@@ -1,13 +1,17 @@
 {
   "generated_at": "2026-11-10",
-  "policy": "Les illustrations pédagogiques sont affichées avec leur statut. Les icônes applicatives proviennent des sites éditeurs ou de leurs pages officielles lorsque disponibles.",
+  "policy": "Les illustrations pédagogiques sont affichées avec leur statut. Les icônes applicatives et de stores sont locales, sourcées et ne remplacent pas les libellés textuels.",
   "assets": [
     {"prefix":"assets/guides/","kind":"instructional_illustration","source":"assistant-installation-v5.7-experience-pro/assets/guides/","license_status":"source project asset; verify redistribution terms before public publication","redistribution_allowed":false,"usage":"display with the label: Illustration pédagogique — pas une capture d’écran"},
     {"path":"assets/mark.svg","kind":"brand_mark","source":"Assistant Installation web project","license_status":"original project mark","redistribution_allowed":true},
-    {"path":"assets/app-icons/nuvio.png","kind":"official_app_icon","source":"https://www.nuvio.tv/","license_status":"publisher asset; keep attribution and verify redistribution terms","redistribution_allowed":false},
-    {"path":"assets/app-icons/stremio.png","kind":"official_app_icon","source":"https://www.stremio.com/downloads","license_status":"publisher asset; keep attribution and verify redistribution terms","redistribution_allowed":false},
-    {"path":"assets/app-icons/kdtivi.png","kind":"official_app_icon","source":"https://kdtapps.com/kdtivi","license_status":"publisher asset; keep attribution and verify redistribution terms","redistribution_allowed":false},
-    {"path":"assets/app-icons/fjordplayer.svg","kind":"official_app_icon","source":"https://fjordplayer.com/","license_status":"publisher favicon; keep attribution and verify redistribution terms","redistribution_allowed":false},
-    {"path":"assets/app-icons/nyxplayer.png","kind":"official_app_icon","source":"https://nyxplayer.app/","license_status":"publisher favicon; keep attribution and verify redistribution terms","redistribution_allowed":false}
+    {"path":"assets/app-icons/nuvio.png","kind":"publisher_app_icon","source":"https://www.nuvio.tv/","license_status":"publisher asset; keep attribution and verify redistribution terms","redistribution_allowed":false},
+    {"path":"assets/app-icons/stremio.png","kind":"publisher_app_icon","source":"https://www.stremio.com/downloads","license_status":"publisher asset; keep attribution and verify redistribution terms","redistribution_allowed":false},
+    {"path":"assets/app-icons/kdtivi.png","kind":"publisher_app_icon","source":"https://kdtapps.com/kdtivi","license_status":"publisher asset; keep attribution and verify redistribution terms","redistribution_allowed":false},
+    {"path":"assets/app-icons/fjordplayer.svg","kind":"publisher_app_icon","source":"https://fjordplayer.com/","license_status":"publisher favicon; keep attribution and verify redistribution terms","redistribution_allowed":false},
+    {"path":"assets/app-icons/nyxplayer.png","kind":"publisher_app_icon","source":"https://nyxplayer.app/","license_status":"publisher favicon; keep attribution and verify redistribution terms","redistribution_allowed":false},
+    {"path":"assets/app-icons/alder.png","kind":"publisher_app_icon","source":"https://github.com/aradhyas8/Alder/tree/main/branding/house-lights","license_status":"project repository asset; verify redistribution terms","redistribution_allowed":false},
+    {"path":"assets/app-icons/ipvio.png","kind":"publisher_app_icon","source":"https://github.com/Emrodev/IPVIO-Stream","license_status":"project repository asset; verify redistribution terms","redistribution_allowed":false},
+    {"path":"assets/app-icons/nuvio-plus.png","kind":"publisher_app_icon","source":"https://github.com/homelessbrian/NuvioPlusIPTV","license_status":"project repository asset; verify redistribution terms","redistribution_allowed":false},
+    {"prefix":"assets/store-icons/","kind":"store_and_source_icons","source":"Local vector icons used as visual signposts; text labels remain authoritative","license_status":"original project vectors inspired by generic platform symbols","redistribution_allowed":true}
   ]
 }

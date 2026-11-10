@@ -19,10 +19,20 @@ searchTerm = state.q || '';
 const LOCAL_APP_ICONS = {
   nuvio_tv: './assets/app-icons/nuvio.png', nuvio_mobile: './assets/app-icons/nuvio.png',
   nuvio_desktop: './assets/app-icons/nuvio.png', nuvio_smart: './assets/app-icons/nuvio.png',
+  nuvio_plus_tv: './assets/app-icons/nuvio-plus.png', nuvio_plus_mobile: './assets/app-icons/nuvio-plus.png',
   stremio: './assets/app-icons/stremio.png', kdtivi: './assets/app-icons/kdtivi.png',
+  alder: './assets/app-icons/alder.png', ipvio_stream: './assets/app-icons/ipvio.png',
   fjordplayer: './assets/app-icons/fjordplayer.svg', nyxplayer: './assets/app-icons/nyxplayer.png',
 };
 const APP_ACCENTS = ['#183c36', '#263d62', '#452b58', '#543527', '#314b39', '#222d40'];
+const STORE_ICONS = {
+  google: './assets/store-icons/google-play.svg',
+  apple: './assets/store-icons/apple-store.svg',
+  github: './assets/store-icons/github.svg',
+  downloader: './assets/store-icons/downloader.svg',
+  altstore: './assets/store-icons/altstore.svg',
+  web: './assets/store-icons/web.svg',
+};
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -59,8 +69,8 @@ function syncUrl(push = true) {
   if (state.config && state.tab === 'configure') query.set('config', state.config);
   if (state.step > 0 && (state.tab === 'install' || state.tab === 'configure')) query.set('step', String(state.step));
   if (state.completed && (state.tab === 'install' || state.tab === 'configure')) query.set('done', '1');
-  if (state.service) query.set('service', state.service);
-  if (state.q) query.set('q', state.q);
+  if (!state.app && state.service) query.set('service', state.service);
+  if (!state.app && state.q) query.set('q', state.q);
   const next = `${window.location.pathname}${query.size ? `?${query}` : ''}`;
   if (next === `${window.location.pathname}${window.location.search}`) return;
   if (push) window.history.pushState({}, '', next);
@@ -129,16 +139,22 @@ function safeHttps(raw) {
 function classifyLink(raw, app = null) {
   let host = '';
   try { host = new URL(raw).hostname.toLowerCase(); } catch { /* no-op */ }
-  if (host.includes('dropbox.com') || host.endsWith('dropboxusercontent.com')) return { label: 'Miroir Dropbox de l’administrateur', css: 'mirror' };
-  if (host.includes('aftv.news') || host.includes('aftvnews.com')) return { label: 'Raccourci AFTV', css: 'aftv' };
-  if (host === 'play.google.com' || host === 'apps.apple.com' || host.endsWith('microsoft.com')) return { label: 'Boutique officielle', css: 'official' };
+  if (host.includes('dropbox.com') || host.endsWith('dropboxusercontent.com')) return { label: 'Miroir Dropbox de l’administrateur', css: 'mirror', icon: 'web' };
+  if (host.includes('aftv.news') || host.includes('aftvnews.com')) return { label: 'Raccourci Downloader / AFTV', css: 'aftv', icon: 'downloader' };
+  if (host === 'play.google.com') return { label: 'Google Play officiel', css: 'official store-google', icon: 'google' };
+  if (host === 'apps.apple.com') return { label: 'App Store officiel', css: 'official store-apple', icon: 'apple' };
+  if (host === 'altstore.io' || host.endsWith('altstore.io')) return { label: 'AltStore officiel', css: 'official store-altstore', icon: 'altstore' };
+  if (host.endsWith('microsoft.com')) return { label: 'Microsoft Store officiel', css: 'official', icon: 'web' };
   if (host === 'github.com' || host.endsWith('.github.io')) {
     return ['third_party', 'independent'].includes(app?.publisher_type)
-      ? { label: 'Projet tiers / releases', css: 'third' }
-      : { label: 'Dépôt / releases éditeur', css: 'official' };
+      ? { label: 'Projet tiers / releases', css: 'third', icon: 'github' }
+      : { label: 'Dépôt / releases éditeur', css: 'official', icon: 'github' };
   }
-  if (['third_party', 'independent'].includes(app?.publisher_type)) return { label: 'Projet indépendant', css: 'third' };
-  return { label: 'Site de l’éditeur', css: 'official' };
+  let appHost = '';
+  try { appHost = new URL(app?.site || app?.source || '').hostname.toLowerCase(); } catch { /* no-op */ }
+  if (appHost && host === appHost) return { label: 'Site officiel de l’éditeur', css: 'official', icon: 'web' };
+  if (['third_party', 'independent'].includes(app?.publisher_type)) return { label: 'Projet indépendant', css: 'third', icon: 'web' };
+  return { label: 'Site officiel de l’éditeur', css: 'official', icon: 'web' };
 }
 
 function addExternalLink(parent, label, raw, app = null, { compact = false } = {}) {
@@ -150,6 +166,13 @@ function addExternalLink(parent, label, raw, app = null, { compact = false } = {
   link.target = '_blank';
   link.rel = 'noopener noreferrer';
   link.referrerPolicy = 'no-referrer';
+  if (type.icon && STORE_ICONS[type.icon]) {
+    const icon = el('img', 'store-icon');
+    icon.src = STORE_ICONS[type.icon];
+    icon.alt = '';
+    icon.setAttribute('aria-hidden', 'true');
+    link.append(icon);
+  }
   link.append(document.createTextNode(label || type.label));
   if (compact) {
     const badge = el('small', '', type.label);
@@ -162,6 +185,16 @@ function addBadge(parent, label, extraClass = '') {
   if (!label) return;
   const badge = el('span', `badge ${extraClass}`.trim(), label);
   parent.append(badge);
+}
+
+function renderIntegrationBadges(parent, app) {
+  const integrations = app.integrations || [];
+  if (integrations.includes('iptv')) addBadge(parent, 'IPTV', 'badge-iptv');
+  if (integrations.includes('nuvio')) {
+    const beta = app.accounts?.nuvio === 'confirmed_beta';
+    addBadge(parent, beta ? 'Nuvio compatible · bêta' : 'Nuvio compatible', 'badge-nuvio');
+  }
+  if (integrations.includes('stremio')) addBadge(parent, 'Stremio compatible', 'badge-stremio');
 }
 
 function groupInfo(groupId) {
@@ -228,7 +261,7 @@ function normalizeText(value) {
 function renderCatalogControls() {
   const controls = $('#catalog-controls');
   controls.replaceChildren();
-  controls.hidden = !state.device;
+  controls.hidden = !state.device || state.device === 'fire_vega';
   if (!state.device) return;
 
   const filters = el('div', 'filter-row');
@@ -277,7 +310,7 @@ function appVisual(appId, app, { large = false } = {}) {
   const icon = el('div', 'app-icon-large');
   const iconPath = LOCAL_APP_ICONS[appId];
   if (iconPath) {
-    const img = el('img'); img.src = iconPath; img.alt = `Icône officielle de ${app.name}`; img.loading = large ? 'eager' : 'lazy';
+    const img = el('img'); img.src = iconPath; img.alt = `${app.publisher_type === 'official' ? 'Icône de l’éditeur' : 'Icône du projet'} : ${app.name}`; img.loading = large ? 'eager' : 'lazy';
     img.addEventListener('error', () => { icon.textContent = app.name.replace(/^[^A-Za-zÀ-ÿ]+/,'').slice(0, 2).toUpperCase(); }, { once: true });
     icon.append(img);
   } else {
@@ -301,22 +334,21 @@ function renderSmartPanel() {
   const root = $('#smart-panel');
   if (!root || !data) return;
   root.replaceChildren();
+  if (!state.device) {
+    root.hidden = true;
+    return;
+  }
+  root.hidden = false;
   const inner = el('div', 'smart-panel-inner');
   const last = readLastGuide();
-  if (!state.device) {
-    inner.append(el('p', 'eyebrow', 'COCKPIT DE PARCOURS'));
-    inner.append(el('h2', '', 'Commencez par une décision simple.'));
-    inner.append(el('p', 'smart-panel-copy', 'L’interface se réorganise selon votre écran. Pas de compte, pas de chatbot à installer, pas de choix inutiles avant la première étape.'));
-    const actions = el('div', 'smart-actions');
-    const start = el('button', 'smart-action primary', 'Choisir mon appareil'); start.type='button'; start.dataset.action='scroll-to'; start.dataset.target='parcours';
-    const explain = el('button', 'smart-action', 'Comprendre les sources'); explain.type='button'; explain.dataset.action='scroll-to'; explain.dataset.target='sources';
-    actions.append(start, explain); inner.append(actions);
-  } else if (!state.app) {
+  if (!state.app) {
     const apps = Object.entries(data.apps).filter(([, app]) => app.devices.includes(state.device));
     const recommended = apps.find(([, app]) => app.publisher_type === 'official') || apps[0];
     inner.append(el('p', 'eyebrow', 'VOTRE ESPACE EST PRÊT'));
     inner.append(el('h2', '', `${apps.length} parcours pour ${data.devices[state.device]?.name || 'votre appareil'}`));
-    inner.append(el('p', 'smart-panel-copy', 'Les cartes ci-dessous sont triées pour vous laisser voir rapidement les applications les plus crédibles et les méthodes les plus documentées.'));
+    inner.append(el('p', 'smart-panel-copy', state.device === 'fire_vega'
+      ? 'Vega OS n’utilise pas les APK Android. Vérifiez les applications disponibles dans l’Amazon Appstore et auprès du fabricant.'
+      : 'Les cartes ci-dessous sont triées pour vous laisser voir rapidement les applications les plus crédibles et les méthodes les plus documentées.'));
     const actions = el('div', 'smart-actions');
     if (recommended) {
       const [id, app] = recommended;
@@ -371,7 +403,7 @@ function drawAppCards() {
 
   const matches = Object.entries(data.apps).filter(([appId, app]) => {
     if (!app.devices.includes(state.device)) return false;
-    if (serviceFilter && !(app.services || []).includes(serviceFilter)) return false;
+    if (serviceFilter && !(app.services || []).includes(serviceFilter) && !(app.integrations || []).includes(serviceFilter)) return false;
     const q = normalizeText(searchTerm);
     return !q || normalizeText(`${app.name} ${app.note || ''} ${app.prerequisites || ''}`).includes(q);
   });
@@ -390,11 +422,7 @@ function drawAppCards() {
       card.classList.add('is-recommended');
       card.append(el('span', 'recommendation-ribbon', 'Recommandée'));
     }
-    card.dataset.action = 'open-app';
     card.dataset.app = appId;
-    card.tabIndex = 0;
-    card.setAttribute('role', 'link');
-    card.setAttribute('aria-label', `Ouvrir la fiche ${app.name}`);
     card.append(appVisual(appId, app));
     const top = el('div', 'app-card-top');
     const copy = el('div');
@@ -402,6 +430,7 @@ function drawAppCards() {
     copy.append(el('p', '', app.note || app.access || 'Consultez la fiche avant installation.'));
     top.append(copy);
     const badges = el('div', 'badge-row');
+    renderIntegrationBadges(badges, app);
     const [compatibility, compatibilityClass] = compatibilityBadge(app);
     addBadge(badges, compatibility, compatibilityClass);
     if (app.publisher_type === 'third_party') addBadge(badges, 'Projet indépendant', 'badge-third');
@@ -450,6 +479,7 @@ function renderSourceLinks(parent, app) {
   for (const item of links) {
     const line = el('div', 'action-line');
     const kind = classifyLink(item.href, app);
+    if (kind.icon && ['google', 'apple', 'altstore', 'downloader'].includes(kind.icon)) line.classList.add('is-store-action');
     line.append(el('span', 'link-label', kind.label));
     addExternalLink(line, item.label, item.href, app);
     parent.append(line);
@@ -479,6 +509,7 @@ function renderDetail() {
   const [compatibility, compatibilityClass] = compatibilityBadge(app);
   addBadge(badges, compatibility, compatibilityClass);
   addBadge(badges, app.publisher_type === 'third_party' ? 'Projet tiers — non affilié' : 'Application / source éditeur', app.publisher_type === 'third_party' ? 'badge-third' : '');
+  renderIntegrationBadges(badges, app);
   for (const service of app.services || []) addBadge(badges, data.services[service]?.replace(/^[^A-Za-zÀ-ÿ]+\s*/, '') || service);
   copy.append(badges);
   const actions = el('div', 'detail-actions');
@@ -586,9 +617,15 @@ function renderInstallPane(pane, app) {
   if (options.length > 1) {
     const list = el('div', 'choice-list');
     for (const option of options) {
-      const button = el('button', 'choice-button', option.label);
+      const button = el('button', 'choice-button');
       button.type = 'button'; button.dataset.action = 'set-method'; button.dataset.method = option.id;
       button.setAttribute('aria-pressed', String(state.method === option.id));
+      const firstUrl = option.steps?.find((step) => step.url)?.url;
+      const type = firstUrl ? classifyLink(firstUrl, app) : (/apple|altstore|ios/i.test(option.label) ? { icon: 'apple', label: 'App Store / Apple' } : /google|android|play/i.test(option.label) ? { icon: 'google', label: 'Google Play' } : null);
+      if (type?.icon && STORE_ICONS[type.icon]) {
+        const icon = el('img', 'store-icon method-icon'); icon.src = STORE_ICONS[type.icon]; icon.alt = ''; icon.setAttribute('aria-hidden', 'true'); button.append(icon);
+      }
+      button.append(el('span', '', option.label));
       list.append(button);
     }
     pane.append(list);
@@ -648,9 +685,11 @@ function renderGuidedSteps(parent, steps, kind) {
     }
     const help = el('button', 'round-button', 'J’ai un problème');
     help.type = 'button'; help.dataset.action = 'open-help';
+    const back = el('button', 'round-button', 'Retour aux applications');
+    back.type = 'button'; back.dataset.action = 'close-app';
     const restart = el('button', 'text-button', 'Revoir depuis le début');
     restart.type = 'button'; restart.dataset.action = 'restart-guide';
-    actions.append(help, restart);
+    actions.append(help, back, restart);
     complete.append(actions);
     parent.append(complete);
     return;
@@ -744,8 +783,8 @@ function appendMedia(parent, app) {
   const items = mediaFor(state.app, state.device).filter((item) => item.kind !== 'logo');
   if (items.length) {
     const section = el('section', 'media-section');
-    section.append(el('h3', '', 'Captures publiées par l’éditeur'));
-    section.append(el('p', 'media-intro', 'Ces visuels illustrent l’interface communiquée par l’éditeur; ils ne prouvent ni la disponibilité actuelle de l’application, ni le fonctionnement sur votre modèle.'));
+    section.append(el('h3', '', 'Visuels associés'));
+    section.append(el('p', 'media-intro', 'Ces visuels illustrent l’interface communiquée par la source indiquée; ils ne prouvent ni la disponibilité actuelle de l’application, ni le fonctionnement sur votre modèle.'));
     const gallery = el('div', 'media-gallery');
     for (const item of items.slice(0, 8)) {
       const figure = el('figure', 'media-card');
@@ -766,6 +805,7 @@ function appendMedia(parent, app) {
       const source = safeHttps(item.source || item.url);
       if (source) {
         const link = el('a', '', 'Source ↗');
+        link.setAttribute('aria-label', `Source de : ${item.title || `la capture de ${app.name}`}`);
         link.href = source; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.referrerPolicy = 'no-referrer';
         caption.append(link);
       }
@@ -809,8 +849,11 @@ function makeVideoCard(video) {
   button.append(el('span', 'play-indicator', '▶'));
   const caption = el('div', 'video-caption');
   caption.append(el('h4', '', video.title));
-  caption.append(el('p', '', `${video.creator || 'Source vidéo'}${video.published ? ` · ${video.published}` : ''}${video.lang ? ` · ${video.lang.toUpperCase()}` : ''}`));
-  if (video.disclaimer) caption.append(el('p', '', video.disclaimer));
+  const meta = el('p', 'video-meta');
+  meta.append(el('span', 'video-source-pill', 'Vidéo tierce'));
+  meta.append(document.createTextNode(`${video.creator || 'Source vidéo'}${video.published ? ` · ${video.published}` : ''}${video.lang ? ` · ${video.lang.toUpperCase()}` : ''}`));
+  caption.append(meta);
+  caption.append(el('p', 'video-disclaimer', video.disclaimer || 'Lien vérifié, contenu non visionné par le catalogue. Utilise d’abord le guide écrit de cette fiche.'));
   addExternalLink(caption, 'Ouvrir sur YouTube', video.url, null);
   card.append(button, caption);
   return card;
@@ -950,7 +993,7 @@ function onClick(event) {
     const app = data.apps[appId];
     setState({ app: appId, tab: 'overview', method: app?.install[state.device]?.[0]?.id || '', config: app?.configure[state.device]?.[0]?.id || '', step: 0, completed: false }, { scroll: true });
   } else if (action === 'close-app') {
-    setState({ app: '', tab: 'overview', method: '', config: '', step: 0 }, { scroll: true });
+    setState({ app: '', tab: 'overview', method: '', config: '', step: 0, service: '', q: '' }, { push: false, scroll: true });
   } else if (action === 'filter-service') {
     serviceFilter = control.dataset.service === 'all' ? '' : control.dataset.service;
     setState({ service: serviceFilter }, { push: true });
@@ -999,10 +1042,6 @@ window.addEventListener('scroll', updateScrollProgress, { passive: true });
 window.addEventListener('resize', updateScrollProgress, { passive: true });
 updateScrollProgress();
 document.addEventListener('keydown', (event) => {
-  const card = event.target.closest?.('.app-card[data-action="open-app"]');
-  if (card && (event.key === 'Enter' || event.key === ' ')) {
-    event.preventDefault(); card.click();
-  }
   const tab = event.target.closest?.('[role="tab"]');
   if (tab) {
     const tabs = $$('.detail-tabs [role="tab"]');
@@ -1015,7 +1054,7 @@ document.addEventListener('keydown', (event) => {
       window.requestAnimationFrame(() => document.querySelector('[role="tab"][aria-selected="true"]')?.focus());
     }
   }
-  if (event.key === 'Escape' && state.app) setState({ app: '', tab: 'overview', completed: false }, { scroll: true });
+  if (event.key === 'Escape' && state.app && !$('#media-lightbox')?.open) setState({ app: '', tab: 'overview', completed: false, service: '', q: '' }, { push: false, scroll: true });
   if (event.key.toLowerCase() === 'r' && state.app && (state.tab === 'install' || state.tab === 'configure') && !['INPUT','TEXTAREA','SELECT'].includes(event.target.tagName)) setState({ step: 0, completed: false });
 });
 $('#media-lightbox')?.addEventListener('click', (event) => { if (event.target === event.currentTarget) event.currentTarget.close(); });
