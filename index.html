@@ -23,6 +23,7 @@
   <script type="module" src="./src/app.js"></script>
 </head>
 <body>
+  <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
   <a class="skip-link" href="#main">Aller au contenu</a>
   <header class="site-header">
     <a class="brand" href="./" aria-label="Assistant Installation, accueil">
@@ -36,6 +37,9 @@
     </nav>
     <a class="header-cta" href="#parcours"><span>Commencer</span><span aria-hidden="true">↗</span></a>
   </header>
+  <nav class="mobile-rail" aria-label="Accès rapide">
+    <a href="#parcours">Appareil</a><a href="#applications">Apps</a><a href="#sources">Sources</a>
+  </nav>
 
   <main id="main">
     <div id="loading-state" class="loading-state" role="status">Préparation de votre guide…</div>
@@ -63,6 +67,7 @@
         <p class="hero-note-foot"><span aria-hidden="true">↳</span> Pas de compte à créer. Aucune application à installer.</p>
       </aside>
     </section>
+    <section id="smart-panel" class="smart-panel" aria-label="Actions intelligentes"></section>
 
     <section class="device-section" id="parcours" aria-labelledby="device-title">
       <div class="section-heading">
@@ -92,6 +97,10 @@
   </main>
   <div id="status-announcer" class="sr-only" role="status" aria-live="polite"></div>
   <div id="error-announcer" class="sr-only" role="alert" aria-live="assertive"></div>
+  <dialog id="media-lightbox" class="media-lightbox" aria-labelledby="lightbox-title">
+    <button class="lightbox-close" type="button" data-action="close-lightbox" aria-label="Fermer l’aperçu">×</button>
+    <div class="lightbox-stage"><img id="lightbox-image" alt=""><p id="lightbox-title"></p></div>
+  </dialog>
 
   <footer class="site-footer">
     <a class="brand footer-brand" href="./" aria-label="Retour en haut"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span class="brand-copy"><strong>ASSISTANT</strong><small>INSTALLATION · V5.7</small></span></a>

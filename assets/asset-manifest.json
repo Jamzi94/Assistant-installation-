@@ -1,22 +1,13 @@
 {
   "generated_at": "2026-11-10",
-  "policy": "Les illustrations pédagogiques sont explicitement présentées comme des illustrations générées et non comme des captures d’écran. Les captures éditeur restent distantes et sourcées dans data/site-data.json.",
+  "policy": "Les illustrations pédagogiques sont affichées avec leur statut. Les icônes applicatives proviennent des sites éditeurs ou de leurs pages officielles lorsque disponibles.",
   "assets": [
-    {
-      "prefix": "assets/guides/",
-      "kind": "instructional_illustration",
-      "source": "assistant-installation-v5.7-experience-pro/assets/guides/",
-      "license_status": "source project asset; verify redistribution terms before public publication",
-      "redistribution_allowed": false,
-      "usage": "display only with the label: Illustration pédagogique — pas une capture d’écran"
-    },
-    {
-      "path": "assets/mark.svg",
-      "kind": "brand_mark",
-      "source": "Assistant Installation web project",
-      "license_status": "original project mark",
-      "redistribution_allowed": true,
-      "usage": "site branding and favicon"
-    }
+    {"prefix":"assets/guides/","kind":"instructional_illustration","source":"assistant-installation-v5.7-experience-pro/assets/guides/","license_status":"source project asset; verify redistribution terms before public publication","redistribution_allowed":false,"usage":"display with the label: Illustration pédagogique — pas une capture d’écran"},
+    {"path":"assets/mark.svg","kind":"brand_mark","source":"Assistant Installation web project","license_status":"original project mark","redistribution_allowed":true},
+    {"path":"assets/app-icons/nuvio.png","kind":"official_app_icon","source":"https://www.nuvio.tv/","license_status":"publisher asset; keep attribution and verify redistribution terms","redistribution_allowed":false},
+    {"path":"assets/app-icons/stremio.png","kind":"official_app_icon","source":"https://www.stremio.com/downloads","license_status":"publisher asset; keep attribution and verify redistribution terms","redistribution_allowed":false},
+    {"path":"assets/app-icons/kdtivi.png","kind":"official_app_icon","source":"https://kdtapps.com/kdtivi","license_status":"publisher asset; keep attribution and verify redistribution terms","redistribution_allowed":false},
+    {"path":"assets/app-icons/fjordplayer.svg","kind":"official_app_icon","source":"https://fjordplayer.com/","license_status":"publisher favicon; keep attribution and verify redistribution terms","redistribution_allowed":false},
+    {"path":"assets/app-icons/nyxplayer.png","kind":"official_app_icon","source":"https://nyxplayer.app/","license_status":"publisher favicon; keep attribution and verify redistribution terms","redistribution_allowed":false}
   ]
 }

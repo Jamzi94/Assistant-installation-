@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Fjord Player">
+  <rect width="512" height="512" rx="112" fill="#0B131C"/>
+  <g transform="translate(96 123) scale(0.838)">
+    <path fill="#E9EFF5" d="M0 0H382L334 62C321 79 301 88 279 88H0Z"/>
+    <path fill="#79B8DC" d="M0 116H306L257 178C244 194 224 203 203 203H0Z"/>
+    <path fill="#E9EFF5" d="M0 232H168L119 294C106 310 87 319 66 319H0Z"/>
+  </g>
+</svg>

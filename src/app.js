@@ -16,6 +16,14 @@ let state = readUrlState();
 serviceFilter = state.service || '';
 searchTerm = state.q || '';
 
+const LOCAL_APP_ICONS = {
+  nuvio_tv: './assets/app-icons/nuvio.png', nuvio_mobile: './assets/app-icons/nuvio.png',
+  nuvio_desktop: './assets/app-icons/nuvio.png', nuvio_smart: './assets/app-icons/nuvio.png',
+  stremio: './assets/app-icons/stremio.png', kdtivi: './assets/app-icons/kdtivi.png',
+  fjordplayer: './assets/app-icons/fjordplayer.svg', nyxplayer: './assets/app-icons/nyxplayer.png',
+};
+const APP_ACCENTS = ['#183c36', '#263d62', '#452b58', '#543527', '#314b39', '#222d40'];
+
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
@@ -64,6 +72,7 @@ function setState(changes, { push = true, scroll = false } = {}) {
   if (Object.prototype.hasOwnProperty.call(changes, 'service')) serviceFilter = changes.service || '';
   if (Object.prototype.hasOwnProperty.call(changes, 'q')) searchTerm = changes.q || '';
   if (data) normalizeState();
+  saveLastGuide();
   syncUrl(push);
   render();
   if (scroll) {
@@ -136,7 +145,7 @@ function addExternalLink(parent, label, raw, app = null, { compact = false } = {
   const href = safeHttps(raw);
   if (!href) return;
   const type = classifyLink(href, app);
-  const link = el('a', compact ? 'outbound-link' : 'action-link');
+  const link = el('a', `${compact ? 'outbound-link' : 'action-link'} source-${type.css}`);
   link.href = href;
   link.target = '_blank';
   link.rel = 'noopener noreferrer';
@@ -259,6 +268,81 @@ function mediaFor(appId, deviceId) {
   return data.media?.[appId]?.[deviceId] || [];
 }
 
+function appVisual(appId, app, { large = false } = {}) {
+  const media = mediaFor(appId, state.device);
+  const poster = media.find((item) => item.kind !== 'logo' && item.url)?.url;
+  const visual = el('div', `app-visual${large ? ' app-visual-large' : ''}`);
+  visual.style.setProperty('--app-accent', APP_ACCENTS[Object.keys(data.apps).indexOf(appId) % APP_ACCENTS.length]);
+  if (poster) visual.style.setProperty('--app-poster', `url("${poster.replaceAll('"', '%22')}")`);
+  const icon = el('div', 'app-icon-large');
+  const iconPath = LOCAL_APP_ICONS[appId];
+  if (iconPath) {
+    const img = el('img'); img.src = iconPath; img.alt = `Icône officielle de ${app.name}`; img.loading = large ? 'eager' : 'lazy';
+    img.addEventListener('error', () => { icon.textContent = app.name.replace(/^[^A-Za-zÀ-ÿ]+/,'').slice(0, 2).toUpperCase(); }, { once: true });
+    icon.append(img);
+  } else {
+    icon.append(el('span', 'icon-monogram', app.name.replace(/^[^A-Za-zÀ-ÿ]+/,'').slice(0, 2).toUpperCase()));
+  }
+  visual.append(icon);
+  if (!iconPath) visual.append(el('span', 'icon-source-label', app.publisher_type === 'official' ? 'Éditeur' : 'Projet indépendant'));
+  return visual;
+}
+
+function readLastGuide() {
+  try { return JSON.parse(localStorage.getItem('assistant-installation:last-guide') || 'null'); } catch { return null; }
+}
+
+function saveLastGuide() {
+  if (!state.app) return;
+  try { localStorage.setItem('assistant-installation:last-guide', JSON.stringify({ app: state.app, device: state.device, tab: state.tab, step: state.step, completed: state.completed })); } catch { /* storage unavailable */ }
+}
+
+function renderSmartPanel() {
+  const root = $('#smart-panel');
+  if (!root || !data) return;
+  root.replaceChildren();
+  const inner = el('div', 'smart-panel-inner');
+  const last = readLastGuide();
+  if (!state.device) {
+    inner.append(el('p', 'eyebrow', 'COCKPIT DE PARCOURS'));
+    inner.append(el('h2', '', 'Commencez par une décision simple.'));
+    inner.append(el('p', 'smart-panel-copy', 'L’interface se réorganise selon votre écran. Pas de compte, pas de chatbot à installer, pas de choix inutiles avant la première étape.'));
+    const actions = el('div', 'smart-actions');
+    const start = el('button', 'smart-action primary', 'Choisir mon appareil'); start.type='button'; start.dataset.action='scroll-to'; start.dataset.target='parcours';
+    const explain = el('button', 'smart-action', 'Comprendre les sources'); explain.type='button'; explain.dataset.action='scroll-to'; explain.dataset.target='sources';
+    actions.append(start, explain); inner.append(actions);
+  } else if (!state.app) {
+    const apps = Object.entries(data.apps).filter(([, app]) => app.devices.includes(state.device));
+    const recommended = apps.find(([, app]) => app.publisher_type === 'official') || apps[0];
+    inner.append(el('p', 'eyebrow', 'VOTRE ESPACE EST PRÊT'));
+    inner.append(el('h2', '', `${apps.length} parcours pour ${data.devices[state.device]?.name || 'votre appareil'}`));
+    inner.append(el('p', 'smart-panel-copy', 'Les cartes ci-dessous sont triées pour vous laisser voir rapidement les applications les plus crédibles et les méthodes les plus documentées.'));
+    const actions = el('div', 'smart-actions');
+    if (recommended) {
+      const [id, app] = recommended;
+      const open = el('button', 'smart-action primary', `Ouvrir la recommandation · ${app.name}`); open.type='button'; open.dataset.action='open-app'; open.dataset.app=id;
+      actions.append(open);
+    }
+    const reset = el('button', 'smart-action', 'Changer d’appareil'); reset.type='button'; reset.dataset.action='scroll-to'; reset.dataset.target='parcours';
+    actions.append(reset); inner.append(actions);
+  } else {
+    const app = data.apps[state.app];
+    inner.append(el('p', 'eyebrow', 'VOTRE PARCOURS EN COURS'));
+    inner.append(el('h2', '', app.name));
+    inner.append(el('p', 'smart-panel-copy', state.completed ? 'Ce parcours est marqué comme terminé. Vous pouvez maintenant configurer l’application ou ouvrir le dépannage.' : `Étape ${state.step + 1} · ${state.tab === 'overview' ? 'présentation' : state.tab === 'install' ? 'installation' : state.tab === 'configure' ? 'configuration' : 'dépannage'}.`));
+    const actions = el('div', 'smart-actions');
+    const resume = el('button', 'smart-action primary', state.completed ? 'Revenir à ma fiche' : 'Reprendre le parcours'); resume.type='button'; resume.dataset.action='set-tab'; resume.dataset.tab=state.completed ? 'overview' : (state.tab === 'overview' ? 'install' : state.tab);
+    const share = el('button', 'smart-action', 'Partager cette étape'); share.type='button'; share.dataset.action='copy-guide';
+    actions.append(resume, share); inner.append(actions);
+  }
+  if (!state.app && last?.app && data.apps[last.app] && data.devices[last.device]) {
+    const resume = el('button', 'resume-strip'); resume.type='button'; resume.dataset.action='resume-last'; resume.dataset.app=last.app; resume.dataset.device=last.device;
+    resume.append(el('span', 'resume-kicker', 'REPRENDRE'), el('strong', '', data.apps[last.app].name), el('small', '', `Dernière étape consultée · ${data.devices[last.device].name}`), el('span', 'resume-arrow', '↗'));
+    inner.append(resume);
+  }
+  root.append(inner);
+}
+
 function compatibilityBadge(app) {
   const evidence = app.platform_support?.[state.device];
   if (evidence?.status === 'publisher_claim_unverified') return ['Support déclaré, non testé ici', 'badge-caution'];
@@ -302,25 +386,21 @@ function drawAppCards() {
 
   for (const [appId, app] of matches) {
     const card = el('article', 'app-card');
+    if (app.publisher_type === 'official' && (app.install[state.device] || []).length) {
+      card.classList.add('is-recommended');
+      card.append(el('span', 'recommendation-ribbon', 'Recommandée'));
+    }
+    card.dataset.action = 'open-app';
+    card.dataset.app = appId;
+    card.tabIndex = 0;
+    card.setAttribute('role', 'link');
+    card.setAttribute('aria-label', `Ouvrir la fiche ${app.name}`);
+    card.append(appVisual(appId, app));
     const top = el('div', 'app-card-top');
     const copy = el('div');
     copy.append(el('h3', '', app.name));
     copy.append(el('p', '', app.note || app.access || 'Consultez la fiche avant installation.'));
-    const icon = el('div', 'app-icon');
-    const gallery = mediaFor(appId, state.device);
-    const logo = gallery.find((item) => item.kind === 'logo') || gallery[0];
-    if (logo?.url) {
-      const image = el('img');
-      image.src = logo.url;
-      image.alt = logo.alt || `Visuel éditeur de ${app.name}`;
-      image.loading = 'lazy';
-      image.referrerPolicy = 'no-referrer';
-      image.addEventListener('error', () => { icon.textContent = app.name.slice(0, 1).toUpperCase(); });
-      icon.append(image);
-    } else {
-      icon.textContent = app.name.replace(/^[^A-Za-zÀ-ÿ]+\s*/, '').slice(0, 1).toUpperCase();
-    }
-    top.append(copy, icon);
+    top.append(copy);
     const badges = el('div', 'badge-row');
     const [compatibility, compatibilityClass] = compatibilityBadge(app);
     addBadge(badges, compatibility, compatibilityClass);
@@ -330,10 +410,8 @@ function drawAppCards() {
     const foot = el('div', 'app-card-foot');
     foot.append(el('small', '', `${(app.install[state.device] || []).length} méthode${(app.install[state.device] || []).length === 1 ? '' : 's'} recensée${(app.install[state.device] || []).length === 1 ? '' : 's'}`));
     const open = el('button', 'text-button');
-    open.type = 'button';
-    open.dataset.action = 'open-app';
-    open.dataset.app = appId;
-    open.append(document.createTextNode('Voir le guide '), el('span', '', '→'));
+    open.type = 'button'; open.dataset.action = 'open-app'; open.dataset.app = appId;
+    open.append(document.createTextNode('Ouvrir la fiche '), el('span', '', '→'));
     foot.append(open);
     card.append(top, badges, foot);
     catalogRoot.append(card);
@@ -389,6 +467,7 @@ function renderDetail() {
   appRoot.hidden = false;
   const shell = el('div', 'detail-shell');
   const top = el('div', 'detail-top');
+  top.append(appVisual(state.app, app, { large: true }));
   const copy = el('div');
   copy.append(makeBreadcrumb(app));
   const title = el('h2', 'detail-title', app.name);
@@ -670,6 +749,9 @@ function appendMedia(parent, app) {
     const gallery = el('div', 'media-gallery');
     for (const item of items.slice(0, 8)) {
       const figure = el('figure', 'media-card');
+      const preview = el('button', 'media-preview');
+      preview.type = 'button'; preview.dataset.action = 'open-lightbox'; preview.dataset.image = item.url; preview.dataset.title = item.title || `Capture de ${app.name}`;
+      preview.setAttribute('aria-label', `Agrandir ${item.title || `la capture de ${app.name}`}`);
       const image = el('img');
       image.src = item.url;
       image.alt = item.alt || item.title || `Capture éditeur de ${app.name}`;
@@ -678,6 +760,7 @@ function appendMedia(parent, app) {
       image.addEventListener('error', () => {
         figure.replaceChildren(el('div', 'media-fallback', 'Visuel temporairement indisponible'));
       }, { once: true });
+      preview.append(image, el('span', 'zoom-indicator', '↗'));
       const caption = el('figcaption');
       caption.append(el('strong', '', item.title || 'Capture éditeur'));
       const source = safeHttps(item.source || item.url);
@@ -686,7 +769,7 @@ function appendMedia(parent, app) {
         link.href = source; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.referrerPolicy = 'no-referrer';
         caption.append(link);
       }
-      figure.append(image, caption);
+      figure.append(preview, caption);
       gallery.append(figure);
     }
     section.append(gallery);
@@ -763,8 +846,10 @@ function render() {
   if (!data) return;
   normalizeState();
   renderDevicePicker();
+  renderSmartPanel();
   renderCatalog();
   renderDetail();
+  requestAnimationFrame(() => observeRevealables());
   const footer = $('.site-footer p');
   const stamp = data.generated_at ? new Date(data.generated_at) : null;
   if (footer && stamp && !$('.data-stamp', footer)) {
@@ -773,6 +858,60 @@ function render() {
     footer.append(small);
   }
 }
+
+let revealObserver;
+function observeRevealables() {
+  const nodes = $$('.device-group, .app-card, .detail-shell, .smart-panel-inner, .source-section, .media-card, .guide-card');
+  if (!('IntersectionObserver' in window)) { nodes.forEach((node) => node.classList.add('is-visible')); return; }
+  revealObserver?.disconnect();
+  revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: .08, rootMargin: '0px 0px -30px' });
+  nodes.forEach((node, index) => { node.style.setProperty('--reveal-delay', `${Math.min(index * 35, 240)}ms`); revealObserver.observe(node); });
+}
+
+function updateScrollProgress() {
+  const bar = $('#scroll-progress');
+  if (!bar) return;
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  bar.style.transform = `scaleX(${max > 0 ? Math.min(1, window.scrollY / max) : 0})`;
+}
+
+function enableMotionDesign() {
+  if (reducedMotion() || !window.matchMedia?.('(hover: hover) and (pointer: fine)').matches) return;
+  document.addEventListener('pointermove', (event) => {
+    const card = event.target.closest?.('.app-card');
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - .5;
+    const y = (event.clientY - rect.top) / rect.height - .5;
+    card.style.setProperty('--tilt-x', `${(-y * 2.8).toFixed(2)}deg`);
+    card.style.setProperty('--tilt-y', `${(x * 3.2).toFixed(2)}deg`);
+    card.style.setProperty('--spot-x', `${(x * 100 + 50).toFixed(1)}%`);
+    card.style.setProperty('--spot-y', `${(y * 100 + 50).toFixed(1)}%`);
+  });
+  document.addEventListener('pointerout', (event) => {
+    const card = event.target.closest?.('.app-card');
+    if (!card || card.contains(event.relatedTarget)) return;
+    card.style.setProperty('--tilt-x', '0deg'); card.style.setProperty('--tilt-y', '0deg');
+  });
+  document.addEventListener('click', (event) => {
+    const target = event.target.closest?.('.round-button, .smart-action, .filter-button, .device-option, .tab-button');
+    if (!target || reducedMotion()) return;
+    const ripple = el('span', 'motion-ripple');
+    const rect = target.getBoundingClientRect();
+    ripple.style.left = `${event.clientX - rect.left}px`;
+    ripple.style.top = `${event.clientY - rect.top}px`;
+    target.append(ripple);
+    window.setTimeout(() => ripple.remove(), 520);
+  });
+}
+
+enableMotionDesign();
 
 function showToast(message) {
   toast.textContent = message;
@@ -816,10 +955,16 @@ function onClick(event) {
     );
     callout.focus?.();
     announce('Aide pour identifier le système de votre appareil affichée.');
+  } else if (action === 'scroll-to') {
+    document.getElementById(control.dataset.target)?.scrollIntoView({ behavior: reducedMotion() ? 'auto' : 'smooth', block: 'start' });
+  } else if (action === 'resume-last') {
+    const last = readLastGuide();
+    const app = data.apps[control.dataset.app];
+    if (app) setState({ device: control.dataset.device, app: control.dataset.app, tab: last?.tab || 'install', method: app.install?.[control.dataset.device]?.[0]?.id || '', config: app.configure?.[control.dataset.device]?.[0]?.id || '', step: last?.step || 0, completed: Boolean(last?.completed) }, { scroll: true });
   } else if (action === 'open-app') {
     const appId = control.dataset.app;
     const app = data.apps[appId];
-    setState({ app: appId, tab: 'overview', method: app?.install[state.device]?.[0]?.id || '', config: app?.configure[state.device]?.[0]?.id || '', step: 0 }, { scroll: true });
+    setState({ app: appId, tab: 'overview', method: app?.install[state.device]?.[0]?.id || '', config: app?.configure[state.device]?.[0]?.id || '', step: 0, completed: false }, { scroll: true });
   } else if (action === 'close-app') {
     setState({ app: '', tab: 'overview', method: '', config: '', step: 0 }, { scroll: true });
   } else if (action === 'filter-service') {
@@ -842,18 +987,38 @@ function onClick(event) {
   } else if (action === 'restart-guide') {
     setState({ step: 0, completed: false });
   } else if (action === 'continue-config') {
-    setState({ tab: 'configure', step: 0, completed: false });
+    const app = data.apps[state.app];
+    if (app?.configure?.[state.device]?.length) setState({ tab: 'configure', step: 0, completed: false });
+    else setState({ tab: 'help', step: 0, completed: false });
   } else if (action === 'open-help') {
     setState({ tab: 'help', step: 0, completed: false }, { scroll: true });
   } else if (action === 'copy-guide') {
     copyGuideLink();
   } else if (action === 'load-video') {
     loadVideo(control.dataset.video);
+  } else if (action === 'open-lightbox') {
+    const dialog = $('#media-lightbox');
+    const image = $('#lightbox-image');
+    image.src = control.dataset.image;
+    image.alt = control.dataset.title || 'Aperçu agrandi';
+    $('#lightbox-title').textContent = control.dataset.title || 'Aperçu agrandi';
+    if (typeof dialog.showModal === 'function') dialog.showModal();
+    else dialog.setAttribute('open', '');
+    $('.lightbox-close')?.focus();
+  } else if (action === 'close-lightbox') {
+    $('#media-lightbox')?.close?.();
   }
 }
 
 document.addEventListener('click', onClick);
+window.addEventListener('scroll', updateScrollProgress, { passive: true });
+window.addEventListener('resize', updateScrollProgress, { passive: true });
+updateScrollProgress();
 document.addEventListener('keydown', (event) => {
+  const card = event.target.closest?.('.app-card[data-action="open-app"]');
+  if (card && (event.key === 'Enter' || event.key === ' ')) {
+    event.preventDefault(); card.click();
+  }
   const tab = event.target.closest?.('[role="tab"]');
   if (tab) {
     const tabs = $$('.detail-tabs [role="tab"]');
@@ -867,8 +1032,9 @@ document.addEventListener('keydown', (event) => {
     }
   }
   if (event.key === 'Escape' && state.app) setState({ app: '', tab: 'overview', completed: false }, { scroll: true });
-  if (event.key.toLowerCase() === 'r' && state.app && (state.tab === 'install' || state.tab === 'configure')) setState({ step: 0, completed: false });
+  if (event.key.toLowerCase() === 'r' && state.app && (state.tab === 'install' || state.tab === 'configure') && !['INPUT','TEXTAREA','SELECT'].includes(event.target.tagName)) setState({ step: 0, completed: false });
 });
+$('#media-lightbox')?.addEventListener('click', (event) => { if (event.target === event.currentTarget) event.currentTarget.close(); });
 window.addEventListener('popstate', () => {
   state = readUrlState();
   if (data) { normalizeState(); render(); }
