@@ -883,22 +883,6 @@ function updateScrollProgress() {
 
 function enableMotionDesign() {
   if (reducedMotion() || !window.matchMedia?.('(hover: hover) and (pointer: fine)').matches) return;
-  document.addEventListener('pointermove', (event) => {
-    const card = event.target.closest?.('.app-card');
-    if (!card) return;
-    const rect = card.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width - .5;
-    const y = (event.clientY - rect.top) / rect.height - .5;
-    card.style.setProperty('--tilt-x', `${(-y * 2.8).toFixed(2)}deg`);
-    card.style.setProperty('--tilt-y', `${(x * 3.2).toFixed(2)}deg`);
-    card.style.setProperty('--spot-x', `${(x * 100 + 50).toFixed(1)}%`);
-    card.style.setProperty('--spot-y', `${(y * 100 + 50).toFixed(1)}%`);
-  });
-  document.addEventListener('pointerout', (event) => {
-    const card = event.target.closest?.('.app-card');
-    if (!card || card.contains(event.relatedTarget)) return;
-    card.style.setProperty('--tilt-x', '0deg'); card.style.setProperty('--tilt-y', '0deg');
-  });
   document.addEventListener('click', (event) => {
     const target = event.target.closest?.('.round-button, .smart-action, .filter-button, .device-option, .tab-button');
     if (!target || reducedMotion()) return;
