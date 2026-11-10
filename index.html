@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Assistant Installation — choisir le bon guide pour son appareil</title>
+  <meta name="description" content="Guides d’installation et de configuration adaptés à votre TV, téléphone ou ordinateur. Vérifiez la compatibilité et suivez les étapes officielles, sans installer de chatbot.">
+  <meta name="keywords" content="guide installation, Android TV, Google TV, Fire TV, Apple TV, applications, dépannage">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Assistant Installation — le bon guide, pour le bon appareil">
+  <meta property="og:description" content="Choisissez votre appareil pour n’afficher que les applications et méthodes compatibles.">
+  <meta property="og:site_name" content="Assistant Installation">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Assistant Installation — le bon guide, pour le bon appareil">
+  <meta name="twitter:description" content="Guides d’installation et de configuration adaptés à votre appareil, accessibles depuis un simple lien.">
+  <meta name="theme-color" content="#f5f4ef">
+  <link rel="icon" type="image/svg+xml" href="./assets/mark.svg">
+  <link rel="stylesheet" href="./src/styles.css">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebSite","name":"Assistant Installation","inLanguage":"fr","description":"Guides d’installation selon l’appareil et les compatibilités vérifiées."}
+  </script>
+  <script type="module" src="./src/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Assistant Installation, accueil">
+      <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span class="brand-copy"><strong>ASSISTANT</strong><small>INSTALLATION · V5.7</small></span>
+    </a>
+    <nav class="header-nav" aria-label="Navigation principale">
+      <a href="#parcours">Mon appareil</a>
+      <a href="#applications">Applications</a>
+      <a href="#sources">Sources &amp; fiabilité</a>
+    </nav>
+    <a class="header-cta" href="#parcours"><span>Commencer</span><span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> Le guide s’adapte à votre appareil</p>
+        <h1 id="hero-title">Le bon guide.<br><em>Le bon appareil.</em></h1>
+        <p class="hero-intro">Choisissez d’abord votre écran. Les applications et les étapes affichées ensuite sont limitées aux compatibilités enregistrées dans le catalogue.</p>
+        <a class="hero-link" href="#parcours">Choisir mon appareil <span aria-hidden="true">↓</span></a>
+      </div>
+      <aside class="hero-note" aria-label="Comment fonctionne le guide">
+        <div class="hero-note-top"><span class="tiny-label">SIMPLE COMME ÇA</span><span class="note-index">01—03</span></div>
+        <ol class="mini-steps">
+          <li><span class="mini-num">01</span><span><strong>Votre appareil</strong><small>TV, mobile ou ordinateur</small></span></li>
+          <li><span class="mini-num">02</span><span><strong>Une application compatible</strong><small>Pas de raccourci hasardeux</small></span></li>
+          <li><span class="mini-num">03</span><span><strong>Un pas à la fois</strong><small>Installation, réglages, aide</small></span></li>
+        </ol>
+        <p class="hero-note-foot"><span aria-hidden="true">↳</span> Pas de compte à créer. Aucune application à installer.</p>
+      </aside>
+    </section>
+
+    <section class="device-section" id="parcours" aria-labelledby="device-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">ÉTAPE 01 <span class="heading-rule"></span> SÉLECTION</p><h2 id="device-title">Sur quel appareil ?</h2></div>
+        <p class="section-aside">Les intitulés et versions de menu peuvent varier selon le modèle et les mises à jour.</p>
+      </div>
+      <div id="device-picker" class="device-picker" aria-live="polite"></div>
+      <div id="device-callout" class="device-callout" hidden></div>
+    </section>
+
+    <section class="catalog-section" id="applications" aria-labelledby="catalog-title">
+      <div class="section-heading catalog-heading">
+        <div><p class="eyebrow">ÉTAPE 02 <span class="heading-rule"></span> CATALOGUE</p><h2 id="catalog-title">Applications pour votre écran</h2></div>
+        <p id="catalog-summary" class="section-aside">Choisissez un appareil pour afficher les applications qui lui sont attribuées.</p>
+      </div>
+      <div id="catalog-controls" class="catalog-controls" hidden></div>
+      <div id="catalog-list" class="app-grid" aria-live="polite"></div>
+    </section>
+
+    <section id="app-detail" class="detail-section" aria-live="polite" hidden></section>
+
+    <section class="source-section" id="sources" aria-labelledby="source-title">
+      <div class="source-mark" aria-hidden="true">i</div>
+      <div class="source-copy"><p class="eyebrow">À SAVOIR AVANT DE CLIQUER</p><h2 id="source-title">Un lien, une source clairement nommée.</h2><p>Les fiches distinguent les boutiques, les pages officielles des éditeurs, les projets tiers et les miroirs fournis par l’administrateur. Un lien disponible ne garantit ni la compatibilité avec chaque modèle, ni la disponibilité actuelle du store.</p></div>
+      <div class="source-legend" aria-label="Types de liens"><span class="source-chip official">Éditeur / store</span><span class="source-chip third">Projet tiers</span><span class="source-chip mirror">Miroir administrateur</span></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="./" aria-label="Retour en haut"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span class="brand-copy"><strong>ASSISTANT</strong><small>INSTALLATION · V5.7</small></span></a>
+    <p>Les sources et versions évoluent. Vérifiez toujours la fiche de l’éditeur avant installation. Si ce site est hébergé par GitHub Pages, GitHub journalise les adresses IP à des fins de sécurité (<a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">politique de confidentialité GitHub</a>).</p>
+    <a href="#main" class="back-top">Retour en haut ↑</a>
+  </footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

@@ -1,0 +1,783 @@
+const DATA_URL = new URL('../data/site-data.json', import.meta.url);
+const VALID_TABS = new Set(['overview', 'install', 'configure', 'help']);
+const appRoot = document.querySelector('#app-detail');
+const catalogRoot = document.querySelector('#catalog-list');
+const pickerRoot = document.querySelector('#device-picker');
+const toast = document.querySelector('#toast');
+
+let data;
+let serviceFilter = 'all';
+let searchTerm = '';
+let toastTimer;
+let state = readUrlState();
+
+const $ = (selector, root = document) => root.querySelector(selector);
+const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+
+function el(tag, className = '', text = '') {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined && text !== null) node.textContent = String(text);
+  return node;
+}
+
+function readUrlState() {
+  const query = new URLSearchParams(window.location.search);
+  const tab = query.get('tab') || 'overview';
+  return {
+    device: query.get('device') || '',
+    app: query.get('app') || '',
+    tab: VALID_TABS.has(tab) ? tab : 'overview',
+    method: query.get('method') || '',
+    config: query.get('config') || '',
+    step: Math.max(0, Number.parseInt(query.get('step') || '0', 10) || 0),
+  };
+}
+
+function syncUrl(push = true) {
+  const query = new URLSearchParams();
+  if (state.device) query.set('device', state.device);
+  if (state.app) query.set('app', state.app);
+  if (state.app && state.tab !== 'overview') query.set('tab', state.tab);
+  if (state.method && state.tab === 'install') query.set('method', state.method);
+  if (state.config && state.tab === 'configure') query.set('config', state.config);
+  if (state.step > 0 && (state.tab === 'install' || state.tab === 'configure')) query.set('step', String(state.step));
+  const next = `${window.location.pathname}${query.size ? `?${query}` : ''}`;
+  if (next === `${window.location.pathname}${window.location.search}`) return;
+  if (push) window.history.pushState({}, '', next);
+  else window.history.replaceState({}, '', next);
+}
+
+function setState(changes, { push = true, scroll = false } = {}) {
+  state = { ...state, ...changes };
+  if (data) normalizeState();
+  syncUrl(push);
+  render();
+  if (scroll) {
+    window.setTimeout(() => {
+      const target = state.app ? appRoot : document.querySelector('#applications');
+      target?.scrollIntoView({ behavior: reducedMotion() ? 'auto' : 'smooth', block: 'start' });
+      if (state.app) $('#detail-title')?.focus({ preventScroll: true });
+    }, 0);
+  }
+}
+
+function normalizeState() {
+  if (state.device && !data.devices[state.device]) state.device = '';
+  if (state.app) {
+    const app = data.apps[state.app];
+    if (!app || !app.devices.includes(state.device)) state.app = '';
+  }
+  if (!VALID_TABS.has(state.tab)) state.tab = 'overview';
+  if (!state.app) {
+    state.tab = 'overview';
+    state.method = '';
+    state.config = '';
+    state.step = 0;
+    return;
+  }
+  const app = data.apps[state.app];
+  const methods = app.install[state.device] || [];
+  if (!methods.some((m) => m.id === state.method)) state.method = methods[0]?.id || '';
+  const configs = app.configure[state.device] || [];
+  if (!configs.some((c) => c.id === state.config)) state.config = configs[0]?.id || '';
+  const current = state.tab === 'configure'
+    ? configs.find((c) => c.id === state.config)
+    : methods.find((m) => m.id === state.method);
+  const max = current?.steps?.length ? current.steps.length - 1 : 0;
+  state.step = Math.min(Math.max(0, state.step), max);
+}
+
+function reducedMotion() {
+  return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches || false;
+}
+
+function safeHttps(raw) {
+  if (!raw || typeof raw !== 'string') return null;
+  try {
+    const url = new URL(raw, window.location.href);
+    return url.protocol === 'https:' ? url.href : null;
+  } catch {
+    return null;
+  }
+}
+
+function classifyLink(raw, app = null) {
+  let host = '';
+  try { host = new URL(raw).hostname.toLowerCase(); } catch { /* no-op */ }
+  if (host.includes('dropbox.com') || host.endsWith('dropboxusercontent.com')) return { label: 'Miroir Dropbox de l’administrateur', css: 'mirror' };
+  if (host.includes('aftv.news') || host.includes('aftvnews.com')) return { label: 'Raccourci AFTV', css: 'aftv' };
+  if (host === 'play.google.com' || host === 'apps.apple.com' || host.endsWith('microsoft.com')) return { label: 'Boutique officielle', css: 'official' };
+  if (host === 'github.com' || host.endsWith('.github.io')) {
+    return app?.publisher_type === 'third_party'
+      ? { label: 'Projet tiers / releases', css: 'third' }
+      : { label: 'Dépôt / releases éditeur', css: 'official' };
+  }
+  if (app?.publisher_type === 'third_party') return { label: 'Projet tiers', css: 'third' };
+  return { label: 'Site de l’éditeur', css: 'official' };
+}
+
+function addExternalLink(parent, label, raw, app = null, { compact = false } = {}) {
+  const href = safeHttps(raw);
+  if (!href) return;
+  const type = classifyLink(href, app);
+  const link = el('a', compact ? 'outbound-link' : 'action-link');
+  link.href = href;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  link.referrerPolicy = 'no-referrer';
+  link.append(document.createTextNode(label || type.label));
+  if (compact) {
+    const badge = el('small', '', type.label);
+    link.append(badge);
+  }
+  parent.append(link);
+}
+
+function addBadge(parent, label, extraClass = '') {
+  if (!label) return;
+  const badge = el('span', `badge ${extraClass}`.trim(), label);
+  parent.append(badge);
+}
+
+function groupInfo(groupId) {
+  const groups = {
+    tv: { title: 'Télévisions & boîtiers', icon: '▣' },
+    computer: { title: 'Ordinateurs', icon: '⌘' },
+    mobile: { title: 'Téléphones & tablettes', icon: '▤' },
+  };
+  const fallback = data.device_groups[groupId] || groupId;
+  return groups[groupId] || { title: fallback.replace(/^[^A-Za-zÀ-ÿ]+\s*/, ''), icon: '•' };
+}
+
+function renderDevicePicker() {
+  pickerRoot.replaceChildren();
+  const groups = new Map();
+  for (const [deviceId, device] of Object.entries(data.devices)) {
+    const groupId = device.group || 'other';
+    if (!groups.has(groupId)) groups.set(groupId, []);
+    groups.get(groupId).push([deviceId, device]);
+  }
+  for (const [groupId, devices] of groups) {
+    const section = el('div', 'device-group');
+    const info = groupInfo(groupId);
+    const title = el('h3', 'device-group-title');
+    title.append(el('span', '', info.icon), document.createTextNode(info.title));
+    section.append(title);
+    const options = el('div', 'device-options');
+    for (const [deviceId, device] of devices) {
+      const button = el('button', 'device-option', device.name);
+      button.type = 'button';
+      button.dataset.action = 'select-device';
+      button.dataset.device = deviceId;
+      button.setAttribute('aria-pressed', String(state.device === deviceId));
+      options.append(button);
+    }
+    section.append(options);
+    pickerRoot.append(section);
+  }
+
+  const callout = $('#device-callout');
+  callout.replaceChildren();
+  if (state.device === 'fire_vega') {
+    callout.hidden = false;
+    callout.append(el('strong', '', 'Vega OS n’est pas Fire OS / Android.'), document.createTextNode('Le catalogue ne propose pas de méthode de sideload Android pour cet appareil. Consultez l’Amazon Appstore de votre téléviseur et les informations officielles du fabricant; n’installez pas un APK Android.'));
+  } else if (state.device) {
+    callout.hidden = false;
+    const name = data.devices[state.device]?.name || 'Cet appareil';
+    callout.append(el('strong', '', name), document.createTextNode('Les menus peuvent varier selon le modèle, la région, la version du système et de l’application. Une compatibilité indiquée ne constitue pas un test sur chaque modèle.'));
+  } else {
+    callout.hidden = true;
+  }
+}
+
+function normalizeText(value) {
+  return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+}
+
+function renderCatalogControls() {
+  const controls = $('#catalog-controls');
+  controls.replaceChildren();
+  controls.hidden = !state.device;
+  if (!state.device) return;
+
+  const filters = el('div', 'filter-row');
+  const all = el('button', 'filter-button', 'Toutes les catégories');
+  all.type = 'button';
+  all.dataset.action = 'filter-service';
+  all.dataset.service = 'all';
+  all.setAttribute('aria-pressed', String(serviceFilter === 'all'));
+  filters.append(all);
+  for (const [serviceId, label] of Object.entries(data.services)) {
+    const button = el('button', 'filter-button', label.replace(/^[^A-Za-zÀ-ÿ]+\s*/, ''));
+    button.type = 'button';
+    button.dataset.action = 'filter-service';
+    button.dataset.service = serviceId;
+    button.setAttribute('aria-pressed', String(serviceFilter === serviceId));
+    filters.append(button);
+  }
+  const searchWrap = el('label', 'search-wrap');
+  searchWrap.append(el('span', '', '⌕'));
+  const input = el('input', 'search-input');
+  input.type = 'search';
+  input.id = 'app-search';
+  input.placeholder = 'Rechercher une application';
+  input.setAttribute('aria-label', 'Rechercher une application compatible');
+  input.value = searchTerm;
+  searchWrap.append(input);
+  controls.append(filters, searchWrap);
+  input.addEventListener('input', () => {
+    searchTerm = input.value;
+    drawAppCards();
+  });
+}
+
+function mediaFor(appId, deviceId) {
+  return data.media?.[appId]?.[deviceId] || [];
+}
+
+function compatibilityBadge(app) {
+  const evidence = app.platform_support?.[state.device];
+  if (evidence?.status === 'publisher_claim_unverified') return ['Support déclaré, non testé ici', 'badge-caution'];
+  if (evidence?.status === 'not_confirmed') return ['Compatibilité non confirmée', 'badge-caution'];
+  if (app.publisher_type === 'third_party') return ['Application tierce', 'badge-third'];
+  return ['Appareil présent au catalogue', ''];
+}
+
+function drawAppCards() {
+  catalogRoot.replaceChildren();
+  const summary = $('#catalog-summary');
+  if (!state.device) {
+    summary.textContent = 'Choisissez un appareil pour afficher les applications qui lui sont attribuées.';
+    const empty = el('div', 'empty-state');
+    empty.append(el('strong', '', 'Le filtre commence par l’appareil.'), document.createTextNode('Choisissez votre TV, téléphone ou ordinateur : seules les applications compatibles selon le catalogue s’afficheront.'));
+    catalogRoot.append(empty);
+    return;
+  }
+  if (state.device === 'fire_vega') {
+    summary.textContent = 'Vega OS : aucun APK Android n’est proposé pour ce parcours.';
+    const empty = el('div', 'empty-state');
+    empty.append(el('strong', '', 'Aucune application du catalogue à installer en APK.'), document.createTextNode('Vega OS est différent de Fire OS. Vérifiez uniquement les applications disponibles dans l’Amazon Appstore de votre téléviseur.'));
+    catalogRoot.append(empty);
+    return;
+  }
+
+  const matches = Object.entries(data.apps).filter(([appId, app]) => {
+    if (!app.devices.includes(state.device)) return false;
+    if (serviceFilter !== 'all' && !(app.services || []).includes(serviceFilter)) return false;
+    const q = normalizeText(searchTerm);
+    return !q || normalizeText(`${app.name} ${app.note || ''} ${app.prerequisites || ''}`).includes(q);
+  });
+  const deviceName = data.devices[state.device]?.name || 'cet appareil';
+  summary.textContent = `${matches.length} application${matches.length === 1 ? '' : 's'} attribuée${matches.length === 1 ? '' : 's'} à ${deviceName.replace(/^[^A-Za-zÀ-ÿ]+\s*/, '')}.`;
+  if (!matches.length) {
+    const empty = el('div', 'empty-state');
+    empty.append(el('strong', '', searchTerm ? 'Aucun résultat.' : 'Rien dans cette catégorie pour cet appareil.'), document.createTextNode(searchTerm ? 'Essayez un autre nom ou effacez la recherche.' : 'Changez de catégorie ou sélectionnez un autre appareil.'));
+    catalogRoot.append(empty);
+    return;
+  }
+
+  for (const [appId, app] of matches) {
+    const card = el('article', 'app-card');
+    const top = el('div', 'app-card-top');
+    const copy = el('div');
+    copy.append(el('h3', '', app.name));
+    copy.append(el('p', '', app.note || app.access || 'Consultez la fiche avant installation.'));
+    const icon = el('div', 'app-icon');
+    const gallery = mediaFor(appId, state.device);
+    const logo = gallery.find((item) => item.kind === 'logo') || gallery[0];
+    if (logo?.url) {
+      const image = el('img');
+      image.src = logo.url;
+      image.alt = logo.alt || `Visuel éditeur de ${app.name}`;
+      image.loading = 'lazy';
+      image.referrerPolicy = 'no-referrer';
+      image.addEventListener('error', () => { icon.textContent = app.name.slice(0, 1).toUpperCase(); });
+      icon.append(image);
+    } else {
+      icon.textContent = app.name.replace(/^[^A-Za-zÀ-ÿ]+\s*/, '').slice(0, 1).toUpperCase();
+    }
+    top.append(copy, icon);
+    const badges = el('div', 'badge-row');
+    const [compatibility, compatibilityClass] = compatibilityBadge(app);
+    addBadge(badges, compatibility, compatibilityClass);
+    if (app.publisher_type === 'third_party') addBadge(badges, 'Projet indépendant', 'badge-third');
+    if (/alpha/i.test(app.name) || /alpha/i.test(app.note || '')) addBadge(badges, 'Version alpha', 'badge-alpha');
+    for (const service of app.services || []) addBadge(badges, data.services[service]?.replace(/^[^A-Za-zÀ-ÿ]+\s*/, '') || service);
+    const foot = el('div', 'app-card-foot');
+    foot.append(el('small', '', `${(app.install[state.device] || []).length} méthode${(app.install[state.device] || []).length === 1 ? '' : 's'} recensée${(app.install[state.device] || []).length === 1 ? '' : 's'}`));
+    const open = el('button', 'text-button');
+    open.type = 'button';
+    open.dataset.action = 'open-app';
+    open.dataset.app = appId;
+    open.append(document.createTextNode('Voir le guide '), el('span', '', '→'));
+    foot.append(open);
+    card.append(top, badges, foot);
+    catalogRoot.append(card);
+  }
+}
+
+function renderCatalog() {
+  renderCatalogControls();
+  drawAppCards();
+}
+
+function makeBreadcrumb(app) {
+  const row = el('div', 'detail-breadcrumb');
+  const back = el('button', 'breadcrumb-button', 'Applications');
+  back.type = 'button';
+  back.dataset.action = 'close-app';
+  row.append(back, document.createTextNode(' / '), document.createTextNode(data.devices[state.device]?.name || ''), document.createTextNode(' / '), document.createTextNode(app.name));
+  return row;
+}
+
+function renderSourceLinks(parent, app) {
+  const links = [];
+  const add = (label, url) => {
+    const href = safeHttps(url);
+    if (!href || links.some((item) => item.href === href)) return;
+    links.push({ label, href });
+  };
+  add('Site de l’application', app.site);
+  add('Dépôt / source', app.source);
+  const deviceLink = app.links?.[state.device];
+  if (Array.isArray(deviceLink)) deviceLink.forEach((item) => add(item[0], item[1]));
+  else add('Page pour cet appareil', deviceLink);
+  add('Fiche Google Play', app.play_store);
+  for (const [label, url] of app.distribution_links?.[state.device] || []) add(label, url);
+
+  for (const item of links) {
+    const line = el('div', 'action-line');
+    const kind = classifyLink(item.href, app);
+    line.append(el('span', 'link-label', kind.label));
+    addExternalLink(line, item.label, item.href, app);
+    parent.append(line);
+  }
+}
+
+function renderDetail() {
+  appRoot.replaceChildren();
+  if (!state.app) {
+    appRoot.hidden = true;
+    return;
+  }
+  const app = data.apps[state.app];
+  if (!app) { appRoot.hidden = true; return; }
+  appRoot.hidden = false;
+  const shell = el('div', 'detail-shell');
+  const top = el('div', 'detail-top');
+  const copy = el('div');
+  copy.append(makeBreadcrumb(app));
+  const title = el('h2', 'detail-title', app.name);
+  title.id = 'detail-title';
+  title.tabIndex = -1;
+  copy.append(title);
+  copy.append(el('p', 'detail-summary', app.access || app.note || 'Consultez la source éditeur avant de continuer.'));
+  const badges = el('div', 'detail-meta');
+  const [compatibility, compatibilityClass] = compatibilityBadge(app);
+  addBadge(badges, compatibility, compatibilityClass);
+  addBadge(badges, app.publisher_type === 'third_party' ? 'Projet tiers — non affilié' : 'Application / source éditeur', app.publisher_type === 'third_party' ? 'badge-third' : '');
+  for (const service of app.services || []) addBadge(badges, data.services[service]?.replace(/^[^A-Za-zÀ-ÿ]+\s*/, '') || service);
+  copy.append(badges);
+  const actions = el('div', 'detail-actions');
+  renderSourceLinks(actions, app);
+  top.append(copy, actions);
+  shell.append(top);
+
+  const evidence = app.platform_support?.[state.device];
+  if (evidence?.note) {
+    const caution = el('aside', 'caution-box');
+    caution.setAttribute('role', 'note');
+    const heading = evidence.status === 'publisher_claim_unverified' ? 'Réserve de compatibilité' : 'Compatibilité non confirmée';
+    caution.append(el('strong', '', heading), document.createTextNode(evidence.note));
+    if (evidence.evidence_url) addExternalLink(caution, 'Consulter la source citée', evidence.evidence_url, app, { compact: true });
+    shell.append(caution);
+  } else if (app.publisher_type === 'third_party') {
+    const caution = el('aside', 'caution-box');
+    caution.append(el('strong', '', 'Projet tiers.'), document.createTextNode('Ce logiciel n’est pas affilié à l’éditeur des services éventuellement associés. Vérifiez la provenance, la version, les permissions et les prérequis avant de l’installer.'));
+    shell.append(caution);
+  }
+  if (app.downloader_code && (app.install[state.device] || []).some((m) => /downloader/i.test(m.id))) {
+    const code = el('aside', 'caution-box');
+    code.append(el('strong', '', `Code Downloader indiqué dans le catalogue : ${app.downloader_code}`), document.createTextNode(`${app.code_source_status || 'Statut de vérification non précisé.'} Un code peut rediriger vers un fichier dont la version évolue. Relisez la source et le nom du paquet avant de confirmer l’installation.`));
+    shell.append(code);
+  }
+  if (app.prerequisites) {
+    const prereq = el('p', 'detail-prereq');
+    prereq.append(el('strong', '', 'Prérequis : '), document.createTextNode(app.prerequisites));
+    shell.append(prereq);
+  }
+
+  const body = el('div', 'detail-body');
+  const tabs = el('div', 'detail-tabs');
+  tabs.setAttribute('role', 'tablist');
+  tabs.setAttribute('aria-label', `Rubriques du guide ${app.name}`);
+  const tabLabels = [
+    ['overview', 'Présentation'], ['install', 'Installer'], ['configure', 'Configurer'], ['help', 'Dépannage'],
+  ];
+  for (const [tabId, label] of tabLabels) {
+    const button = el('button', 'tab-button', label);
+    button.type = 'button';
+    button.id = `tab-${tabId}`;
+    button.setAttribute('role', 'tab');
+    button.setAttribute('aria-selected', String(state.tab === tabId));
+    button.setAttribute('aria-controls', 'guide-pane');
+    button.tabIndex = state.tab === tabId ? 0 : -1;
+    button.dataset.action = 'set-tab';
+    button.dataset.tab = tabId;
+    tabs.append(button);
+  }
+  body.append(tabs);
+  const pane = el('div', 'detail-pane');
+  pane.id = 'guide-pane';
+  pane.setAttribute('role', 'tabpanel');
+  pane.setAttribute('aria-labelledby', `tab-${state.tab}`);
+  if (state.tab === 'install') renderInstallPane(pane, app);
+  else if (state.tab === 'configure') renderConfigurePane(pane, app);
+  else if (state.tab === 'help') renderHelpPane(pane, app);
+  else renderOverviewPane(pane, app);
+  body.append(pane);
+  shell.append(body);
+  appRoot.append(shell);
+}
+
+function renderOverviewPane(pane, app) {
+  const heading = el('div', 'pane-heading');
+  heading.append(el('h3', '', 'Avant de commencer'));
+  heading.append(el('p', '', 'Vérifiez que votre appareil, la source et le compte attendu correspondent à cette fiche.'));
+  pane.append(heading);
+  const details = el('div', 'overview-copy');
+  details.append(el('p', '', app.note || 'Consultez la source de l’éditeur pour les informations récentes.'));
+  if (app.prerequisites) details.append(el('p', '', `À préparer : ${app.prerequisites}`));
+  details.append(el('p', '', 'Cette application ne fournit pas automatiquement de chaînes, d’abonnement ni de sources. N’ajoutez que des contenus et services auxquels vous êtes autorisé à accéder.'));
+  pane.append(details);
+  appendMedia(pane, app);
+  const shareRow = el('div', 'share-row');
+  const share = el('button', 'round-button');
+  share.type = 'button'; share.dataset.action = 'copy-guide'; share.textContent = 'Copier le lien de cette fiche';
+  shareRow.append(share);
+  pane.append(shareRow);
+}
+
+function renderInstallPane(pane, app) {
+  const options = app.install[state.device] || [];
+  const heading = el('div', 'pane-heading');
+  heading.append(el('h3', '', 'Installation, pas à pas'));
+  heading.append(el('p', '', 'Choisissez une méthode disponible dans le catalogue pour cet appareil. Les menus peuvent varier selon le modèle et la version de l’application.'));
+  pane.append(heading);
+  if (!options.length) {
+    pane.append(el('div', 'empty-state', 'Aucune méthode d’installation n’est renseignée pour ce couple appareil–application.'));
+    return;
+  }
+  if (options.length > 1) {
+    const list = el('div', 'choice-list');
+    for (const option of options) {
+      const button = el('button', 'choice-button', option.label);
+      button.type = 'button'; button.dataset.action = 'set-method'; button.dataset.method = option.id;
+      button.setAttribute('aria-pressed', String(state.method === option.id));
+      list.append(button);
+    }
+    pane.append(list);
+  }
+  const selected = options.find((option) => option.id === state.method) || options[0];
+  renderGuidedSteps(pane, selected.steps, 'install');
+  appendMedia(pane, app);
+}
+
+function renderConfigurePane(pane, app) {
+  const options = app.configure[state.device] || [];
+  const heading = el('div', 'pane-heading');
+  heading.append(el('h3', '', 'Configuration pas à pas'));
+  heading.append(el('p', '', 'Ajoutez uniquement vos propres accès. Les mots de passe, URL privées, adresses MAC et codes d’association ne doivent pas être partagés dans un chatbot.'));
+  pane.append(heading);
+  if (!options.length) {
+    pane.append(el('div', 'empty-state', 'Aucun guide de configuration spécifique n’est renseigné pour ce couple appareil–application.'));
+    return;
+  }
+  const label = el('label', 'config-select-label', 'Que souhaitez-vous configurer ?');
+  const select = el('select', 'config-select');
+  select.id = 'config-choice';
+  for (const option of options) {
+    const item = el('option', '', option.label);
+    item.value = option.id;
+    item.selected = state.config === option.id;
+    select.append(item);
+  }
+  select.addEventListener('change', () => setState({ config: select.value, step: 0 }));
+  label.append(select);
+  pane.append(label);
+  const selected = options.find((option) => option.id === state.config) || options[0];
+  renderGuidedSteps(pane, selected.steps, 'configure');
+  appendMedia(pane, app);
+}
+
+function renderGuidedSteps(parent, steps, kind) {
+  if (!steps?.length) {
+    parent.append(el('div', 'empty-state', 'Aucune étape de ce type n’est actuellement disponible.'));
+    return;
+  }
+  const index = Math.min(state.step, steps.length - 1);
+  const step = steps[index];
+  const card = el('article', 'guide-card');
+  card.setAttribute('aria-live', 'polite');
+  const num = el('div', 'guide-number', String(index + 1).padStart(2, '0'));
+  num.setAttribute('aria-hidden', 'true');
+  const content = el('div', 'guide-content');
+  content.append(el('h4', '', step.title || `Étape ${index + 1}`));
+  content.append(el('p', '', step.body || 'Suivez les instructions affichées par l’application.'));
+  card.append(num, content);
+  parent.append(card);
+
+  const progress = el('div', 'step-progress');
+  progress.setAttribute('role', 'progressbar');
+  progress.setAttribute('aria-label', `Progression du guide : étape ${index + 1} sur ${steps.length}`);
+  progress.setAttribute('aria-valuemin', '1');
+  progress.setAttribute('aria-valuemax', String(steps.length));
+  progress.setAttribute('aria-valuenow', String(index + 1));
+  for (let i = 0; i < steps.length; i += 1) {
+    const segment = el('span', `progress-segment${i <= index ? ' active' : ''}`);
+    segment.setAttribute('aria-hidden', 'true');
+    progress.append(segment);
+  }
+  parent.append(progress);
+
+  const actionLinks = el('div', 'step-links');
+  const sourceApp = data.apps[state.app];
+  if (step.url) addExternalLink(actionLinks, 'Ouvrir la page liée à cette étape', step.url, sourceApp, { compact: true });
+  for (const [label, url] of step.links || []) addExternalLink(actionLinks, label, url, sourceApp, { compact: true });
+  if (actionLinks.childNodes.length) parent.append(actionLinks);
+
+  const nav = el('div', 'step-nav');
+  nav.append(el('span', 'step-count', `Étape ${index + 1} sur ${steps.length}`));
+  const buttons = el('div', 'nav-buttons');
+  const prev = el('button', 'round-button', '← Précédente');
+  prev.type = 'button'; prev.dataset.action = 'prev-step'; prev.disabled = index === 0;
+  const next = el('button', 'round-button primary', index === steps.length - 1 ? 'Terminer' : 'Suivante →');
+  next.type = 'button'; next.dataset.action = 'next-step'; next.dataset.kind = kind;
+  if (index === steps.length - 1) next.setAttribute('aria-label', 'Revenir à la première étape');
+  buttons.append(prev, next);
+  nav.append(buttons);
+  parent.append(nav);
+}
+
+function renderHelpPane(pane, app) {
+  const heading = el('div', 'pane-heading');
+  heading.append(el('h3', '', 'Que se passe-t-il ?'));
+  heading.append(el('p', '', 'Conseils repris du parcours du bot. Commencez par choisir le problème qui ressemble le plus au vôtre.'));
+  pane.append(heading);
+  const issues = app.troubleshooting[state.device] || [];
+  if (issues.length) {
+    const list = el('div', 'troubleshoot-list');
+    for (const issue of issues) {
+      const details = el('details', 'issue-item');
+      const summary = el('summary', '', issue.label);
+      details.append(summary);
+      details.append(el('div', 'issue-text', issue.text));
+      if (issue.links?.length) {
+        const links = el('div', 'issue-links');
+        for (const [label, url] of issue.links) addExternalLink(links, label, url, app, { compact: true });
+        details.append(links);
+      }
+      list.append(details);
+    }
+    pane.append(list);
+  } else {
+    const fallback = el('div', 'empty-state');
+    fallback.append(el('strong', '', 'Aucun cas spécifique exporté pour cette combinaison.'), document.createTextNode('Vérifiez les prérequis, la compatibilité de votre modèle et la source du fichier téléchargé. Si une étape ne correspond pas à votre écran, arrêtez-vous et consultez la page de l’éditeur.'));
+    pane.append(fallback);
+  }
+  const safety = el('aside', 'caution-box');
+  safety.append(el('strong', '', 'Évitez les corrections risquées.'), document.createTextNode('Ne désactivez pas durablement les protections du système, ne partagez pas de mot de passe ou de code privé et n’installez pas un paquet prévu pour un autre appareil.'));
+  pane.append(safety);
+  appendMedia(pane, app);
+}
+
+function appendMedia(parent, app) {
+  const items = mediaFor(state.app, state.device).filter((item) => item.kind !== 'logo');
+  if (items.length) {
+    const section = el('section', 'media-section');
+    section.append(el('h3', '', 'Captures publiées par l’éditeur'));
+    section.append(el('p', 'media-intro', 'Ces visuels illustrent l’interface communiquée par l’éditeur; ils ne prouvent ni la disponibilité actuelle de l’application, ni le fonctionnement sur votre modèle.'));
+    const gallery = el('div', 'media-gallery');
+    for (const item of items.slice(0, 8)) {
+      const figure = el('figure', 'media-card');
+      const image = el('img');
+      image.src = item.url;
+      image.alt = item.alt || item.title || `Capture éditeur de ${app.name}`;
+      image.loading = 'lazy';
+      image.referrerPolicy = 'no-referrer';
+      image.addEventListener('error', () => {
+        figure.replaceChildren(el('div', 'media-fallback', 'Visuel temporairement indisponible'));
+      }, { once: true });
+      const caption = el('figcaption');
+      caption.append(el('strong', '', item.title || 'Capture éditeur'));
+      const source = safeHttps(item.source || item.url);
+      if (source) {
+        const link = el('a', '', 'Source ↗');
+        link.href = source; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.referrerPolicy = 'no-referrer';
+        caption.append(link);
+      }
+      figure.append(image, caption);
+      gallery.append(figure);
+    }
+    section.append(gallery);
+    parent.append(section);
+  }
+
+  const videos = (data.videos || []).filter((video) => (video.apps || []).includes(state.app) && (video.devices || []).includes(state.device));
+  if (videos.length) {
+    const section = el('section', 'media-section');
+    section.append(el('h3', '', 'Vidéos associées'));
+    section.append(el('p', 'media-intro', 'Les liens et métadonnées ont été contrôlés; le contenu complet des vidéos n’a pas été visionné. Les vidéos de créateurs tiers ne remplacent pas les instructions de l’éditeur.'));
+    const list = el('div', 'video-list');
+    for (const video of videos) list.append(makeVideoCard(video));
+    section.append(list);
+    if (data.video_verification_method) section.append(el('p', 'video-disclaimer', data.video_verification_method));
+    parent.append(section);
+  }
+}
+
+function makeVideoCard(video) {
+  const card = el('article', 'video-card');
+  const button = el('button', 'video-preview');
+  button.type = 'button';
+  button.dataset.action = 'load-video';
+  button.dataset.video = video.id;
+  button.setAttribute('aria-label', `Charger la vidéo : ${video.title}`);
+  const videoId = youtubeId(video.url);
+  if (videoId) {
+    const image = el('img');
+    image.src = `https://i.ytimg.com/vi/${encodeURIComponent(videoId)}/hqdefault.jpg`;
+    image.alt = '';
+    image.loading = 'lazy';
+    image.referrerPolicy = 'no-referrer';
+    image.addEventListener('error', () => { image.remove(); }, { once: true });
+    button.append(image);
+  }
+  button.append(el('span', 'play-indicator', '▶'));
+  const caption = el('div', 'video-caption');
+  caption.append(el('h4', '', video.title));
+  caption.append(el('p', '', `${video.creator || 'Source vidéo'}${video.published ? ` · ${video.published}` : ''}${video.lang ? ` · ${video.lang.toUpperCase()}` : ''}`));
+  if (video.disclaimer) caption.append(el('p', '', video.disclaimer));
+  addExternalLink(caption, 'Ouvrir sur YouTube', video.url, null);
+  card.append(button, caption);
+  return card;
+}
+
+function youtubeId(raw) {
+  try {
+    const url = new URL(raw);
+    if (url.hostname.endsWith('youtu.be')) return url.pathname.slice(1).split('/')[0];
+    if (url.searchParams.get('v')) return url.searchParams.get('v');
+    const match = url.pathname.match(/\/(?:embed|shorts)\/([\w-]+)/);
+    return match?.[1] || '';
+  } catch { return ''; }
+}
+
+function loadVideo(videoId) {
+  const video = (data.videos || []).find((item) => item.id === videoId);
+  const id = video ? youtubeId(video.url) : '';
+  if (!id) return;
+  const button = $(`[data-action="load-video"][data-video="${CSS.escape(videoId)}"]`);
+  if (!button) return;
+  const iframe = el('iframe', 'video-frame');
+  iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1`;
+  iframe.title = video.title;
+  iframe.loading = 'lazy';
+  iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+  iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+  iframe.allowFullscreen = true;
+  button.replaceWith(iframe);
+}
+
+function render() {
+  if (!data) return;
+  normalizeState();
+  renderDevicePicker();
+  renderCatalog();
+  renderDetail();
+  const footer = $('.site-footer p');
+  const stamp = data.generated_at ? new Date(data.generated_at) : null;
+  if (footer && stamp && !$('.data-stamp', footer)) {
+    footer.append(document.createTextNode(' '));
+    const small = el('small', 'data-stamp', `Données exportées le ${new Intl.DateTimeFormat('fr-FR', { dateStyle: 'medium', timeZone: 'Europe/Paris' }).format(stamp)}.`);
+    footer.append(small);
+  }
+}
+
+function showToast(message) {
+  toast.textContent = message;
+  toast.classList.add('show');
+  window.clearTimeout(toastTimer);
+  toastTimer = window.setTimeout(() => toast.classList.remove('show'), 2600);
+}
+
+async function copyGuideLink() {
+  syncUrl(false);
+  try {
+    await navigator.clipboard.writeText(window.location.href);
+    showToast('Lien copié. Il s’ouvrira sur cette fiche et cette étape.');
+  } catch {
+    showToast('Le navigateur ne permet pas la copie automatique. Copiez le lien depuis la barre d’adresse.');
+  }
+}
+
+function onClick(event) {
+  const control = event.target.closest('[data-action]');
+  if (!control) return;
+  const action = control.dataset.action;
+  if (action === 'select-device') {
+    serviceFilter = 'all'; searchTerm = '';
+    setState({ device: control.dataset.device, app: '', tab: 'overview', method: '', config: '', step: 0 }, { scroll: true });
+  } else if (action === 'open-app') {
+    const appId = control.dataset.app;
+    const app = data.apps[appId];
+    setState({ app: appId, tab: 'overview', method: app?.install[state.device]?.[0]?.id || '', config: app?.configure[state.device]?.[0]?.id || '', step: 0 }, { scroll: true });
+  } else if (action === 'close-app') {
+    setState({ app: '', tab: 'overview', method: '', config: '', step: 0 }, { scroll: true });
+  } else if (action === 'filter-service') {
+    serviceFilter = control.dataset.service;
+    renderCatalogControls(); drawAppCards();
+  } else if (action === 'set-tab') {
+    setState({ tab: control.dataset.tab, step: 0 });
+  } else if (action === 'set-method') {
+    setState({ method: control.dataset.method, step: 0 });
+  } else if (action === 'prev-step') {
+    setState({ step: Math.max(0, state.step - 1) });
+  } else if (action === 'next-step') {
+    const current = state.tab === 'configure'
+      ? data.apps[state.app]?.configure[state.device]?.find((item) => item.id === state.config)
+      : data.apps[state.app]?.install[state.device]?.find((item) => item.id === state.method);
+    const max = Math.max(0, (current?.steps?.length || 1) - 1);
+    setState({ step: state.step < max ? state.step + 1 : 0 });
+  } else if (action === 'copy-guide') {
+    copyGuideLink();
+  } else if (action === 'load-video') {
+    loadVideo(control.dataset.video);
+  }
+}
+
+document.addEventListener('click', onClick);
+window.addEventListener('popstate', () => {
+  state = readUrlState();
+  if (data) { normalizeState(); render(); }
+});
+
+fetch(DATA_URL, { cache: 'no-cache' })
+  .then((response) => {
+    if (!response.ok) throw new Error(`Erreur HTTP ${response.status}`);
+    return response.json();
+  })
+  .then((json) => {
+    if (!json.apps || !json.devices || json.schema_version !== 1) throw new Error('Format de données inattendu');
+    data = json;
+    normalizeState();
+    syncUrl(false);
+    render();
+  })
+  .catch((error) => {
+    const empty = el('div', 'empty-state');
+    empty.append(el('strong', '', 'Le catalogue ne s’est pas chargé.'), document.createTextNode('Actualisez la page. Si le problème continue, vérifiez que le fichier data/site-data.json est présent dans le dépôt du site.'));
+    catalogRoot.replaceChildren(empty);
+    console.error('Assistant Installation: impossible de charger les données publiques.', error);
+  });
