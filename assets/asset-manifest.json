@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-11-10",
+  "policy": "Les illustrations pédagogiques sont explicitement présentées comme des illustrations générées et non comme des captures d’écran. Les captures éditeur restent distantes et sourcées dans data/site-data.json.",
+  "assets": [
+    {
+      "prefix": "assets/guides/",
+      "kind": "instructional_illustration",
+      "source": "assistant-installation-v5.7-experience-pro/assets/guides/",
+      "license_status": "source project asset; verify redistribution terms before public publication",
+      "redistribution_allowed": false,
+      "usage": "display only with the label: Illustration pédagogique — pas une capture d’écran"
+    },
+    {
+      "path": "assets/mark.svg",
+      "kind": "brand_mark",
+      "source": "Assistant Installation web project",
+      "license_status": "original project mark",
+      "redistribution_allowed": true,
+      "usage": "site branding and favicon"
+    }
+  ]
+}

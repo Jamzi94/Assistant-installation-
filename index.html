@@ -38,6 +38,14 @@
   </header>
 
   <main id="main">
+    <div id="loading-state" class="loading-state" role="status">Préparation de votre guide…</div>
+    <noscript>
+      <section class="no-script-state" aria-labelledby="no-script-title">
+        <p class="eyebrow">JavaScript requis pour le guide interactif</p>
+        <h1 id="no-script-title">Activez JavaScript pour choisir votre appareil et ouvrir les étapes.</h1>
+        <p>Le catalogue public reste statique et ne demande aucun compte. Réactivez JavaScript puis rechargez cette page pour afficher les compatibilités et les guides.</p>
+      </section>
+    </noscript>
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-copy">
         <p class="eyebrow"><span class="eyebrow-dot"></span> Le guide s’adapte à votre appareil</p>
@@ -61,7 +69,7 @@
         <div><p class="eyebrow">ÉTAPE 01 <span class="heading-rule"></span> SÉLECTION</p><h2 id="device-title">Sur quel appareil ?</h2></div>
         <p class="section-aside">Les intitulés et versions de menu peuvent varier selon le modèle et les mises à jour.</p>
       </div>
-      <div id="device-picker" class="device-picker" aria-live="polite"></div>
+      <div id="device-picker" class="device-picker"></div>
       <div id="device-callout" class="device-callout" hidden></div>
     </section>
 
@@ -71,10 +79,10 @@
         <p id="catalog-summary" class="section-aside">Choisissez un appareil pour afficher les applications qui lui sont attribuées.</p>
       </div>
       <div id="catalog-controls" class="catalog-controls" hidden></div>
-      <div id="catalog-list" class="app-grid" aria-live="polite"></div>
+      <div id="catalog-list" class="app-grid"></div>
     </section>
 
-    <section id="app-detail" class="detail-section" aria-live="polite" hidden></section>
+    <section id="app-detail" class="detail-section" hidden></section>
 
     <section class="source-section" id="sources" aria-labelledby="source-title">
       <div class="source-mark" aria-hidden="true">i</div>
@@ -82,6 +90,8 @@
       <div class="source-legend" aria-label="Types de liens"><span class="source-chip official">Éditeur / store</span><span class="source-chip third">Projet tiers</span><span class="source-chip mirror">Miroir administrateur</span></div>
     </section>
   </main>
+  <div id="status-announcer" class="sr-only" role="status" aria-live="polite"></div>
+  <div id="error-announcer" class="sr-only" role="alert" aria-live="assertive"></div>
 
   <footer class="site-footer">
     <a class="brand footer-brand" href="./" aria-label="Retour en haut"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span class="brand-copy"><strong>ASSISTANT</strong><small>INSTALLATION · V5.7</small></span></a>

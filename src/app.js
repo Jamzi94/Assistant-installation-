@@ -4,12 +4,17 @@ const appRoot = document.querySelector('#app-detail');
 const catalogRoot = document.querySelector('#catalog-list');
 const pickerRoot = document.querySelector('#device-picker');
 const toast = document.querySelector('#toast');
+const announcer = document.querySelector('#status-announcer');
+const errorAnnouncer = document.querySelector('#error-announcer');
+const loadingState = document.querySelector('#loading-state');
 
 let data;
-let serviceFilter = 'all';
+let serviceFilter = '';
 let searchTerm = '';
 let toastTimer;
 let state = readUrlState();
+serviceFilter = state.service || '';
+searchTerm = state.q || '';
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -31,6 +36,9 @@ function readUrlState() {
     method: query.get('method') || '',
     config: query.get('config') || '',
     step: Math.max(0, Number.parseInt(query.get('step') || '0', 10) || 0),
+    completed: query.get('done') === '1',
+    service: query.get('service') || '',
+    q: query.get('q') || '',
   };
 }
 
@@ -42,6 +50,9 @@ function syncUrl(push = true) {
   if (state.method && state.tab === 'install') query.set('method', state.method);
   if (state.config && state.tab === 'configure') query.set('config', state.config);
   if (state.step > 0 && (state.tab === 'install' || state.tab === 'configure')) query.set('step', String(state.step));
+  if (state.completed && (state.tab === 'install' || state.tab === 'configure')) query.set('done', '1');
+  if (state.service) query.set('service', state.service);
+  if (state.q) query.set('q', state.q);
   const next = `${window.location.pathname}${query.size ? `?${query}` : ''}`;
   if (next === `${window.location.pathname}${window.location.search}`) return;
   if (push) window.history.pushState({}, '', next);
@@ -50,6 +61,8 @@ function syncUrl(push = true) {
 
 function setState(changes, { push = true, scroll = false } = {}) {
   state = { ...state, ...changes };
+  if (Object.prototype.hasOwnProperty.call(changes, 'service')) serviceFilter = changes.service || '';
+  if (Object.prototype.hasOwnProperty.call(changes, 'q')) searchTerm = changes.q || '';
   if (data) normalizeState();
   syncUrl(push);
   render();
@@ -74,6 +87,7 @@ function normalizeState() {
     state.method = '';
     state.config = '';
     state.step = 0;
+    state.completed = false;
     return;
   }
   const app = data.apps[state.app];
@@ -86,6 +100,7 @@ function normalizeState() {
     : methods.find((m) => m.id === state.method);
   const max = current?.steps?.length ? current.steps.length - 1 : 0;
   state.step = Math.min(Math.max(0, state.step), max);
+  if (state.completed && state.step !== max) state.completed = false;
 }
 
 function reducedMotion() {
@@ -109,11 +124,11 @@ function classifyLink(raw, app = null) {
   if (host.includes('aftv.news') || host.includes('aftvnews.com')) return { label: 'Raccourci AFTV', css: 'aftv' };
   if (host === 'play.google.com' || host === 'apps.apple.com' || host.endsWith('microsoft.com')) return { label: 'Boutique officielle', css: 'official' };
   if (host === 'github.com' || host.endsWith('.github.io')) {
-    return app?.publisher_type === 'third_party'
+    return ['third_party', 'independent'].includes(app?.publisher_type)
       ? { label: 'Projet tiers / releases', css: 'third' }
       : { label: 'Dépôt / releases éditeur', css: 'official' };
   }
-  if (app?.publisher_type === 'third_party') return { label: 'Projet tiers', css: 'third' };
+  if (['third_party', 'independent'].includes(app?.publisher_type)) return { label: 'Projet indépendant', css: 'third' };
   return { label: 'Site de l’éditeur', css: 'official' };
 }
 
@@ -177,6 +192,12 @@ function renderDevicePicker() {
     pickerRoot.append(section);
   }
 
+  const help = el('button', 'device-help-button');
+  help.type = 'button';
+  help.dataset.action = 'device-help';
+  help.append(el('span', 'device-help-icon', '?'), document.createTextNode('Je ne sais pas quel système utilise mon appareil'));
+  pickerRoot.append(help);
+
   const callout = $('#device-callout');
   callout.replaceChildren();
   if (state.device === 'fire_vega') {
@@ -206,7 +227,7 @@ function renderCatalogControls() {
   all.type = 'button';
   all.dataset.action = 'filter-service';
   all.dataset.service = 'all';
-  all.setAttribute('aria-pressed', String(serviceFilter === 'all'));
+  all.setAttribute('aria-pressed', String(!serviceFilter));
   filters.append(all);
   for (const [serviceId, label] of Object.entries(data.services)) {
     const button = el('button', 'filter-button', label.replace(/^[^A-Za-zÀ-ÿ]+\s*/, ''));
@@ -228,6 +249,8 @@ function renderCatalogControls() {
   controls.append(filters, searchWrap);
   input.addEventListener('input', () => {
     searchTerm = input.value;
+    state.q = searchTerm;
+    syncUrl(false);
     drawAppCards();
   });
 }
@@ -264,7 +287,7 @@ function drawAppCards() {
 
   const matches = Object.entries(data.apps).filter(([appId, app]) => {
     if (!app.devices.includes(state.device)) return false;
-    if (serviceFilter !== 'all' && !(app.services || []).includes(serviceFilter)) return false;
+    if (serviceFilter && !(app.services || []).includes(serviceFilter)) return false;
     const q = normalizeText(searchTerm);
     return !q || normalizeText(`${app.name} ${app.note || ''} ${app.prerequisites || ''}`).includes(q);
   });
@@ -412,6 +435,7 @@ function renderDetail() {
   const tabs = el('div', 'detail-tabs');
   tabs.setAttribute('role', 'tablist');
   tabs.setAttribute('aria-label', `Rubriques du guide ${app.name}`);
+  tabs.setAttribute('aria-orientation', 'horizontal');
   const tabLabels = [
     ['overview', 'Présentation'], ['install', 'Installer'], ['configure', 'Configurer'], ['help', 'Dépannage'],
   ];
@@ -451,6 +475,17 @@ function renderOverviewPane(pane, app) {
   if (app.prerequisites) details.append(el('p', '', `À préparer : ${app.prerequisites}`));
   details.append(el('p', '', 'Cette application ne fournit pas automatiquement de chaînes, d’abonnement ni de sources. N’ajoutez que des contenus et services auxquels vous êtes autorisé à accéder.'));
   pane.append(details);
+  const methods = app.install[state.device] || [];
+  if (methods.length) {
+    const recommendation = el('aside', 'recommendation-card');
+    recommendation.append(el('p', 'eyebrow', 'PARCOURS RECOMMANDÉ'));
+    recommendation.append(el('h3', '', methods[0].label));
+    recommendation.append(el('p', '', `${methods[0].steps?.length || 0} étapes guidées pour ${data.devices[state.device]?.name || 'cet appareil'}. Les autres méthodes restent accessibles depuis l’onglet Installer.`));
+    const start = el('button', 'round-button primary', 'Commencer ce parcours →');
+    start.type = 'button'; start.dataset.action = 'set-tab'; start.dataset.tab = 'install';
+    recommendation.append(start);
+    pane.append(recommendation);
+  }
   appendMedia(pane, app);
   const shareRow = el('div', 'share-row');
   const share = el('button', 'round-button');
@@ -518,6 +553,29 @@ function renderGuidedSteps(parent, steps, kind) {
   }
   const index = Math.min(state.step, steps.length - 1);
   const step = steps[index];
+  if (state.completed) {
+    const complete = el('section', 'completion-card');
+    complete.append(el('div', 'completion-mark', '✓'));
+    const copy = el('div', 'completion-copy');
+    copy.append(el('p', 'eyebrow', kind === 'configure' ? 'CONFIGURATION TERMINÉE' : 'INSTALLATION TERMINÉE'));
+    copy.append(el('h3', '', kind === 'configure' ? 'Vos réglages sont en place.' : 'L’application est installée et prête à être ouverte.'));
+    copy.append(el('p', '', 'Si l’écran ne correspond pas à ce qui est indiqué, revenez à l’étape précédente plutôt que de forcer une installation ou de partager un accès privé.'));
+    complete.append(copy);
+    const actions = el('div', 'completion-actions');
+    if (kind === 'install') {
+      const configure = el('button', 'round-button primary', 'Configurer maintenant →');
+      configure.type = 'button'; configure.dataset.action = 'continue-config';
+      actions.append(configure);
+    }
+    const help = el('button', 'round-button', 'J’ai un problème');
+    help.type = 'button'; help.dataset.action = 'open-help';
+    const restart = el('button', 'text-button', 'Revoir depuis le début');
+    restart.type = 'button'; restart.dataset.action = 'restart-guide';
+    actions.append(help, restart);
+    complete.append(actions);
+    parent.append(complete);
+    return;
+  }
   const card = el('article', 'guide-card');
   card.setAttribute('aria-live', 'polite');
   const num = el('div', 'guide-number', String(index + 1).padStart(2, '0'));
@@ -525,6 +583,17 @@ function renderGuidedSteps(parent, steps, kind) {
   const content = el('div', 'guide-content');
   content.append(el('h4', '', step.title || `Étape ${index + 1}`));
   content.append(el('p', '', step.body || 'Suivez les instructions affichées par l’application.'));
+  if (step.image) {
+    const figure = el('figure', 'step-visual');
+    const image = el('img');
+    image.src = step.image.startsWith('assets/') ? `./${step.image}` : step.image;
+    image.alt = 'Illustration pédagogique de cette étape — pas une capture d’écran';
+    image.loading = 'lazy';
+    image.decoding = 'async';
+    image.addEventListener('error', () => figure.replaceChildren(el('figcaption', 'media-fallback', 'Illustration temporairement indisponible')), { once: true });
+    figure.append(image, el('figcaption', '', 'Illustration pédagogique — pas une capture d’écran'));
+    content.append(figure);
+  }
   card.append(num, content);
   parent.append(card);
 
@@ -552,9 +621,9 @@ function renderGuidedSteps(parent, steps, kind) {
   const buttons = el('div', 'nav-buttons');
   const prev = el('button', 'round-button', '← Précédente');
   prev.type = 'button'; prev.dataset.action = 'prev-step'; prev.disabled = index === 0;
-  const next = el('button', 'round-button primary', index === steps.length - 1 ? 'Terminer' : 'Suivante →');
+  const next = el('button', 'round-button primary', index === steps.length - 1 ? 'Marquer comme terminé' : 'Suivante →');
   next.type = 'button'; next.dataset.action = 'next-step'; next.dataset.kind = kind;
-  if (index === steps.length - 1) next.setAttribute('aria-label', 'Revenir à la première étape');
+  if (index === steps.length - 1) next.setAttribute('aria-label', 'Marquer le guide comme terminé');
   buttons.append(prev, next);
   nav.append(buttons);
   parent.append(nav);
@@ -712,6 +781,13 @@ function showToast(message) {
   toastTimer = window.setTimeout(() => toast.classList.remove('show'), 2600);
 }
 
+function announce(message, { error = false } = {}) {
+  const target = error ? errorAnnouncer : announcer;
+  if (!target) return;
+  target.textContent = '';
+  window.setTimeout(() => { target.textContent = message; }, 20);
+}
+
 async function copyGuideLink() {
   syncUrl(false);
   try {
@@ -727,8 +803,19 @@ function onClick(event) {
   if (!control) return;
   const action = control.dataset.action;
   if (action === 'select-device') {
-    serviceFilter = 'all'; searchTerm = '';
-    setState({ device: control.dataset.device, app: '', tab: 'overview', method: '', config: '', step: 0 }, { scroll: true });
+    serviceFilter = ''; searchTerm = '';
+    setState({ device: control.dataset.device, app: '', tab: 'overview', method: '', config: '', step: 0, completed: false, service: '', q: '' }, { scroll: true });
+  } else if (action === 'device-help') {
+    const callout = $('#device-callout');
+    callout.hidden = false;
+    callout.replaceChildren(
+      el('strong', '', 'Comment reconnaître votre appareil ?'),
+      document.createTextNode(' TV : ouvrez Paramètres → À propos. Samsung utilise généralement Tizen, LG webOS, Apple TV tvOS et Google TV/Chromecast Android TV. Sur mobile, consultez Réglages/Paramètres → À propos. Sur ordinateur, ouvrez Informations système.'),
+      el('br'),
+      document.createTextNode(' Si vous hésitez encore, choisissez le système indiqué sur l’écran d’accueil plutôt que l’appareil utilisé pour lire cette page.'),
+    );
+    callout.focus?.();
+    announce('Aide pour identifier le système de votre appareil affichée.');
   } else if (action === 'open-app') {
     const appId = control.dataset.app;
     const app = data.apps[appId];
@@ -736,7 +823,8 @@ function onClick(event) {
   } else if (action === 'close-app') {
     setState({ app: '', tab: 'overview', method: '', config: '', step: 0 }, { scroll: true });
   } else if (action === 'filter-service') {
-    serviceFilter = control.dataset.service;
+    serviceFilter = control.dataset.service === 'all' ? '' : control.dataset.service;
+    setState({ service: serviceFilter }, { push: true });
     renderCatalogControls(); drawAppCards();
   } else if (action === 'set-tab') {
     setState({ tab: control.dataset.tab, step: 0 });
@@ -749,7 +837,14 @@ function onClick(event) {
       ? data.apps[state.app]?.configure[state.device]?.find((item) => item.id === state.config)
       : data.apps[state.app]?.install[state.device]?.find((item) => item.id === state.method);
     const max = Math.max(0, (current?.steps?.length || 1) - 1);
-    setState({ step: state.step < max ? state.step + 1 : 0 });
+    if (state.step < max) setState({ step: state.step + 1, completed: false });
+    else setState({ completed: true });
+  } else if (action === 'restart-guide') {
+    setState({ step: 0, completed: false });
+  } else if (action === 'continue-config') {
+    setState({ tab: 'configure', step: 0, completed: false });
+  } else if (action === 'open-help') {
+    setState({ tab: 'help', step: 0, completed: false }, { scroll: true });
   } else if (action === 'copy-guide') {
     copyGuideLink();
   } else if (action === 'load-video') {
@@ -758,6 +853,22 @@ function onClick(event) {
 }
 
 document.addEventListener('click', onClick);
+document.addEventListener('keydown', (event) => {
+  const tab = event.target.closest?.('[role="tab"]');
+  if (tab) {
+    const tabs = $$('.detail-tabs [role="tab"]');
+    const index = tabs.indexOf(tab);
+    if (event.key === 'ArrowRight' || event.key === 'ArrowLeft' || event.key === 'Home' || event.key === 'End') {
+      event.preventDefault();
+      const delta = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0;
+      const targetIndex = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (index + delta + tabs.length) % tabs.length;
+      tabs[targetIndex]?.click();
+      window.requestAnimationFrame(() => document.querySelector('[role="tab"][aria-selected="true"]')?.focus());
+    }
+  }
+  if (event.key === 'Escape' && state.app) setState({ app: '', tab: 'overview', completed: false }, { scroll: true });
+  if (event.key.toLowerCase() === 'r' && state.app && (state.tab === 'install' || state.tab === 'configure')) setState({ step: 0, completed: false });
+});
 window.addEventListener('popstate', () => {
   state = readUrlState();
   if (data) { normalizeState(); render(); }
@@ -771,13 +882,20 @@ fetch(DATA_URL, { cache: 'no-cache' })
   .then((json) => {
     if (!json.apps || !json.devices || json.schema_version !== 1) throw new Error('Format de données inattendu');
     data = json;
+    if (loadingState) loadingState.hidden = true;
     normalizeState();
     syncUrl(false);
     render();
+    announce('Catalogue chargé.');
   })
   .catch((error) => {
+    if (loadingState) loadingState.hidden = true;
     const empty = el('div', 'empty-state');
-    empty.append(el('strong', '', 'Le catalogue ne s’est pas chargé.'), document.createTextNode('Actualisez la page. Si le problème continue, vérifiez que le fichier data/site-data.json est présent dans le dépôt du site.'));
+    empty.append(el('strong', '', 'Le catalogue ne s’est pas chargé.'), document.createTextNode('Vérifiez votre connexion ou la présence du fichier data/site-data.json, puis réessayez.'));
+    const retry = el('button', 'round-button primary', 'Réessayer');
+    retry.type = 'button'; retry.addEventListener('click', () => window.location.reload());
+    empty.append(el('br'), retry);
     catalogRoot.replaceChildren(empty);
+    announce('Le catalogue ne s’est pas chargé. Un bouton Réessayer est disponible.', { error: true });
     console.error('Assistant Installation: impossible de charger les données publiques.', error);
   });

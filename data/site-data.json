@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-10T15:11:11+00:00",
+  "generated_at": "2026-11-10T17:05:40+00:00",
   "source_version": "Assistant Installation V5.7",
   "refresh_policy": "Données exportées à la date de génération; aucune actualisation automatique n’est promise.",
   "devices": {
@@ -129,22 +129,26 @@
                 "title": "Installe Downloader si nécessaire",
                 "body": "Sur la TV, ouvre Google Play Store, recherche « Downloader by AFTVnews », puis installe et ouvre l’application. Si Downloader est déjà présent, passe à la suite.",
                 "url": "https://play.google.com/store/apps/details?id=com.esaba.downloader",
+                "image": "assets/guides/manual_tv_apk/android_tv/v57_01.jpg",
                 "links": []
               },
               {
                 "title": "Autorise Downloader à installer un APK",
                 "body": "Sur Android TV : Paramètres → Applications → Accès spécial (ou Sécurité et restrictions) → Installer des applications inconnues → Downloader → Autoriser.",
+                "image": "assets/guides/manual_tv_apk/android_tv/v57_02.jpg",
                 "links": []
               },
               {
                 "title": "Télécharge le bon fichier",
                 "body": "Depuis Downloader sur la TV, ouvre la page officielle indiquée ci-dessous. Dans Releases → Assets, prends le fichier .apk prévu pour la TV, pas « Source code ». Tu peux aussi transférer l’APK depuis un ordinateur si la TV le permet.",
                 "url": "https://github.com/NuvioMedia/NuvioTV/releases",
+                "image": "assets/guides/manual_tv_apk/android_tv/v57_03.jpg",
                 "links": []
               },
               {
                 "title": "Installe puis ouvre l’application",
                 "body": "Ouvre le fichier APK téléchargé et sélectionne « Installer », puis « Ouvrir ». Si un avertissement signale un fichier dangereux, arrête-toi. Après l’installation, retire l’autorisation accordée à Downloader et supprime le fichier APK si tu n’en as plus besoin.",
+                "image": "assets/guides/manual_tv_apk/android_tv/v57_04.jpg",
                 "links": []
               }
             ]
@@ -157,28 +161,33 @@
                 "title": "Installe Downloader sur la télévision",
                 "body": "Sur ta télévision, ouvre Google Play Store, recherche « Downloader by AFTVnews », puis sélectionne « Installer » et « Ouvrir ».",
                 "url": "https://play.google.com/store/apps/details?id=com.esaba.downloader",
+                "image": "assets/guides/downloader/android_tv/v57_01.jpg",
                 "links": []
               },
               {
                 "title": "Autorise l’installation du fichier",
                 "body": "Sur la TV : Paramètres → Applications → Accès spécial (ou Sécurité et restrictions) → Installer des applications inconnues → Downloader → Autoriser. Les noms peuvent varier selon ton modèle Android TV / Google TV.",
                 "url": "https://support.google.com/androidtv/",
+                "image": "assets/guides/downloader/android_tv/v57_02.jpg",
                 "links": []
               },
               {
                 "title": "Saisis le code 1108419",
                 "body": "Dans Downloader sur la télévision, sélectionne la case « URL / Short Code », entre 1108419, puis appuie sur « Go ». Ce code se saisit dans Downloader, pas dans Telegram ni dans la boutique.",
+                "image": "assets/guides/downloader/android_tv/v57_03.jpg",
                 "links": []
               },
               {
                 "title": "Contrôle le téléchargement",
                 "body": "Le code ouvre la page de téléchargement de Nuvio TV (officiel). Vérifie le nom de l’application et la provenance du fichier avant de télécharger. Si la page ne correspond pas, arrête-toi et utilise la page du développeur.",
                 "url": "https://github.com/NuvioMedia/NuvioTV/releases",
+                "image": "assets/guides/downloader/android_tv/v57_04.jpg",
                 "links": []
               },
               {
                 "title": "Installe et ouvre l’application",
                 "body": "Une fois le fichier APK téléchargé, sélectionne « Installer », puis « Ouvrir ». Si une alerte de sécurité signale un fichier dangereux, ne force pas. Ensuite, tu peux supprimer le fichier APK dans Downloader et désactiver son autorisation d’installation dans les paramètres. Pour ajouter ton compte ou ta source, utilise ensuite « Configurer » dans le bot.",
+                "image": "assets/guides/downloader/android_tv/v57_05.jpg",
                 "links": []
               }
             ]
@@ -452,25 +461,9 @@
             "steps": [
               {
                 "title": "Choisis l’APK correspondant à ton appareil",
-                "body": "Nuvio Mobile · release 0.6.10-beta, canal bêta. Choisis l’APK ARM64 (Android récent), ARMv7 (ancien 32 bits), ou x86/x86_64 (Intel/émulateur). Si tu hésites, vérifie l’architecture de ton appareil.",
-                "links": [
-                  [
-                    "📦 ARM64",
-                    "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.10-beta/androidApp-full-arm64-v8a-release.apk"
-                  ],
-                  [
-                    "📦 ARMv7",
-                    "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.10-beta/androidApp-full-armeabi-v7a-release.apk"
-                  ],
-                  [
-                    "📦 x86_64",
-                    "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.10-beta/androidApp-full-x86_64-release.apk"
-                  ],
-                  [
-                    "📦 x86",
-                    "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.10-beta/androidApp-full-x86-release.apk"
-                  ]
-                ]
+                "body": "Nuvio Mobile : ARM64 pour Android récent, ARMv7 pour ancien appareil 32 bits, x86/x86_64 surtout pour Intel ou émulateur. Vérifie l’architecture si tu hésites; n’installe pas un APK TV.",
+                "url": "https://github.com/NuvioMedia/NuvioMobile/releases",
+                "links": []
               },
               {
                 "title": "Installe le fichier .apk",
@@ -509,25 +502,9 @@
             "steps": [
               {
                 "title": "Choisis l’APK correspondant à ton appareil",
-                "body": "Nuvio Mobile · release 0.6.10-beta, canal bêta. Choisis l’APK ARM64 (Android récent), ARMv7 (ancien 32 bits), ou x86/x86_64 (Intel/émulateur). Si tu hésites, vérifie l’architecture de ton appareil.",
-                "links": [
-                  [
-                    "📦 ARM64",
-                    "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.10-beta/androidApp-full-arm64-v8a-release.apk"
-                  ],
-                  [
-                    "📦 ARMv7",
-                    "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.10-beta/androidApp-full-armeabi-v7a-release.apk"
-                  ],
-                  [
-                    "📦 x86_64",
-                    "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.10-beta/androidApp-full-x86_64-release.apk"
-                  ],
-                  [
-                    "📦 x86",
-                    "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.10-beta/androidApp-full-x86-release.apk"
-                  ]
-                ]
+                "body": "Nuvio Mobile : ARM64 pour Android récent, ARMv7 pour ancien appareil 32 bits, x86/x86_64 surtout pour Intel ou émulateur. Vérifie l’architecture si tu hésites; n’installe pas un APK TV.",
+                "url": "https://github.com/NuvioMedia/NuvioMobile/releases",
+                "links": []
               },
               {
                 "title": "Installe le fichier .apk",
@@ -1172,54 +1149,6 @@
             "https://play.google.com/store/apps/details?id=com.nuvio.app"
           ],
           [
-            "📦 ARM64",
-            "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.10-beta/androidApp-full-arm64-v8a-release.apk"
-          ],
-          [
-            "📦 ARMv7",
-            "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.10-beta/androidApp-full-armeabi-v7a-release.apk"
-          ],
-          [
-            "📦 x86_64",
-            "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.10-beta/androidApp-full-x86_64-release.apk"
-          ],
-          [
-            "📦 x86",
-            "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.10-beta/androidApp-full-x86-release.apk"
-          ],
-          [
-            "📂 APK et releases du développeur",
-            "https://github.com/NuvioMedia/NuvioMobile/releases"
-          ],
-          [
-            "🔢 Downloader 9207351 · bêta ARM64 0.6.10 (épinglée)",
-            "https://aftv.news/9207351"
-          ],
-          [
-            "📦 Miroir Dropbox fourni par l’administrateur",
-            "https://www.dropbox.com/scl/fi/7w5inr5ebzr79e63ekewb/nuvio-mobile.apk?rlkey=7ck3iyiro2v5eenw4g8yewyra&dl=1"
-          ],
-          [
-            "✅ Google Play · Nuvio",
-            "https://play.google.com/store/apps/details?id=com.nuvio.app"
-          ],
-          [
-            "📦 ARM64",
-            "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.10-beta/androidApp-full-arm64-v8a-release.apk"
-          ],
-          [
-            "📦 ARMv7",
-            "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.10-beta/androidApp-full-armeabi-v7a-release.apk"
-          ],
-          [
-            "📦 x86_64",
-            "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.10-beta/androidApp-full-x86_64-release.apk"
-          ],
-          [
-            "📦 x86",
-            "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.10-beta/androidApp-full-x86-release.apk"
-          ],
-          [
             "📂 APK et releases du développeur",
             "https://github.com/NuvioMedia/NuvioMobile/releases"
           ],
@@ -1236,54 +1165,6 @@
           [
             "✅ Google Play · Nuvio",
             "https://play.google.com/store/apps/details?id=com.nuvio.app"
-          ],
-          [
-            "📦 ARM64",
-            "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.10-beta/androidApp-full-arm64-v8a-release.apk"
-          ],
-          [
-            "📦 ARMv7",
-            "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.10-beta/androidApp-full-armeabi-v7a-release.apk"
-          ],
-          [
-            "📦 x86_64",
-            "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.10-beta/androidApp-full-x86_64-release.apk"
-          ],
-          [
-            "📦 x86",
-            "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.10-beta/androidApp-full-x86-release.apk"
-          ],
-          [
-            "📂 APK et releases du développeur",
-            "https://github.com/NuvioMedia/NuvioMobile/releases"
-          ],
-          [
-            "🔢 Downloader 9207351 · bêta ARM64 0.6.10 (épinglée)",
-            "https://aftv.news/9207351"
-          ],
-          [
-            "📦 Miroir Dropbox fourni par l’administrateur",
-            "https://www.dropbox.com/scl/fi/7w5inr5ebzr79e63ekewb/nuvio-mobile.apk?rlkey=7ck3iyiro2v5eenw4g8yewyra&dl=1"
-          ],
-          [
-            "✅ Google Play · Nuvio",
-            "https://play.google.com/store/apps/details?id=com.nuvio.app"
-          ],
-          [
-            "📦 ARM64",
-            "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.10-beta/androidApp-full-arm64-v8a-release.apk"
-          ],
-          [
-            "📦 ARMv7",
-            "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.10-beta/androidApp-full-armeabi-v7a-release.apk"
-          ],
-          [
-            "📦 x86_64",
-            "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.10-beta/androidApp-full-x86_64-release.apk"
-          ],
-          [
-            "📦 x86",
-            "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.10-beta/androidApp-full-x86-release.apk"
           ],
           [
             "📂 APK et releases du développeur",
@@ -2341,22 +2222,26 @@
                 "title": "Installe Downloader si nécessaire",
                 "body": "Sur la TV, ouvre Google Play Store, recherche « Downloader by AFTVnews », puis installe et ouvre l’application. Si Downloader est déjà présent, passe à la suite.",
                 "url": "https://play.google.com/store/apps/details?id=com.esaba.downloader",
+                "image": "assets/guides/manual_tv_apk/android_tv/v57_01.jpg",
                 "links": []
               },
               {
                 "title": "Autorise Downloader à installer un APK",
                 "body": "Sur Android TV : Paramètres → Applications → Accès spécial (ou Sécurité et restrictions) → Installer des applications inconnues → Downloader → Autoriser.",
+                "image": "assets/guides/manual_tv_apk/android_tv/v57_02.jpg",
                 "links": []
               },
               {
                 "title": "Télécharge le bon fichier",
                 "body": "Depuis Downloader sur la TV, ouvre la page officielle indiquée ci-dessous. Dans Releases → Assets, choisis « universal » en cas de doute ; ne prends pas « Source code ». Tu peux aussi transférer l’APK depuis un ordinateur si la TV le permet.",
                 "url": "https://github.com/homelessbrian/NuvioPlusIPTV/releases",
+                "image": "assets/guides/manual_tv_apk/android_tv/v57_03.jpg",
                 "links": []
               },
               {
                 "title": "Installe puis ouvre l’application",
                 "body": "Ouvre le fichier APK téléchargé et sélectionne « Installer », puis « Ouvrir ». Si un avertissement signale un fichier dangereux, arrête-toi. Après l’installation, retire l’autorisation accordée à Downloader et supprime le fichier APK si tu n’en as plus besoin.",
+                "image": "assets/guides/manual_tv_apk/android_tv/v57_04.jpg",
                 "links": []
               }
             ]
@@ -2369,28 +2254,33 @@
                 "title": "Installe Downloader sur la télévision",
                 "body": "Sur ta télévision, ouvre Google Play Store, recherche « Downloader by AFTVnews », puis sélectionne « Installer » et « Ouvrir ».",
                 "url": "https://play.google.com/store/apps/details?id=com.esaba.downloader",
+                "image": "assets/guides/downloader/android_tv/v57_01.jpg",
                 "links": []
               },
               {
                 "title": "Autorise l’installation du fichier",
                 "body": "Sur la TV : Paramètres → Applications → Accès spécial (ou Sécurité et restrictions) → Installer des applications inconnues → Downloader → Autoriser. Les noms peuvent varier selon ton modèle Android TV / Google TV.",
                 "url": "https://support.google.com/androidtv/",
+                "image": "assets/guides/downloader/android_tv/v57_02.jpg",
                 "links": []
               },
               {
                 "title": "Saisis le code 6532491",
                 "body": "Dans Downloader sur la télévision, sélectionne la case « URL / Short Code », entre 6532491, puis appuie sur « Go ». Ce code se saisit dans Downloader, pas dans Telegram ni dans la boutique.",
+                "image": "assets/guides/downloader/android_tv/v57_03.jpg",
                 "links": []
               },
               {
                 "title": "Contrôle le téléchargement",
                 "body": "Le code ouvre la page de téléchargement de Nuvio + IPTV (homelessbrian — TV). Vérifie le nom de l’application et la provenance du fichier avant de télécharger. Si la page ne correspond pas, arrête-toi et utilise la page du développeur.",
                 "url": "https://github.com/homelessbrian/NuvioPlusIPTV/releases",
+                "image": "assets/guides/downloader/android_tv/v57_04.jpg",
                 "links": []
               },
               {
                 "title": "Installe et ouvre l’application",
                 "body": "Une fois le fichier APK téléchargé, sélectionne « Installer », puis « Ouvrir ». Si une alerte de sécurité signale un fichier dangereux, ne force pas. Ensuite, tu peux supprimer le fichier APK dans Downloader et désactiver son autorisation d’installation dans les paramètres. Pour ajouter ton compte ou ta source, utilise ensuite « Configurer » dans le bot.",
+                "image": "assets/guides/downloader/android_tv/v57_05.jpg",
                 "links": []
               }
             ]
@@ -2405,22 +2295,26 @@
                 "title": "Installe Downloader si nécessaire",
                 "body": "Sur la TV, ouvre Amazon Appstore, recherche « Downloader by AFTVnews », puis installe et ouvre l’application. Si Downloader est déjà présent, passe à la suite.",
                 "url": "https://www.aftvnews.com/downloader/",
+                "image": "assets/guides/manual_tv_apk/fire_tv/v57_01.jpg",
                 "links": []
               },
               {
                 "title": "Autorise Downloader à installer un APK",
                 "body": "Sur la Fire TV : Paramètres → Ma Fire TV → Options pour les développeurs → Installer des applications inconnues → Downloader → Autoriser. Si le menu manque : Ma Fire TV → À propos, puis 7 appuis sur le modèle. Ne suis pas ce guide sur Vega OS.",
+                "image": "assets/guides/manual_tv_apk/fire_tv/v57_02.jpg",
                 "links": []
               },
               {
                 "title": "Télécharge le bon fichier",
                 "body": "Depuis Downloader sur la TV, ouvre la page officielle indiquée ci-dessous. Dans Releases → Assets, choisis « universal » en cas de doute ; ne prends pas « Source code ». Tu peux aussi transférer l’APK depuis un ordinateur si la TV le permet.",
                 "url": "https://github.com/homelessbrian/NuvioPlusIPTV/releases",
+                "image": "assets/guides/manual_tv_apk/fire_tv/v57_03.jpg",
                 "links": []
               },
               {
                 "title": "Installe puis ouvre l’application",
                 "body": "Ouvre le fichier APK téléchargé et sélectionne « Installer », puis « Ouvrir ». Si un avertissement signale un fichier dangereux, arrête-toi. Après l’installation, retire l’autorisation accordée à Downloader et supprime le fichier APK si tu n’en as plus besoin.",
+                "image": "assets/guides/manual_tv_apk/fire_tv/v57_04.jpg",
                 "links": []
               }
             ]
@@ -2433,28 +2327,33 @@
                 "title": "Installe Downloader sur la télévision",
                 "body": "Sur ta télévision, ouvre Amazon Appstore, recherche « Downloader by AFTVnews », puis sélectionne « Installer » et « Ouvrir ». Si ta Fire TV utilise Vega OS, n’utilise pas ce tutoriel.",
                 "url": "https://www.aftvnews.com/downloader/",
+                "image": "assets/guides/downloader/fire_tv/v57_01.jpg",
                 "links": []
               },
               {
                 "title": "Autorise l’installation du fichier",
                 "body": "Sur la Fire TV : Paramètres → Ma Fire TV → Options pour les développeurs → Installer des applications inconnues → Downloader → Autoriser. Si « Options pour les développeurs » est absent : Ma Fire TV → À propos, puis appuie 7 fois sur le nom du modèle. Cette méthode concerne Fire OS, pas Vega OS.",
                 "url": "https://www.aftvnews.com/how-to-sideload-apps-on-the-fire-tv/",
+                "image": "assets/guides/downloader/fire_tv/v57_02.jpg",
                 "links": []
               },
               {
                 "title": "Saisis le code 6532491",
                 "body": "Dans Downloader sur la télévision, sélectionne la case « URL / Short Code », entre 6532491, puis appuie sur « Go ». Ce code se saisit dans Downloader, pas dans Telegram ni dans la boutique.",
+                "image": "assets/guides/downloader/fire_tv/v57_03.jpg",
                 "links": []
               },
               {
                 "title": "Contrôle le téléchargement",
                 "body": "Le code ouvre la page de téléchargement de Nuvio + IPTV (homelessbrian — TV). Vérifie le nom de l’application et la provenance du fichier avant de télécharger. Si la page ne correspond pas, arrête-toi et utilise la page du développeur.",
                 "url": "https://github.com/homelessbrian/NuvioPlusIPTV/releases",
+                "image": "assets/guides/downloader/fire_tv/v57_04.jpg",
                 "links": []
               },
               {
                 "title": "Installe et ouvre l’application",
                 "body": "Une fois le fichier APK téléchargé, sélectionne « Installer », puis « Ouvrir ». Si une alerte de sécurité signale un fichier dangereux, ne force pas. Ensuite, tu peux supprimer le fichier APK dans Downloader et désactiver son autorisation d’installation dans les paramètres. Pour ajouter ton compte ou ta source, utilise ensuite « Configurer » dans le bot.",
+                "image": "assets/guides/downloader/fire_tv/v57_05.jpg",
                 "links": []
               }
             ]
@@ -2990,25 +2889,9 @@
             "steps": [
               {
                 "title": "Choisis l’APK correspondant à ton appareil",
-                "body": "Nuvio + IPTV Mobile · release 0.6.10-beta-iptv.1, canal bêta. Choisis l’APK ARM64 (Android récent), ARMv7 (ancien 32 bits), ou x86/x86_64 (Intel/émulateur). Si tu hésites, vérifie l’architecture de ton appareil.",
-                "links": [
-                  [
-                    "📦 ARM64",
-                    "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-arm64-v8a-release.apk"
-                  ],
-                  [
-                    "📦 ARMv7",
-                    "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-armeabi-v7a-release.apk"
-                  ],
-                  [
-                    "📦 x86_64",
-                    "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-x86_64-release.apk"
-                  ],
-                  [
-                    "📦 x86",
-                    "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-x86-release.apk"
-                  ]
-                ]
+                "body": "Nuvio + IPTV Mobile : ARM64 pour Android récent, ARMv7 pour ancien appareil 32 bits, x86/x86_64 surtout pour Intel ou émulateur. Vérifie l’architecture si tu hésites; n’installe pas un APK TV.",
+                "url": "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases",
+                "links": []
               },
               {
                 "title": "Installe le fichier .apk",
@@ -3030,25 +2913,9 @@
             "steps": [
               {
                 "title": "Choisis l’APK correspondant à ton appareil",
-                "body": "Nuvio + IPTV Mobile · release 0.6.10-beta-iptv.1, canal bêta. Choisis l’APK ARM64 (Android récent), ARMv7 (ancien 32 bits), ou x86/x86_64 (Intel/émulateur). Si tu hésites, vérifie l’architecture de ton appareil.",
-                "links": [
-                  [
-                    "📦 ARM64",
-                    "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-arm64-v8a-release.apk"
-                  ],
-                  [
-                    "📦 ARMv7",
-                    "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-armeabi-v7a-release.apk"
-                  ],
-                  [
-                    "📦 x86_64",
-                    "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-x86_64-release.apk"
-                  ],
-                  [
-                    "📦 x86",
-                    "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-x86-release.apk"
-                  ]
-                ]
+                "body": "Nuvio + IPTV Mobile : ARM64 pour Android récent, ARMv7 pour ancien appareil 32 bits, x86/x86_64 surtout pour Intel ou émulateur. Vérifie l’architecture si tu hésites; n’installe pas un APK TV.",
+                "url": "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases",
+                "links": []
               },
               {
                 "title": "Installe le fichier .apk",
@@ -3378,8 +3245,8 @@
             "text": "⬇️ Le téléchargement échoue ?\n\nVérifie ta connexion, l’espace libre et la version de ton système. Réessaie depuis le site ou la boutique officielle indiquée dans le guide. N’ouvre pas de fichier proposé par un site qui ne correspond pas à l’éditeur.",
             "links": [
               [
-                "📦 ARM64",
-                "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-arm64-v8a-release.apk"
+                "📂 APK et releases du développeur",
+                "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases"
               ]
             ]
           },
@@ -3389,8 +3256,8 @@
             "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée par le bot. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
             "links": [
               [
-                "📦 ARM64",
-                "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-arm64-v8a-release.apk"
+                "📂 APK et releases du développeur",
+                "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases"
               ]
             ]
           },
@@ -3420,8 +3287,8 @@
             "text": "⬇️ Le téléchargement échoue ?\n\nVérifie ta connexion, l’espace libre et la version de ton système. Réessaie depuis le site ou la boutique officielle indiquée dans le guide. N’ouvre pas de fichier proposé par un site qui ne correspond pas à l’éditeur.",
             "links": [
               [
-                "📦 ARM64",
-                "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-arm64-v8a-release.apk"
+                "📂 APK et releases du développeur",
+                "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases"
               ]
             ]
           },
@@ -3431,8 +3298,8 @@
             "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée par le bot. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
             "links": [
               [
-                "📦 ARM64",
-                "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-arm64-v8a-release.apk"
+                "📂 APK et releases du développeur",
+                "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases"
               ]
             ]
           },
@@ -3453,83 +3320,11 @@
       "distribution_links": {
         "android_phone": [
           [
-            "📦 ARM64",
-            "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-arm64-v8a-release.apk"
-          ],
-          [
-            "📦 ARMv7",
-            "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-armeabi-v7a-release.apk"
-          ],
-          [
-            "📦 x86_64",
-            "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-x86_64-release.apk"
-          ],
-          [
-            "📦 x86",
-            "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-x86-release.apk"
-          ],
-          [
-            "📂 APK et releases du développeur",
-            "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases"
-          ],
-          [
-            "📦 ARM64",
-            "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-arm64-v8a-release.apk"
-          ],
-          [
-            "📦 ARMv7",
-            "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-armeabi-v7a-release.apk"
-          ],
-          [
-            "📦 x86_64",
-            "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-x86_64-release.apk"
-          ],
-          [
-            "📦 x86",
-            "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-x86-release.apk"
-          ],
-          [
             "📂 APK et releases du développeur",
             "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases"
           ]
         ],
         "android_tablet": [
-          [
-            "📦 ARM64",
-            "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-arm64-v8a-release.apk"
-          ],
-          [
-            "📦 ARMv7",
-            "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-armeabi-v7a-release.apk"
-          ],
-          [
-            "📦 x86_64",
-            "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-x86_64-release.apk"
-          ],
-          [
-            "📦 x86",
-            "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-x86-release.apk"
-          ],
-          [
-            "📂 APK et releases du développeur",
-            "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases"
-          ],
-          [
-            "📦 ARM64",
-            "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-arm64-v8a-release.apk"
-          ],
-          [
-            "📦 ARMv7",
-            "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-armeabi-v7a-release.apk"
-          ],
-          [
-            "📦 x86_64",
-            "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-x86_64-release.apk"
-          ],
-          [
-            "📦 x86",
-            "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases/download/0.6.10-beta-iptv.1/NuvioMobilePlusIPTV-0.6.10-beta-iptv.1-x86-release.apk"
-          ],
           [
             "📂 APK et releases du développeur",
             "https://github.com/homelessbrian/NuvioPlusIPTV-Mobile/releases"
@@ -3605,22 +3400,26 @@
                 "title": "Installe Downloader si nécessaire",
                 "body": "Sur la TV, ouvre Google Play Store, recherche « Downloader by AFTVnews », puis installe et ouvre l’application. Si Downloader est déjà présent, passe à la suite.",
                 "url": "https://play.google.com/store/apps/details?id=com.esaba.downloader",
+                "image": "assets/guides/manual_tv_apk/android_tv/v57_01.jpg",
                 "links": []
               },
               {
                 "title": "Autorise Downloader à installer un APK",
                 "body": "Sur Android TV : Paramètres → Applications → Accès spécial (ou Sécurité et restrictions) → Installer des applications inconnues → Downloader → Autoriser.",
+                "image": "assets/guides/manual_tv_apk/android_tv/v57_02.jpg",
                 "links": []
               },
               {
                 "title": "Télécharge le bon fichier",
                 "body": "Depuis Downloader sur la TV, ouvre la page officielle indiquée ci-dessous. Sur le site Stremio, choisis Android TV (pas Android Mobile), puis la variante adaptée au processeur. Tu peux aussi transférer l’APK depuis un ordinateur si la TV le permet.",
                 "url": "https://www.stremio.com/downloads",
+                "image": "assets/guides/manual_tv_apk/android_tv/v57_03.jpg",
                 "links": []
               },
               {
                 "title": "Installe puis ouvre l’application",
                 "body": "Ouvre le fichier APK téléchargé et sélectionne « Installer », puis « Ouvrir ». Si un avertissement signale un fichier dangereux, arrête-toi. Après l’installation, retire l’autorisation accordée à Downloader et supprime le fichier APK si tu n’en as plus besoin.",
+                "image": "assets/guides/manual_tv_apk/android_tv/v57_04.jpg",
                 "links": []
               }
             ]
@@ -3633,28 +3432,33 @@
                 "title": "Installe Downloader sur la télévision",
                 "body": "Sur ta télévision, ouvre Google Play Store, recherche « Downloader by AFTVnews », puis sélectionne « Installer » et « Ouvrir ».",
                 "url": "https://play.google.com/store/apps/details?id=com.esaba.downloader",
+                "image": "assets/guides/downloader/android_tv/v57_01.jpg",
                 "links": []
               },
               {
                 "title": "Autorise l’installation du fichier",
                 "body": "Sur la TV : Paramètres → Applications → Accès spécial (ou Sécurité et restrictions) → Installer des applications inconnues → Downloader → Autoriser. Les noms peuvent varier selon ton modèle Android TV / Google TV.",
                 "url": "https://support.google.com/androidtv/",
+                "image": "assets/guides/downloader/android_tv/v57_02.jpg",
                 "links": []
               },
               {
                 "title": "Saisis le code 5441593",
                 "body": "Dans Downloader sur la télévision, sélectionne la case « URL / Short Code », entre 5441593, puis appuie sur « Go ». Ce code se saisit dans Downloader, pas dans Telegram ni dans la boutique.",
+                "image": "assets/guides/downloader/android_tv/v57_03.jpg",
                 "links": []
               },
               {
                 "title": "Contrôle le téléchargement",
                 "body": "Le code ouvre la page de téléchargement de Stremio (officiel). Vérifie le nom de l’application et la provenance du fichier avant de télécharger. Si la page ne correspond pas, arrête-toi et utilise la page du développeur.",
                 "url": "https://www.stremio.com/downloads",
+                "image": "assets/guides/downloader/android_tv/v57_04.jpg",
                 "links": []
               },
               {
                 "title": "Installe et ouvre l’application",
                 "body": "Une fois le fichier APK téléchargé, sélectionne « Installer », puis « Ouvrir ». Si une alerte de sécurité signale un fichier dangereux, ne force pas. Ensuite, tu peux supprimer le fichier APK dans Downloader et désactiver son autorisation d’installation dans les paramètres. Pour ajouter ton compte ou ta source, utilise ensuite « Configurer » dans le bot.",
+                "image": "assets/guides/downloader/android_tv/v57_05.jpg",
                 "links": []
               }
             ]
@@ -3866,36 +3670,42 @@
                 "title": "Vérifie que tu peux utiliser AltStore PAL",
                 "body": "Il faut iOS/iPadOS 18 ou plus, être physiquement dans l’Union européenne, au Japon ou au Brésil ET utiliser un compte App Store de la région correspondante. Sinon choisis Stremio Web.",
                 "url": "https://altstore.io/download",
+                "image": "assets/methods/stremio/iphone/pal/01.jpg",
                 "links": []
               },
               {
                 "title": "Télécharge AltStore PAL",
                 "body": "Sur l’iPhone/iPad, ouvre le site officiel AltStore avec Safari, Chrome ou Vivaldi. Appuie sur « Download ».",
                 "url": "https://altstore.io/download",
+                "image": "assets/methods/stremio/iphone/pal/02.jpg",
                 "links": []
               },
               {
                 "title": "Autorise la place de marché",
                 "body": "Si un message apparaît, ouvre Réglages puis « Autoriser la place de marché AltStore LLC ». Reviens au site AltStore et appuie de nouveau sur « Download ».",
                 "url": "https://altstore.io/download",
+                "image": "assets/methods/stremio/iphone/pal/03.jpg",
                 "links": []
               },
               {
                 "title": "Installe AltStore PAL",
                 "body": "Après l’autorisation, valide « Installer la place de marché ». Ouvre AltStore PAL sur ton iPhone/iPad.",
                 "url": "https://altstore.io/download",
+                "image": "assets/methods/stremio/iphone/pal/04.jpg",
                 "links": []
               },
               {
                 "title": "Installe Stremio dans AltStore PAL",
                 "body": "Dans AltStore PAL, recherche « Stremio », vérifie l’éditeur, puis lance l’installation. Si tu ne trouves pas l’application, ouvre l’annonce officielle ci-dessous pour le lien de la source. Ne confonds pas AltStore PAL et AltStore Classic.",
                 "url": "https://blog.stremio.com/stremio-released-on-apple-altstore-for-europe-and-japan/",
+                "image": "assets/methods/stremio/iphone/pal/05.jpg",
                 "links": []
               },
               {
                 "title": "Ouvre Stremio",
                 "body": "Connecte-toi à ton compte Stremio et teste une source à laquelle tu as légalement accès. N’envoie jamais ton mot de passe au bot.",
                 "url": "https://www.stremio.com/downloads",
+                "image": "assets/methods/stremio/iphone/pal/06.jpg",
                 "links": []
               }
             ]
@@ -3908,18 +3718,21 @@
                 "title": "Ouvre Stremio Web",
                 "body": "Sur ton iPhone ou ton iPad, touche le lien Stremio Web. Aucune application à installer : ouvre le site dans Safari.",
                 "url": "https://web.stremio.com/",
+                "image": "assets/methods/stremio/iphone/web/01.jpg",
                 "links": []
               },
               {
                 "title": "Connecte-toi",
                 "body": "Sur le site Stremio, connecte-toi à ton compte. La version Web sur iOS a des limites de lecture et de fonctionnalités : ce n’est pas la même chose que l’application complète.",
                 "url": "https://web.stremio.com/",
+                "image": "assets/methods/stremio/iphone/web/02.jpg",
                 "links": []
               },
               {
                 "title": "Garde un accès rapide",
                 "body": "Facultatif : dans Safari, touche Partager puis « Sur l’écran d’accueil ». Si la lecture ne fonctionne pas, essaie la version complète via AltStore PAL si ton appareil est éligible.",
                 "url": "https://web.stremio.com/",
+                "image": "assets/methods/stremio/iphone/web/03.jpg",
                 "links": []
               }
             ]
@@ -3932,6 +3745,7 @@
                 "title": "Commence par vérifier le fichier IPA",
                 "body": "Stremio a annoncé une IPA officielle pour iPhone et iPad, mais le lien de téléchargement peut ne pas apparaître sur la page actuelle. Vérifie sur le site de Stremio que le fichier est bien pour iOS/iPadOS avant toute installation : pas d’IPA de source inconnue.",
                 "url": "https://www.stremio.com/downloads",
+                "image": "assets/methods/stremio/iphone/classic_info/01.jpg",
                 "links": []
               },
               {
@@ -3939,12 +3753,14 @@
                 "body": "Avec une IPA pour iOS/iPadOS provenant de Stremio, installe AltServer sur un PC Windows ou un Mac, puis suis les instructions officielles pour installer AltStore Classic sur ton appareil.",
                 "url": "https://faq.altstore.io/altstore-classic/how-to-install-altstore-windows",
                 "video": "https://www.youtube.com/watch?v=878V4TZ1LxA",
+                "image": "assets/methods/stremio/iphone/classic_info/02.jpg",
                 "links": []
               },
               {
                 "title": "Installe l’IPA puis renouvelle si nécessaire",
                 "body": "Dans AltStore Classic, utilise « My Apps » puis + pour choisir l’IPA officielle. Avec un compte Apple gratuit, il faut généralement actualiser l’application tous les 7 jours. Pour une installation simple, choisis plutôt Stremio Web ou AltStore PAL.",
                 "url": "https://faq.altstore.io/altstore-classic/how-to-install-altstore-macos",
+                "image": "assets/methods/stremio/iphone/classic_info/03.jpg",
                 "links": []
               }
             ]
@@ -3959,36 +3775,42 @@
                 "title": "Vérifie que tu peux utiliser AltStore PAL",
                 "body": "Il faut iOS/iPadOS 18 ou plus, être physiquement dans l’Union européenne, au Japon ou au Brésil ET utiliser un compte App Store de la région correspondante. Sinon choisis Stremio Web.",
                 "url": "https://altstore.io/download",
+                "image": "assets/methods/stremio/ipad/pal/01.jpg",
                 "links": []
               },
               {
                 "title": "Télécharge AltStore PAL",
                 "body": "Sur l’iPhone/iPad, ouvre le site officiel AltStore avec Safari, Chrome ou Vivaldi. Appuie sur « Download ».",
                 "url": "https://altstore.io/download",
+                "image": "assets/methods/stremio/ipad/pal/02.jpg",
                 "links": []
               },
               {
                 "title": "Autorise la place de marché",
                 "body": "Si un message apparaît, ouvre Réglages puis « Autoriser la place de marché AltStore LLC ». Reviens au site AltStore et appuie de nouveau sur « Download ».",
                 "url": "https://altstore.io/download",
+                "image": "assets/methods/stremio/ipad/pal/03.jpg",
                 "links": []
               },
               {
                 "title": "Installe AltStore PAL",
                 "body": "Après l’autorisation, valide « Installer la place de marché ». Ouvre AltStore PAL sur ton iPhone/iPad.",
                 "url": "https://altstore.io/download",
+                "image": "assets/methods/stremio/ipad/pal/04.jpg",
                 "links": []
               },
               {
                 "title": "Installe Stremio dans AltStore PAL",
                 "body": "Dans AltStore PAL, recherche « Stremio », vérifie l’éditeur, puis lance l’installation. Si tu ne trouves pas l’application, ouvre l’annonce officielle ci-dessous pour le lien de la source. Ne confonds pas AltStore PAL et AltStore Classic.",
                 "url": "https://blog.stremio.com/stremio-released-on-apple-altstore-for-europe-and-japan/",
+                "image": "assets/methods/stremio/ipad/pal/05.jpg",
                 "links": []
               },
               {
                 "title": "Ouvre Stremio",
                 "body": "Connecte-toi à ton compte Stremio et teste une source à laquelle tu as légalement accès. N’envoie jamais ton mot de passe au bot.",
                 "url": "https://www.stremio.com/downloads",
+                "image": "assets/methods/stremio/ipad/pal/06.jpg",
                 "links": []
               }
             ]
@@ -4001,18 +3823,21 @@
                 "title": "Ouvre Stremio Web",
                 "body": "Sur ton iPhone ou ton iPad, touche le lien Stremio Web. Aucune application à installer : ouvre le site dans Safari.",
                 "url": "https://web.stremio.com/",
+                "image": "assets/methods/stremio/ipad/web/01.jpg",
                 "links": []
               },
               {
                 "title": "Connecte-toi",
                 "body": "Sur le site Stremio, connecte-toi à ton compte. La version Web sur iOS a des limites de lecture et de fonctionnalités : ce n’est pas la même chose que l’application complète.",
                 "url": "https://web.stremio.com/",
+                "image": "assets/methods/stremio/ipad/web/02.jpg",
                 "links": []
               },
               {
                 "title": "Garde un accès rapide",
                 "body": "Facultatif : dans Safari, touche Partager puis « Sur l’écran d’accueil ». Si la lecture ne fonctionne pas, essaie la version complète via AltStore PAL si ton appareil est éligible.",
                 "url": "https://web.stremio.com/",
+                "image": "assets/methods/stremio/ipad/web/03.jpg",
                 "links": []
               }
             ]
@@ -4025,6 +3850,7 @@
                 "title": "Commence par vérifier le fichier IPA",
                 "body": "Stremio a annoncé une IPA officielle pour iPhone et iPad, mais le lien de téléchargement peut ne pas apparaître sur la page actuelle. Vérifie sur le site de Stremio que le fichier est bien pour iOS/iPadOS avant toute installation : pas d’IPA de source inconnue.",
                 "url": "https://www.stremio.com/downloads",
+                "image": "assets/methods/stremio/ipad/classic_info/01.jpg",
                 "links": []
               },
               {
@@ -4032,12 +3858,14 @@
                 "body": "Avec une IPA pour iOS/iPadOS provenant de Stremio, installe AltServer sur un PC Windows ou un Mac, puis suis les instructions officielles pour installer AltStore Classic sur ton appareil.",
                 "url": "https://faq.altstore.io/altstore-classic/how-to-install-altstore-windows",
                 "video": "https://www.youtube.com/watch?v=878V4TZ1LxA",
+                "image": "assets/methods/stremio/ipad/classic_info/02.jpg",
                 "links": []
               },
               {
                 "title": "Installe l’IPA puis renouvelle si nécessaire",
                 "body": "Dans AltStore Classic, utilise « My Apps » puis + pour choisir l’IPA officielle. Avec un compte Apple gratuit, il faut généralement actualiser l’application tous les 7 jours. Pour une installation simple, choisis plutôt Stremio Web ou AltStore PAL.",
                 "url": "https://faq.altstore.io/altstore-classic/how-to-install-altstore-macos",
+                "image": "assets/methods/stremio/ipad/classic_info/03.jpg",
                 "links": []
               }
             ]
@@ -4828,25 +4656,9 @@
           [
             "⬇️ Téléchargements officiels · choisir appareil/architecture",
             "https://www.stremio.com/downloads"
-          ],
-          [
-            "✅ Google Play · Stremio",
-            "https://play.google.com/store/apps/details?id=com.stremio.one"
-          ],
-          [
-            "⬇️ Téléchargements officiels · choisir appareil/architecture",
-            "https://www.stremio.com/downloads"
           ]
         ],
         "android_tablet": [
-          [
-            "✅ Google Play · Stremio",
-            "https://play.google.com/store/apps/details?id=com.stremio.one"
-          ],
-          [
-            "⬇️ Téléchargements officiels · choisir appareil/architecture",
-            "https://www.stremio.com/downloads"
-          ],
           [
             "✅ Google Play · Stremio",
             "https://play.google.com/store/apps/details?id=com.stremio.one"
@@ -4933,22 +4745,26 @@
                 "title": "Installe Downloader si nécessaire",
                 "body": "Sur la TV, ouvre Google Play Store, recherche « Downloader by AFTVnews », puis installe et ouvre l’application. Si Downloader est déjà présent, passe à la suite.",
                 "url": "https://play.google.com/store/apps/details?id=com.esaba.downloader",
+                "image": "assets/guides/manual_tv_apk/android_tv/v57_01.jpg",
                 "links": []
               },
               {
                 "title": "Autorise Downloader à installer un APK",
                 "body": "Sur Android TV : Paramètres → Applications → Accès spécial (ou Sécurité et restrictions) → Installer des applications inconnues → Downloader → Autoriser.",
+                "image": "assets/guides/manual_tv_apk/android_tv/v57_02.jpg",
                 "links": []
               },
               {
                 "title": "Télécharge le bon fichier",
                 "body": "Depuis Downloader sur la TV, ouvre la page officielle indiquée ci-dessous. Dans Releases → Assets, choisis Alder.apk (pas « Source code »). Tu peux aussi transférer l’APK depuis un ordinateur si la TV le permet.",
                 "url": "https://github.com/aradhyas8/Alder/releases",
+                "image": "assets/guides/manual_tv_apk/android_tv/v57_03.jpg",
                 "links": []
               },
               {
                 "title": "Installe puis ouvre l’application",
                 "body": "Ouvre le fichier APK téléchargé et sélectionne « Installer », puis « Ouvrir ». Si un avertissement signale un fichier dangereux, arrête-toi. Après l’installation, retire l’autorisation accordée à Downloader et supprime le fichier APK si tu n’en as plus besoin.",
+                "image": "assets/guides/manual_tv_apk/android_tv/v57_04.jpg",
                 "links": []
               }
             ]
@@ -4961,28 +4777,33 @@
                 "title": "Installe Downloader sur la télévision",
                 "body": "Sur ta télévision, ouvre Google Play Store, recherche « Downloader by AFTVnews », puis sélectionne « Installer » et « Ouvrir ».",
                 "url": "https://play.google.com/store/apps/details?id=com.esaba.downloader",
+                "image": "assets/guides/downloader/android_tv/v57_01.jpg",
                 "links": []
               },
               {
                 "title": "Autorise l’installation du fichier",
                 "body": "Sur la TV : Paramètres → Applications → Accès spécial (ou Sécurité et restrictions) → Installer des applications inconnues → Downloader → Autoriser. Les noms peuvent varier selon ton modèle Android TV / Google TV.",
                 "url": "https://support.google.com/androidtv/",
+                "image": "assets/guides/downloader/android_tv/v57_02.jpg",
                 "links": []
               },
               {
                 "title": "Saisis le code 9638679",
                 "body": "Dans Downloader sur la télévision, sélectionne la case « URL / Short Code », entre 9638679, puis appuie sur « Go ». Ce code se saisit dans Downloader, pas dans Telegram ni dans la boutique.",
+                "image": "assets/guides/downloader/android_tv/v57_03.jpg",
                 "links": []
               },
               {
                 "title": "Contrôle le téléchargement",
                 "body": "Le code ouvre la page de téléchargement de Alder — client Stremio TV. Vérifie le nom de l’application et la provenance du fichier avant de télécharger. Si la page ne correspond pas, arrête-toi et utilise la page du développeur.",
                 "url": "https://github.com/aradhyas8/Alder/releases",
+                "image": "assets/guides/downloader/android_tv/v57_04.jpg",
                 "links": []
               },
               {
                 "title": "Installe et ouvre l’application",
                 "body": "Une fois le fichier APK téléchargé, sélectionne « Installer », puis « Ouvrir ». Si une alerte de sécurité signale un fichier dangereux, ne force pas. Ensuite, tu peux supprimer le fichier APK dans Downloader et désactiver son autorisation d’installation dans les paramètres. Pour ajouter ton compte ou ta source, utilise ensuite « Configurer » dans le bot.",
+                "image": "assets/guides/downloader/android_tv/v57_05.jpg",
                 "links": []
               }
             ]
@@ -4997,22 +4818,26 @@
                 "title": "Installe Downloader si nécessaire",
                 "body": "Sur la TV, ouvre Amazon Appstore, recherche « Downloader by AFTVnews », puis installe et ouvre l’application. Si Downloader est déjà présent, passe à la suite.",
                 "url": "https://www.aftvnews.com/downloader/",
+                "image": "assets/guides/manual_tv_apk/fire_tv/v57_01.jpg",
                 "links": []
               },
               {
                 "title": "Autorise Downloader à installer un APK",
                 "body": "Sur la Fire TV : Paramètres → Ma Fire TV → Options pour les développeurs → Installer des applications inconnues → Downloader → Autoriser. Si le menu manque : Ma Fire TV → À propos, puis 7 appuis sur le modèle. Ne suis pas ce guide sur Vega OS.",
+                "image": "assets/guides/manual_tv_apk/fire_tv/v57_02.jpg",
                 "links": []
               },
               {
                 "title": "Télécharge le bon fichier",
                 "body": "Depuis Downloader sur la TV, ouvre la page officielle indiquée ci-dessous. Dans Releases → Assets, choisis Alder.apk (pas « Source code »). Tu peux aussi transférer l’APK depuis un ordinateur si la TV le permet.",
                 "url": "https://github.com/aradhyas8/Alder/releases",
+                "image": "assets/guides/manual_tv_apk/fire_tv/v57_03.jpg",
                 "links": []
               },
               {
                 "title": "Installe puis ouvre l’application",
                 "body": "Ouvre le fichier APK téléchargé et sélectionne « Installer », puis « Ouvrir ». Si un avertissement signale un fichier dangereux, arrête-toi. Après l’installation, retire l’autorisation accordée à Downloader et supprime le fichier APK si tu n’en as plus besoin.",
+                "image": "assets/guides/manual_tv_apk/fire_tv/v57_04.jpg",
                 "links": []
               }
             ]
@@ -5025,28 +4850,33 @@
                 "title": "Installe Downloader sur la télévision",
                 "body": "Sur ta télévision, ouvre Amazon Appstore, recherche « Downloader by AFTVnews », puis sélectionne « Installer » et « Ouvrir ». Si ta Fire TV utilise Vega OS, n’utilise pas ce tutoriel.",
                 "url": "https://www.aftvnews.com/downloader/",
+                "image": "assets/guides/downloader/fire_tv/v57_01.jpg",
                 "links": []
               },
               {
                 "title": "Autorise l’installation du fichier",
                 "body": "Sur la Fire TV : Paramètres → Ma Fire TV → Options pour les développeurs → Installer des applications inconnues → Downloader → Autoriser. Si « Options pour les développeurs » est absent : Ma Fire TV → À propos, puis appuie 7 fois sur le nom du modèle. Cette méthode concerne Fire OS, pas Vega OS.",
                 "url": "https://www.aftvnews.com/how-to-sideload-apps-on-the-fire-tv/",
+                "image": "assets/guides/downloader/fire_tv/v57_02.jpg",
                 "links": []
               },
               {
                 "title": "Saisis le code 9638679",
                 "body": "Dans Downloader sur la télévision, sélectionne la case « URL / Short Code », entre 9638679, puis appuie sur « Go ». Ce code se saisit dans Downloader, pas dans Telegram ni dans la boutique.",
+                "image": "assets/guides/downloader/fire_tv/v57_03.jpg",
                 "links": []
               },
               {
                 "title": "Contrôle le téléchargement",
                 "body": "Le code ouvre la page de téléchargement de Alder — client Stremio TV. Vérifie le nom de l’application et la provenance du fichier avant de télécharger. Si la page ne correspond pas, arrête-toi et utilise la page du développeur.",
                 "url": "https://github.com/aradhyas8/Alder/releases",
+                "image": "assets/guides/downloader/fire_tv/v57_04.jpg",
                 "links": []
               },
               {
                 "title": "Installe et ouvre l’application",
                 "body": "Une fois le fichier APK téléchargé, sélectionne « Installer », puis « Ouvrir ». Si une alerte de sécurité signale un fichier dangereux, ne force pas. Ensuite, tu peux supprimer le fichier APK dans Downloader et désactiver son autorisation d’installation dans les paramètres. Pour ajouter ton compte ou ta source, utilise ensuite « Configurer » dans le bot.",
+                "image": "assets/guides/downloader/fire_tv/v57_05.jpg",
                 "links": []
               }
             ]
@@ -5327,28 +5157,33 @@
                 "title": "Installe Downloader sur la télévision",
                 "body": "Sur ta télévision, ouvre Google Play Store, recherche « Downloader by AFTVnews », puis sélectionne « Installer » et « Ouvrir ».",
                 "url": "https://play.google.com/store/apps/details?id=com.esaba.downloader",
+                "image": "assets/guides/downloader/android_tv/v57_01.jpg",
                 "links": []
               },
               {
                 "title": "Autorise l’installation du fichier",
                 "body": "Sur la TV : Paramètres → Applications → Accès spécial (ou Sécurité et restrictions) → Installer des applications inconnues → Downloader → Autoriser. Les noms peuvent varier selon ton modèle Android TV / Google TV.",
                 "url": "https://support.google.com/androidtv/",
+                "image": "assets/guides/downloader/android_tv/v57_02.jpg",
                 "links": []
               },
               {
                 "title": "Saisis le code 2995184",
                 "body": "Dans Downloader sur la télévision, sélectionne la case « URL / Short Code », entre 2995184, puis appuie sur « Go ». Ce code se saisit dans Downloader, pas dans Telegram ni dans la boutique.",
+                "image": "assets/guides/downloader/android_tv/v57_03.jpg",
                 "links": []
               },
               {
                 "title": "Contrôle le téléchargement",
                 "body": "Le code ouvre la page de téléchargement de KDTIVI — IPTV + Stremio. Vérifie le nom de l’application et la provenance du fichier avant de télécharger. Si la page ne correspond pas, arrête-toi et utilise la page du développeur.",
                 "url": "https://play.google.com/store/apps/details?id=com.kdtvandroid",
+                "image": "assets/guides/downloader/android_tv/v57_04.jpg",
                 "links": []
               },
               {
                 "title": "Installe et ouvre l’application",
                 "body": "Une fois le fichier APK téléchargé, sélectionne « Installer », puis « Ouvrir ». Si une alerte de sécurité signale un fichier dangereux, ne force pas. Ensuite, tu peux supprimer le fichier APK dans Downloader et désactiver son autorisation d’installation dans les paramètres. Pour ajouter ton compte ou ta source, utilise ensuite « Configurer » dans le bot.",
+                "image": "assets/guides/downloader/android_tv/v57_05.jpg",
                 "links": []
               }
             ]
@@ -5363,28 +5198,33 @@
                 "title": "Installe Downloader sur la télévision",
                 "body": "Sur ta télévision, ouvre Amazon Appstore, recherche « Downloader by AFTVnews », puis sélectionne « Installer » et « Ouvrir ». Si ta Fire TV utilise Vega OS, n’utilise pas ce tutoriel.",
                 "url": "https://www.aftvnews.com/downloader/",
+                "image": "assets/guides/downloader/fire_tv/v57_01.jpg",
                 "links": []
               },
               {
                 "title": "Autorise l’installation du fichier",
                 "body": "Sur la Fire TV : Paramètres → Ma Fire TV → Options pour les développeurs → Installer des applications inconnues → Downloader → Autoriser. Si « Options pour les développeurs » est absent : Ma Fire TV → À propos, puis appuie 7 fois sur le nom du modèle. Cette méthode concerne Fire OS, pas Vega OS.",
                 "url": "https://www.aftvnews.com/how-to-sideload-apps-on-the-fire-tv/",
+                "image": "assets/guides/downloader/fire_tv/v57_02.jpg",
                 "links": []
               },
               {
                 "title": "Saisis le code 2995184",
                 "body": "Dans Downloader sur la télévision, sélectionne la case « URL / Short Code », entre 2995184, puis appuie sur « Go ». Ce code se saisit dans Downloader, pas dans Telegram ni dans la boutique.",
+                "image": "assets/guides/downloader/fire_tv/v57_03.jpg",
                 "links": []
               },
               {
                 "title": "Contrôle le téléchargement",
                 "body": "Le code ouvre la page de téléchargement de KDTIVI — IPTV + Stremio. Vérifie le nom de l’application et la provenance du fichier avant de télécharger. Si la page ne correspond pas, arrête-toi et utilise la page du développeur.",
                 "url": "https://kdtapps.com/kdtivi",
+                "image": "assets/guides/downloader/fire_tv/v57_04.jpg",
                 "links": []
               },
               {
                 "title": "Installe et ouvre l’application",
                 "body": "Une fois le fichier APK téléchargé, sélectionne « Installer », puis « Ouvrir ». Si une alerte de sécurité signale un fichier dangereux, ne force pas. Ensuite, tu peux supprimer le fichier APK dans Downloader et désactiver son autorisation d’installation dans les paramètres. Pour ajouter ton compte ou ta source, utilise ensuite « Configurer » dans le bot.",
+                "image": "assets/guides/downloader/fire_tv/v57_05.jpg",
                 "links": []
               }
             ]
@@ -6723,22 +6563,26 @@
                 "title": "Installe Downloader si nécessaire",
                 "body": "Sur la TV, ouvre Google Play Store, recherche « Downloader by AFTVnews », puis installe et ouvre l’application. Si Downloader est déjà présent, passe à la suite.",
                 "url": "https://play.google.com/store/apps/details?id=com.esaba.downloader",
+                "image": "assets/guides/manual_tv_apk/android_tv/v57_01.jpg",
                 "links": []
               },
               {
                 "title": "Autorise Downloader à installer un APK",
                 "body": "Sur Android TV : Paramètres → Applications → Accès spécial (ou Sécurité et restrictions) → Installer des applications inconnues → Downloader → Autoriser.",
+                "image": "assets/guides/manual_tv_apk/android_tv/v57_02.jpg",
                 "links": []
               },
               {
                 "title": "Télécharge le bon fichier",
                 "body": "Depuis Downloader sur la TV, ouvre la page officielle indiquée ci-dessous. Dans Releases, sélectionne le fichier IPVIO-Stream.apk publié par Emrodev. Tu peux aussi transférer l’APK depuis un ordinateur si la TV le permet.",
                 "url": "https://github.com/Emrodev/IPVIO-Stream/releases/latest/download/IPVIO-Stream.apk",
+                "image": "assets/guides/manual_tv_apk/android_tv/v57_03.jpg",
                 "links": []
               },
               {
                 "title": "Installe puis ouvre l’application",
                 "body": "Ouvre le fichier APK téléchargé et sélectionne « Installer », puis « Ouvrir ». Si un avertissement signale un fichier dangereux, arrête-toi. Après l’installation, retire l’autorisation accordée à Downloader et supprime le fichier APK si tu n’en as plus besoin.",
+                "image": "assets/guides/manual_tv_apk/android_tv/v57_04.jpg",
                 "links": []
               }
             ]
@@ -6751,28 +6595,33 @@
                 "title": "Installe Downloader sur la télévision",
                 "body": "Sur ta télévision, ouvre Google Play Store, recherche « Downloader by AFTVnews », puis sélectionne « Installer » et « Ouvrir ».",
                 "url": "https://play.google.com/store/apps/details?id=com.esaba.downloader",
+                "image": "assets/guides/downloader/android_tv/v57_01.jpg",
                 "links": []
               },
               {
                 "title": "Autorise l’installation du fichier",
                 "body": "Sur la TV : Paramètres → Applications → Accès spécial (ou Sécurité et restrictions) → Installer des applications inconnues → Downloader → Autoriser. Les noms peuvent varier selon ton modèle Android TV / Google TV.",
                 "url": "https://support.google.com/androidtv/",
+                "image": "assets/guides/downloader/android_tv/v57_02.jpg",
                 "links": []
               },
               {
                 "title": "Saisis le code 4200542",
                 "body": "Dans Downloader sur la télévision, sélectionne la case « URL / Short Code », entre 4200542, puis appuie sur « Go ». Ce code se saisit dans Downloader, pas dans Telegram ni dans la boutique.",
+                "image": "assets/guides/downloader/android_tv/v57_03.jpg",
                 "links": []
               },
               {
                 "title": "Contrôle le téléchargement",
                 "body": "Le code ouvre la page de téléchargement de IPVIO Stream — IPTV pour TV. Vérifie le nom de l’application et la provenance du fichier avant de télécharger. Si la page ne correspond pas, arrête-toi et utilise la page du développeur.",
                 "url": "https://github.com/Emrodev/IPVIO-Stream/releases/latest/download/IPVIO-Stream.apk",
+                "image": "assets/guides/downloader/android_tv/v57_04.jpg",
                 "links": []
               },
               {
                 "title": "Installe et ouvre l’application",
                 "body": "Une fois le fichier APK téléchargé, sélectionne « Installer », puis « Ouvrir ». Si une alerte de sécurité signale un fichier dangereux, ne force pas. Ensuite, tu peux supprimer le fichier APK dans Downloader et désactiver son autorisation d’installation dans les paramètres. Pour ajouter ton compte ou ta source, utilise ensuite « Configurer » dans le bot.",
+                "image": "assets/guides/downloader/android_tv/v57_05.jpg",
                 "links": []
               }
             ]
@@ -6787,22 +6636,26 @@
                 "title": "Installe Downloader si nécessaire",
                 "body": "Sur la TV, ouvre Amazon Appstore, recherche « Downloader by AFTVnews », puis installe et ouvre l’application. Si Downloader est déjà présent, passe à la suite.",
                 "url": "https://www.aftvnews.com/downloader/",
+                "image": "assets/guides/manual_tv_apk/fire_tv/v57_01.jpg",
                 "links": []
               },
               {
                 "title": "Autorise Downloader à installer un APK",
                 "body": "Sur la Fire TV : Paramètres → Ma Fire TV → Options pour les développeurs → Installer des applications inconnues → Downloader → Autoriser. Si le menu manque : Ma Fire TV → À propos, puis 7 appuis sur le modèle. Ne suis pas ce guide sur Vega OS.",
+                "image": "assets/guides/manual_tv_apk/fire_tv/v57_02.jpg",
                 "links": []
               },
               {
                 "title": "Télécharge le bon fichier",
                 "body": "Depuis Downloader sur la TV, ouvre la page officielle indiquée ci-dessous. Dans Releases, sélectionne le fichier IPVIO-Stream.apk publié par Emrodev. Tu peux aussi transférer l’APK depuis un ordinateur si la TV le permet.",
                 "url": "https://github.com/Emrodev/IPVIO-Stream/releases/latest/download/IPVIO-Stream.apk",
+                "image": "assets/guides/manual_tv_apk/fire_tv/v57_03.jpg",
                 "links": []
               },
               {
                 "title": "Installe puis ouvre l’application",
                 "body": "Ouvre le fichier APK téléchargé et sélectionne « Installer », puis « Ouvrir ». Si un avertissement signale un fichier dangereux, arrête-toi. Après l’installation, retire l’autorisation accordée à Downloader et supprime le fichier APK si tu n’en as plus besoin.",
+                "image": "assets/guides/manual_tv_apk/fire_tv/v57_04.jpg",
                 "links": []
               }
             ]
@@ -6815,28 +6668,33 @@
                 "title": "Installe Downloader sur la télévision",
                 "body": "Sur ta télévision, ouvre Amazon Appstore, recherche « Downloader by AFTVnews », puis sélectionne « Installer » et « Ouvrir ». Si ta Fire TV utilise Vega OS, n’utilise pas ce tutoriel.",
                 "url": "https://www.aftvnews.com/downloader/",
+                "image": "assets/guides/downloader/fire_tv/v57_01.jpg",
                 "links": []
               },
               {
                 "title": "Autorise l’installation du fichier",
                 "body": "Sur la Fire TV : Paramètres → Ma Fire TV → Options pour les développeurs → Installer des applications inconnues → Downloader → Autoriser. Si « Options pour les développeurs » est absent : Ma Fire TV → À propos, puis appuie 7 fois sur le nom du modèle. Cette méthode concerne Fire OS, pas Vega OS.",
                 "url": "https://www.aftvnews.com/how-to-sideload-apps-on-the-fire-tv/",
+                "image": "assets/guides/downloader/fire_tv/v57_02.jpg",
                 "links": []
               },
               {
                 "title": "Saisis le code 4200542",
                 "body": "Dans Downloader sur la télévision, sélectionne la case « URL / Short Code », entre 4200542, puis appuie sur « Go ». Ce code se saisit dans Downloader, pas dans Telegram ni dans la boutique.",
+                "image": "assets/guides/downloader/fire_tv/v57_03.jpg",
                 "links": []
               },
               {
                 "title": "Contrôle le téléchargement",
                 "body": "Le code ouvre la page de téléchargement de IPVIO Stream — IPTV pour TV. Vérifie le nom de l’application et la provenance du fichier avant de télécharger. Si la page ne correspond pas, arrête-toi et utilise la page du développeur.",
                 "url": "https://github.com/Emrodev/IPVIO-Stream/releases/latest/download/IPVIO-Stream.apk",
+                "image": "assets/guides/downloader/fire_tv/v57_04.jpg",
                 "links": []
               },
               {
                 "title": "Installe et ouvre l’application",
                 "body": "Une fois le fichier APK téléchargé, sélectionne « Installer », puis « Ouvrir ». Si une alerte de sécurité signale un fichier dangereux, ne force pas. Ensuite, tu peux supprimer le fichier APK dans Downloader et désactiver son autorisation d’installation dans les paramètres. Pour ajouter ton compte ou ta source, utilise ensuite « Configurer » dans le bot.",
+                "image": "assets/guides/downloader/fire_tv/v57_05.jpg",
                 "links": []
               }
             ]
@@ -7804,16 +7662,8 @@
               {
                 "title": "Choisis le bon APK Nyx pour ton Android",
                 "body": "Ouvre la release officielle. ARM64 convient à la plupart des appareils récents; ARMv7 est destiné à certains appareils 32 bits plus anciens. La liste ci-dessous expose tous les APK publiés par l’éditeur pour cette release.",
-                "links": [
-                  [
-                    "📦 ARM64",
-                    "https://github.com/kunai974/nyx-player/releases/download/v0.9.0/nyx-player-arm64-v0.9.0.apk"
-                  ],
-                  [
-                    "📦 ARMv7",
-                    "https://github.com/kunai974/nyx-player/releases/download/v0.9.0/nyx-player-armv7-v0.9.0.apk"
-                  ]
-                ]
+                "url": "https://github.com/kunai974/nyx-player/releases/latest",
+                "links": []
               },
               {
                 "title": "Installe le fichier APK",
@@ -7837,16 +7687,8 @@
               {
                 "title": "Choisis le bon APK Nyx pour ton Android",
                 "body": "Ouvre la release officielle. ARM64 convient à la plupart des appareils récents; ARMv7 est destiné à certains appareils 32 bits plus anciens. La liste ci-dessous expose tous les APK publiés par l’éditeur pour cette release.",
-                "links": [
-                  [
-                    "📦 ARM64",
-                    "https://github.com/kunai974/nyx-player/releases/download/v0.9.0/nyx-player-arm64-v0.9.0.apk"
-                  ],
-                  [
-                    "📦 ARMv7",
-                    "https://github.com/kunai974/nyx-player/releases/download/v0.9.0/nyx-player-armv7-v0.9.0.apk"
-                  ]
-                ]
+                "url": "https://github.com/kunai974/nyx-player/releases/latest",
+                "links": []
               },
               {
                 "title": "Installe le fichier APK",
@@ -7870,16 +7712,8 @@
               {
                 "title": "Choisis le bon APK Nyx pour ta TV",
                 "body": "Ouvre la release officielle et choisis ARM64 pour les appareils récents compatibles, ou ARMv7 (32 bits) pour certains anciens modèles. Le même APK Android est annoncé pour téléphone et Android TV. Vérifie l’architecture du modèle si tu hésites.",
-                "links": [
-                  [
-                    "📦 ARM64",
-                    "https://github.com/kunai974/nyx-player/releases/download/v0.9.0/nyx-player-arm64-v0.9.0.apk"
-                  ],
-                  [
-                    "📦 ARMv7",
-                    "https://github.com/kunai974/nyx-player/releases/download/v0.9.0/nyx-player-armv7-v0.9.0.apk"
-                  ]
-                ]
+                "url": "https://github.com/kunai974/nyx-player/releases/latest",
+                "links": []
               },
               {
                 "title": "Installe le fichier APK",
@@ -8174,8 +8008,8 @@
             "text": "⬇️ Le téléchargement échoue ?\n\nVérifie ta connexion, l’espace libre et la version de ton système. Réessaie depuis le site ou la boutique officielle indiquée dans le guide. N’ouvre pas de fichier proposé par un site qui ne correspond pas à l’éditeur.",
             "links": [
               [
-                "📦 ARM64",
-                "https://github.com/kunai974/nyx-player/releases/download/v0.9.0/nyx-player-arm64-v0.9.0.apk"
+                "📂 APK et releases du développeur",
+                "https://github.com/kunai974/nyx-player/releases"
               ]
             ]
           },
@@ -8185,8 +8019,8 @@
             "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée par le bot. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
             "links": [
               [
-                "📦 ARM64",
-                "https://github.com/kunai974/nyx-player/releases/download/v0.9.0/nyx-player-arm64-v0.9.0.apk"
+                "📂 APK et releases du développeur",
+                "https://github.com/kunai974/nyx-player/releases"
               ]
             ]
           },
@@ -8210,8 +8044,8 @@
             "text": "⬇️ Le téléchargement échoue ?\n\nVérifie ta connexion, l’espace libre et la version de ton système. Réessaie depuis le site ou la boutique officielle indiquée dans le guide. N’ouvre pas de fichier proposé par un site qui ne correspond pas à l’éditeur.",
             "links": [
               [
-                "📦 ARM64",
-                "https://github.com/kunai974/nyx-player/releases/download/v0.9.0/nyx-player-arm64-v0.9.0.apk"
+                "📂 APK et releases du développeur",
+                "https://github.com/kunai974/nyx-player/releases"
               ]
             ]
           },
@@ -8221,8 +8055,8 @@
             "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée par le bot. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
             "links": [
               [
-                "📦 ARM64",
-                "https://github.com/kunai974/nyx-player/releases/download/v0.9.0/nyx-player-arm64-v0.9.0.apk"
+                "📂 APK et releases du développeur",
+                "https://github.com/kunai974/nyx-player/releases"
               ]
             ]
           },
@@ -8257,8 +8091,8 @@
             "text": "⬇️ Téléchargement sur la TV impossible ?\n\n1. Vérifie la connexion Internet de la télévision et l’espace libre.\n2. Si la boutique refuse l’application, regarde la compatibilité du modèle.\n3. Si Downloader affiche une erreur, le code court peut avoir changé : ouvre la page officielle de l’éditeur en alternative.\n4. N’installe pas un fichier provenant d’une page inconnue.",
             "links": [
               [
-                "📦 ARM64",
-                "https://github.com/kunai974/nyx-player/releases/download/v0.9.0/nyx-player-arm64-v0.9.0.apk"
+                "📂 APK et releases du développeur",
+                "https://github.com/kunai974/nyx-player/releases"
               ]
             ]
           },
@@ -8268,8 +8102,8 @@
             "text": "🛠️ Android TV : installation refusée\n\nOuvre Paramètres → Applications → Accès spécial (ou Sécurité et restrictions) → Installer des applications inconnues. Autorise temporairement Downloader ou ton gestionnaire de fichiers. Réessaie avec le fichier APK publié par le développeur. Ne désactive pas Play Protect.",
             "links": [
               [
-                "📦 ARM64",
-                "https://github.com/kunai974/nyx-player/releases/download/v0.9.0/nyx-player-arm64-v0.9.0.apk"
+                "📂 APK et releases du développeur",
+                "https://github.com/kunai974/nyx-player/releases"
               ]
             ]
           },
@@ -8326,77 +8160,17 @@
       "distribution_links": {
         "android_phone": [
           [
-            "📦 ARM64",
-            "https://github.com/kunai974/nyx-player/releases/download/v0.9.0/nyx-player-arm64-v0.9.0.apk"
-          ],
-          [
-            "📦 ARMv7",
-            "https://github.com/kunai974/nyx-player/releases/download/v0.9.0/nyx-player-armv7-v0.9.0.apk"
-          ],
-          [
-            "📂 APK et releases du développeur",
-            "https://github.com/kunai974/nyx-player/releases"
-          ],
-          [
-            "📦 ARM64",
-            "https://github.com/kunai974/nyx-player/releases/download/v0.9.0/nyx-player-arm64-v0.9.0.apk"
-          ],
-          [
-            "📦 ARMv7",
-            "https://github.com/kunai974/nyx-player/releases/download/v0.9.0/nyx-player-armv7-v0.9.0.apk"
-          ],
-          [
             "📂 APK et releases du développeur",
             "https://github.com/kunai974/nyx-player/releases"
           ]
         ],
         "android_tablet": [
           [
-            "📦 ARM64",
-            "https://github.com/kunai974/nyx-player/releases/download/v0.9.0/nyx-player-arm64-v0.9.0.apk"
-          ],
-          [
-            "📦 ARMv7",
-            "https://github.com/kunai974/nyx-player/releases/download/v0.9.0/nyx-player-armv7-v0.9.0.apk"
-          ],
-          [
-            "📂 APK et releases du développeur",
-            "https://github.com/kunai974/nyx-player/releases"
-          ],
-          [
-            "📦 ARM64",
-            "https://github.com/kunai974/nyx-player/releases/download/v0.9.0/nyx-player-arm64-v0.9.0.apk"
-          ],
-          [
-            "📦 ARMv7",
-            "https://github.com/kunai974/nyx-player/releases/download/v0.9.0/nyx-player-armv7-v0.9.0.apk"
-          ],
-          [
             "📂 APK et releases du développeur",
             "https://github.com/kunai974/nyx-player/releases"
           ]
         ],
         "android_tv": [
-          [
-            "📦 ARM64",
-            "https://github.com/kunai974/nyx-player/releases/download/v0.9.0/nyx-player-arm64-v0.9.0.apk"
-          ],
-          [
-            "📦 ARMv7",
-            "https://github.com/kunai974/nyx-player/releases/download/v0.9.0/nyx-player-armv7-v0.9.0.apk"
-          ],
-          [
-            "📂 APK et releases du développeur",
-            "https://github.com/kunai974/nyx-player/releases"
-          ],
-          [
-            "📦 ARM64",
-            "https://github.com/kunai974/nyx-player/releases/download/v0.9.0/nyx-player-arm64-v0.9.0.apk"
-          ],
-          [
-            "📦 ARMv7",
-            "https://github.com/kunai974/nyx-player/releases/download/v0.9.0/nyx-player-armv7-v0.9.0.apk"
-          ],
           [
             "📂 APK et releases du développeur",
             "https://github.com/kunai974/nyx-player/releases"

@@ -27,9 +27,13 @@ def json_safe(value):
 
 
 def clean_step(step: dict) -> dict:
-    clean = {key: step[key] for key in ('title', 'body', 'url', 'video', 'links') if step.get(key)}
+    clean = {key: step[key] for key in ('title', 'body', 'url', 'video', 'image', 'links') if step.get(key)}
     if clean.get('url') and urlsplit(clean['url']).scheme != 'https':
         clean.pop('url', None)
+    if clean.get('image') and isinstance(clean['image'], str):
+        clean['image'] = clean['image'] if clean['image'].startswith(('https://', 'assets/')) else None
+        if clean['image'] is None:
+            clean.pop('image', None)
     clean['links'] = [
         [str(label), str(url)] for label, url in clean.get('links', [])
         if urlsplit(str(url)).scheme == 'https'
@@ -87,14 +91,22 @@ def main() -> int:
                     'steps': [clean_step(s) for s in install_steps(state)],
                 })
             public_app['install'][device_id] = install_options
-            public_app['distribution_links'][device_id] = [
+            distribution_links = [
                 [label, url] for label, url in download_actions(app_id, device_id)
                 if urlsplit(url).scheme == 'https'
             ]
-            public_app['distribution_links'][device_id].extend(
+            distribution_links.extend(
                 [[label, url] for label, url in download_buttons(app_id, device_id)
                  if urlsplit(url).scheme == 'https']
             )
+            public_app['distribution_links'][device_id] = []
+            seen_links = set()
+            for label, url in distribution_links:
+                key = (str(label), str(url))
+                if key in seen_links:
+                    continue
+                seen_links.add(key)
+                public_app['distribution_links'][device_id].append([str(label), str(url)])
 
             config_routes = []
             seen = set()
