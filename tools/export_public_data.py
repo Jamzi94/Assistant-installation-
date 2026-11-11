@@ -21,12 +21,34 @@ except ImportError:
     from stremio_publication import apply_stremio_overrides, validate_stremio_overrides
 
 
+PUBLIC_TEXT_REPLACEMENTS = (
+    ('Ne les saisis jamais dans le chatbot.', 'Saisis ces données uniquement dans l’application.'),
+    ('ne doivent pas être partagés dans un chatbot.', 'ne doivent pas être partagés ici.'),
+    ('dans le bot', 'dans cette fiche'),
+    ('Dans ce bot', 'Sur ce site'),
+    ('via le bot', 'dans cette fiche'),
+    ('reviens dans le bot', 'reviens à cette fiche'),
+    ('reviens au bot', 'reviens à cette fiche'),
+    ('Le bot ne fournit', 'Ce site ne fournit'),
+    ('N’envoie jamais ces informations au bot.', 'Ne partage jamais ces informations ici.'),
+    ('N’envoie pas ce code au bot.', 'Ne partage pas ce code ici.'),
+)
+
+
+def clean_public_text(value: str) -> str:
+    for old, new in PUBLIC_TEXT_REPLACEMENTS:
+        value = value.replace(old, new)
+    return value
+
+
 def json_safe(value):
     if isinstance(value, dict):
         return {str(k): json_safe(v) for k, v in value.items()}
     if isinstance(value, (list, tuple, set, frozenset)):
         return [json_safe(v) for v in value]
-    if value is None or isinstance(value, (str, int, float, bool)):
+    if isinstance(value, str):
+        return clean_public_text(value)
+    if value is None or isinstance(value, (int, float, bool)):
         return value
     return str(value)
 
@@ -151,7 +173,7 @@ def main() -> int:
                 add_config(variant, label, configuration_steps(variant_state))
             public_app['configure'][device_id] = config_routes
 
-            # Reuse the bot's exact contextual help labels and responses.
+            # Reuse the source project's contextual help labels and responses.
             current = fresh()
             for action in (
                 'intent:install',

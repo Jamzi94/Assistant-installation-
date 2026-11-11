@@ -685,7 +685,7 @@ function renderConfigurePane(pane, app) {
   const options = orderedGuideOptions(app, state.device, 'configure');
   const heading = el('div', 'pane-heading');
   heading.append(el('h3', '', 'Configuration pas à pas'));
-  heading.append(el('p', '', 'Ajoutez uniquement vos propres accès. Les mots de passe, URL privées, adresses MAC et codes d’association ne doivent pas être partagés dans un chatbot.'));
+  heading.append(el('p', '', 'Ajoutez uniquement vos propres accès. Les mots de passe, URL privées, adresses MAC et codes d’association ne doivent pas être partagés ici.'));
   pane.append(heading);
   if (!options.length) {
     pane.append(el('div', 'empty-state', 'Aucun guide de configuration spécifique n’est renseigné pour ce couple appareil–application.'));
@@ -801,7 +801,7 @@ function renderGuidedSteps(parent, steps, kind) {
 function renderHelpPane(pane, app) {
   const heading = el('div', 'pane-heading');
   heading.append(el('h3', '', 'Que se passe-t-il ?'));
-  heading.append(el('p', '', 'Conseils repris du parcours du bot. Commencez par choisir le problème qui ressemble le plus au vôtre.'));
+  heading.append(el('p', '', 'Conseils issus du catalogue public. Commencez par choisir le problème qui ressemble le plus au vôtre.'));
   pane.append(heading);
   const issues = app.troubleshooting[state.device] || [];
   if (issues.length) {

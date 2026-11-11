@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-11T02:05:07+00:00",
+  "generated_at": "2026-11-11T02:15:43+00:00",
   "source_version": "Assistant Installation V5.7",
   "refresh_policy": "Données exportées à la date de génération; aucune actualisation automatique n’est promise.",
   "devices": {
@@ -88,8 +88,8 @@
       "publisher_type": "official",
       "prerequisites": "Un compte Nuvio si la version le demande, et les extensions ou sources compatibles proposées par Nuvio. La documentation officielle consultée ne confirme pas une saisie native M3U/Xtream pour cette application.",
       "downloader_code": "1108419",
-      "code_source_status": "code confirmé par l’administrateur",
-      "code_target_status": "confirmé par l’administrateur",
+      "code_source_status": "code fourni par l’administrateur; à recontrôler avant publication",
+      "code_target_status": "fourni par l’administrateur; à recontrôler avant publication",
       "platform_support": {
         "fire_tv": {
           "status": "not_confirmed",
@@ -169,7 +169,7 @@
               {
                 "title": "Autorise l’installation du fichier",
                 "body": "Sur la TV : Paramètres → Applications → Accès spécial (ou Sécurité et restrictions) → Installer des applications inconnues → Downloader → Autoriser. Les noms peuvent varier selon ton modèle Android TV / Google TV.",
-                "url": "https://support.google.com/androidtv/",
+                "url": "https://support.google.com/googletv/?hl=fr",
                 "image": "assets/guides/downloader/android_tv/v57_02.jpg",
                 "links": []
               },
@@ -352,7 +352,7 @@
             "links": [
               [
                 "📋 Instructions Android TV",
-                "https://support.google.com/androidtv/answer/12188351?hl=fr"
+                "https://support.google.com/googletv/?hl=fr"
               ]
             ]
           },
@@ -990,7 +990,7 @@
           {
             "id": "install",
             "label": "🚫 Installation refusée",
-            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée par le bot. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
+            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée dans cette fiche. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
             "links": [
               [
                 "✅ Google Play · Nuvio",
@@ -1032,7 +1032,7 @@
           {
             "id": "install",
             "label": "🚫 Installation refusée",
-            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée par le bot. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
+            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée dans cette fiche. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
             "links": [
               [
                 "✅ Google Play · Nuvio",
@@ -1625,7 +1625,7 @@
           {
             "id": "install",
             "label": "🚫 Installation refusée",
-            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée par le bot. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
+            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée dans cette fiche. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
             "links": [
               [
                 "💻 Versions PC/Mac/Linux · GitHub",
@@ -1667,7 +1667,7 @@
           {
             "id": "install",
             "label": "🚫 Installation refusée",
-            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée par le bot. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
+            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée dans cette fiche. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
             "links": [
               [
                 "💻 Versions PC/Mac/Linux · GitHub",
@@ -1709,7 +1709,7 @@
           {
             "id": "install",
             "label": "🚫 Installation refusée",
-            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée par le bot. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
+            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée dans cette fiche. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
             "links": [
               [
                 "💻 Versions PC/Mac/Linux · GitHub",
@@ -2131,7 +2131,7 @@
           {
             "id": "install",
             "label": "🚫 Installation refusée",
-            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée par le bot. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
+            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée dans cette fiche. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
             "links": [
               [
                 "🛠️ Procédure de l’installateur officiel",
@@ -2179,7 +2179,7 @@
           {
             "id": "install",
             "label": "🚫 Installation refusée",
-            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée par le bot. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
+            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée dans cette fiche. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
             "links": [
               [
                 "🛠️ Procédure de l’installateur officiel",
@@ -2261,13 +2261,13 @@
         "android_tv": "https://github.com/homelessbrian/NuvioPlusIPTV/releases",
         "fire_tv": "https://github.com/homelessbrian/NuvioPlusIPTV/releases"
       },
-      "access": "Dans Paramètres → Live TV, ajoute une playlist M3U autorisée ou tes identifiants Xtream autorisés. Ajoute éventuellement ton EPG. N'envoie jamais tes identifiants au bot.",
+      "access": "Dans Paramètres → Live TV, ajoute une playlist M3U autorisée ou tes identifiants Xtream autorisés. Ajoute éventuellement ton EPG. Ne partage jamais tes identifiants ici.",
       "note": "Fork tiers Nuvio + IPTV : Live/TV via M3U, Xtream et EPG ; compte Nuvio séparé si la build l’affiche.",
       "publisher_type": "third_party",
       "prerequisites": "Compte Nuvio pour la synchronisation ; pour IPTV : playlist M3U ou accès Xtream fourni légalement.",
       "downloader_code": "6532491",
-      "code_source_status": "code confirmé par l’administrateur",
-      "code_target_status": "confirmé par l’administrateur",
+      "code_source_status": "code fourni par l’administrateur; à recontrôler avant publication",
+      "code_target_status": "fourni par l’administrateur; à recontrôler avant publication",
       "platform_support": {
         "android_tv": {
           "status": "publisher_claim_unverified",
@@ -2335,7 +2335,7 @@
               {
                 "title": "Autorise l’installation du fichier",
                 "body": "Sur la TV : Paramètres → Applications → Accès spécial (ou Sécurité et restrictions) → Installer des applications inconnues → Downloader → Autoriser. Les noms peuvent varier selon ton modèle Android TV / Google TV.",
-                "url": "https://support.google.com/androidtv/",
+                "url": "https://support.google.com/googletv/?hl=fr",
                 "image": "assets/guides/downloader/android_tv/v57_02.jpg",
                 "links": []
               },
@@ -2408,7 +2408,7 @@
               {
                 "title": "Autorise l’installation du fichier",
                 "body": "Sur la Fire TV : Paramètres → Ma Fire TV → Options pour les développeurs → Installer des applications inconnues → Downloader → Autoriser. Si « Options pour les développeurs » est absent : Ma Fire TV → À propos, puis appuie 7 fois sur le nom du modèle. Cette méthode concerne Fire OS, pas Vega OS.",
-                "url": "https://www.aftvnews.com/how-to-sideload-apps-on-the-fire-tv/",
+                "url": "https://www.aftvnews.com/downloader/",
                 "image": "assets/guides/downloader/fire_tv/v57_02.jpg",
                 "links": []
               },
@@ -2579,7 +2579,7 @@
               },
               {
                 "title": "Entre les trois informations",
-                "body": "Saisis l’URL du serveur, l’identifiant et le mot de passe uniquement dans l’application. Valide et teste une chaîne autorisée. N’envoie jamais ces informations au bot.",
+                "body": "Saisis l’URL du serveur, l’identifiant et le mot de passe uniquement dans l’application. Valide et teste une chaîne autorisée. Ne partage jamais ces informations ici.",
                 "links": []
               }
             ]
@@ -2590,7 +2590,7 @@
             "steps": [
               {
                 "title": "Retrouve le type de ton accès",
-                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\nQuand tu l’as trouvé, touche « Autre type de source ». Dans ce bot, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
+                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\nQuand tu l’as trouvé, touche « Autre type de source ». Sur ce site, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
                 "links": []
               }
             ]
@@ -2739,7 +2739,7 @@
               },
               {
                 "title": "Entre les trois informations",
-                "body": "Saisis l’URL du serveur, l’identifiant et le mot de passe uniquement dans l’application. Valide et teste une chaîne autorisée. N’envoie jamais ces informations au bot.",
+                "body": "Saisis l’URL du serveur, l’identifiant et le mot de passe uniquement dans l’application. Valide et teste une chaîne autorisée. Ne partage jamais ces informations ici.",
                 "links": []
               }
             ]
@@ -2750,7 +2750,7 @@
             "steps": [
               {
                 "title": "Retrouve le type de ton accès",
-                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\nQuand tu l’as trouvé, touche « Autre type de source ». Dans ce bot, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
+                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\nQuand tu l’as trouvé, touche « Autre type de source ». Sur ce site, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
                 "links": []
               }
             ]
@@ -2789,7 +2789,7 @@
             "links": [
               [
                 "📋 Instructions Android TV",
-                "https://support.google.com/androidtv/answer/12188351?hl=fr"
+                "https://support.google.com/googletv/?hl=fr"
               ]
             ]
           },
@@ -3160,7 +3160,7 @@
             "steps": [
               {
                 "title": "Retrouve le type de ton accès",
-                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\nQuand tu l’as trouvé, touche « Autre type de source ». Dans ce bot, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
+                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\nQuand tu l’as trouvé, touche « Autre type de source ». Sur ce site, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
                 "links": []
               }
             ]
@@ -3314,7 +3314,7 @@
             "steps": [
               {
                 "title": "Retrouve le type de ton accès",
-                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\nQuand tu l’as trouvé, touche « Autre type de source ». Dans ce bot, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
+                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\nQuand tu l’as trouvé, touche « Autre type de source ». Sur ce site, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
                 "links": []
               }
             ]
@@ -3343,7 +3343,7 @@
           {
             "id": "install",
             "label": "🚫 Installation refusée",
-            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée par le bot. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
+            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée dans cette fiche. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
             "links": [
               [
                 "📂 APK et releases du développeur",
@@ -3385,7 +3385,7 @@
           {
             "id": "install",
             "label": "🚫 Installation refusée",
-            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée par le bot. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
+            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée dans cette fiche. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
             "links": [
               [
                 "📂 APK et releases du développeur",
@@ -3467,8 +3467,8 @@
       "publisher_type": "official",
       "prerequisites": "Sources personnelles ou extensions légales. Compte de la plateforme si nécessaire.",
       "downloader_code": "5441593",
-      "code_source_status": "code confirmé par l’administrateur",
-      "code_target_status": "confirmé par l’administrateur",
+      "code_source_status": "code fourni par l’administrateur; à recontrôler avant publication",
+      "code_target_status": "fourni par l’administrateur; à recontrôler avant publication",
       "platform_support": {
         "fire_tv": {
           "status": "not_confirmed",
@@ -3547,7 +3547,7 @@
               {
                 "title": "Autorise l’installation du fichier",
                 "body": "Sur la TV : Paramètres → Applications → Accès spécial (ou Sécurité et restrictions) → Installer des applications inconnues → Downloader → Autoriser. Les noms peuvent varier selon ton modèle Android TV / Google TV.",
-                "url": "https://support.google.com/androidtv/",
+                "url": "https://support.google.com/googletv/?hl=fr",
                 "image": "assets/guides/downloader/android_tv/v57_02.jpg",
                 "links": []
               },
@@ -4343,7 +4343,7 @@
             "links": [
               [
                 "📋 Instructions Android TV",
-                "https://support.google.com/androidtv/answer/12188351?hl=fr"
+                "https://support.google.com/googletv/?hl=fr"
               ]
             ]
           },
@@ -4397,7 +4397,7 @@
           {
             "id": "install",
             "label": "🚫 Installation refusée",
-            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée par le bot. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
+            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée dans cette fiche. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
             "links": [
               [
                 "⬇️ Téléchargements Stremio officiels",
@@ -4433,7 +4433,7 @@
           {
             "id": "install",
             "label": "🚫 Installation refusée",
-            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée par le bot. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
+            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée dans cette fiche. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
             "links": [
               [
                 "⬇️ Téléchargements Stremio officiels",
@@ -4505,7 +4505,7 @@
           {
             "id": "install",
             "label": "🚫 Installation refusée",
-            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée par le bot. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
+            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée dans cette fiche. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
             "links": [
               [
                 "⬇️ Téléchargements Stremio officiels",
@@ -4541,7 +4541,7 @@
           {
             "id": "install",
             "label": "🚫 Installation refusée",
-            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée par le bot. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
+            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée dans cette fiche. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
             "links": [
               [
                 "⬇️ Téléchargements Stremio officiels",
@@ -4577,7 +4577,7 @@
           {
             "id": "install",
             "label": "🚫 Installation refusée",
-            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée par le bot. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
+            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée dans cette fiche. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
             "links": [
               [
                 "⬇️ Téléchargements Stremio officiels",
@@ -4613,7 +4613,7 @@
           {
             "id": "install",
             "label": "🚫 Installation refusée",
-            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée par le bot. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
+            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée dans cette fiche. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
             "links": [
               [
                 "✅ Google Play · Stremio",
@@ -4649,7 +4649,7 @@
           {
             "id": "install",
             "label": "🚫 Installation refusée",
-            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée par le bot. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
+            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée dans cette fiche. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
             "links": [
               [
                 "✅ Google Play · Stremio",
@@ -4921,8 +4921,8 @@
       "publisher_type": "third_party",
       "prerequisites": "Compte Stremio et extensions de lecture compatibles (Alder ne diffuse pas directement les torrents). Prépare-les sur Stremio PC/mobile.",
       "downloader_code": "9638679",
-      "code_source_status": "code confirmé par l’administrateur",
-      "code_target_status": "confirmé par l’administrateur",
+      "code_source_status": "code fourni par l’administrateur; à recontrôler avant publication",
+      "code_target_status": "fourni par l’administrateur; à recontrôler avant publication",
       "platform_support": {
         "fire_tv": {
           "status": "publisher_claim_unverified",
@@ -4985,7 +4985,7 @@
               {
                 "title": "Autorise l’installation du fichier",
                 "body": "Sur la TV : Paramètres → Applications → Accès spécial (ou Sécurité et restrictions) → Installer des applications inconnues → Downloader → Autoriser. Les noms peuvent varier selon ton modèle Android TV / Google TV.",
-                "url": "https://support.google.com/androidtv/",
+                "url": "https://support.google.com/googletv/?hl=fr",
                 "image": "assets/guides/downloader/android_tv/v57_02.jpg",
                 "links": []
               },
@@ -5058,7 +5058,7 @@
               {
                 "title": "Autorise l’installation du fichier",
                 "body": "Sur la Fire TV : Paramètres → Ma Fire TV → Options pour les développeurs → Installer des applications inconnues → Downloader → Autoriser. Si « Options pour les développeurs » est absent : Ma Fire TV → À propos, puis appuie 7 fois sur le nom du modèle. Cette méthode concerne Fire OS, pas Vega OS.",
-                "url": "https://www.aftvnews.com/how-to-sideload-apps-on-the-fire-tv/",
+                "url": "https://www.aftvnews.com/downloader/",
                 "image": "assets/guides/downloader/fire_tv/v57_02.jpg",
                 "links": []
               },
@@ -5099,7 +5099,7 @@
               },
               {
                 "title": "Associe Alder à ton compte",
-                "body": "Sur la TV, ouvre Alder. Utilise le code de connexion Stremio affiché par Alder sur la TV : sur ton téléphone, ouvre l’adresse indiquée sur cet écran, connecte-toi à Stremio et confirme l’association. N’entre jamais ce code dans le chat. N’envoie pas ce code au bot.",
+                "body": "Sur la TV, ouvre Alder. Utilise le code de connexion Stremio affiché par Alder sur la TV : sur ton téléphone, ouvre l’adresse indiquée sur cet écran, connecte-toi à Stremio et confirme l’association. Ne partage pas ce code ici.",
                 "links": []
               },
               {
@@ -5123,7 +5123,7 @@
               },
               {
                 "title": "Associe Alder à ton compte",
-                "body": "Sur la TV, ouvre Alder. Utilise le code de connexion Stremio affiché par Alder sur la TV : sur ton téléphone, ouvre l’adresse indiquée sur cet écran, connecte-toi à Stremio et confirme l’association. N’entre jamais ce code dans le chat. N’envoie pas ce code au bot.",
+                "body": "Sur la TV, ouvre Alder. Utilise le code de connexion Stremio affiché par Alder sur la TV : sur ton téléphone, ouvre l’adresse indiquée sur cet écran, connecte-toi à Stremio et confirme l’association. Ne partage pas ce code ici.",
                 "links": []
               },
               {
@@ -5155,7 +5155,7 @@
             "links": [
               [
                 "📋 Instructions Android TV",
-                "https://support.google.com/androidtv/answer/12188351?hl=fr"
+                "https://support.google.com/googletv/?hl=fr"
               ]
             ]
           },
@@ -5312,9 +5312,9 @@
         "android_tv": "https://play.google.com/store/apps/details?id=com.kdtvandroid",
         "android_phone": "https://play.google.com/store/apps/details?id=com.kdtvandroid",
         "android_tablet": "https://play.google.com/store/apps/details?id=com.kdtvandroid",
-        "apple_tv": "https://apps.apple.com/no/app/kdtivi-unify-iptv-vod/id6754769190?platform=tv",
-        "iphone": "https://apps.apple.com/no/app/kdtivi-unify-iptv-vod/id6754769190?platform=iphone",
-        "ipad": "https://apps.apple.com/no/app/kdtivi-unify-iptv-vod/id6754769190?platform=ipad",
+        "apple_tv": "https://kdtapps.com/kdtivi",
+        "iphone": "https://kdtapps.com/kdtivi",
+        "ipad": "https://kdtapps.com/kdtivi",
         "fire_tv": "https://kdtapps.com/kdtivi"
       },
       "access": "Connecte ton propre accès IPTV, ton compte Nuvio si la version le propose, ou tes extensions Stremio autorisées. Ne partage jamais tes identifiants dans le application.",
@@ -5322,8 +5322,8 @@
       "publisher_type": "independent",
       "prerequisites": "Un accès IPTV légal (M3U/Xtream) et/ou un compte Nuvio, Plex, Emby, Jellyfin ou Stremio selon la source choisie. KDTIVI ne fournit aucune chaîne ni abonnement.",
       "downloader_code": "2995184",
-      "code_source_status": "code confirmé par l’administrateur",
-      "code_target_status": "confirmé par l’administrateur",
+      "code_source_status": "code fourni par l’administrateur; à recontrôler avant publication",
+      "code_target_status": "fourni par l’administrateur; à recontrôler avant publication",
       "platform_support": {
         "fire_tv": {
           "status": "sideload_claim_unverified",
@@ -5352,7 +5352,7 @@
               },
               {
                 "title": "Ouvre KDTIVI et ajoute une source",
-                "body": "Choisis une playlist IPTV autorisée, un serveur Plex/Emby/Jellyfin ou des extensions compatibles. Le bot ne fournit aucun contenu ni abonnement.",
+                "body": "Choisis une playlist IPTV autorisée, un serveur Plex/Emby/Jellyfin ou des extensions compatibles. Ce site ne fournit aucun contenu ni abonnement.",
                 "links": []
               }
             ]
@@ -5371,7 +5371,7 @@
               {
                 "title": "Autorise l’installation du fichier",
                 "body": "Sur la TV : Paramètres → Applications → Accès spécial (ou Sécurité et restrictions) → Installer des applications inconnues → Downloader → Autoriser. Les noms peuvent varier selon ton modèle Android TV / Google TV.",
-                "url": "https://support.google.com/androidtv/",
+                "url": "https://support.google.com/googletv/?hl=fr",
                 "image": "assets/guides/downloader/android_tv/v57_02.jpg",
                 "links": []
               },
@@ -5429,7 +5429,7 @@
               {
                 "title": "Autorise l’installation du fichier",
                 "body": "Sur la Fire TV : Paramètres → Ma Fire TV → Options pour les développeurs → Installer des applications inconnues → Downloader → Autoriser. Si « Options pour les développeurs » est absent : Ma Fire TV → À propos, puis appuie 7 fois sur le nom du modèle. Cette méthode concerne Fire OS, pas Vega OS.",
-                "url": "https://www.aftvnews.com/how-to-sideload-apps-on-the-fire-tv/",
+                "url": "https://www.aftvnews.com/downloader/",
                 "image": "assets/guides/downloader/fire_tv/v57_02.jpg",
                 "links": []
               },
@@ -5469,7 +5469,7 @@
               {
                 "title": "Cherche KDTIVI dans l’App Store",
                 "body": "Dans l’App Store de ton appareil, la fiche KDTIVI et vérifie que l’éditeur est « KDT Apps ». Si aucune fiche exacte n’apparaît, arrête-toi : ne télécharge pas une application homonyme et ne considère pas l’installation comme disponible.",
-                "url": "https://apps.apple.com/no/app/kdtivi-unify-iptv-vod/id6754769190?platform=tv",
+                "url": "https://kdtapps.com/kdtivi",
                 "links": []
               },
               {
@@ -5493,7 +5493,7 @@
               },
               {
                 "title": "Ouvre KDTIVI et ajoute une source",
-                "body": "Choisis une playlist IPTV autorisée, un serveur Plex/Emby/Jellyfin ou des extensions compatibles. Le bot ne fournit aucun contenu ni abonnement.",
+                "body": "Choisis une playlist IPTV autorisée, un serveur Plex/Emby/Jellyfin ou des extensions compatibles. Ce site ne fournit aucun contenu ni abonnement.",
                 "links": []
               }
             ]
@@ -5512,7 +5512,7 @@
               },
               {
                 "title": "Ouvre KDTIVI et ajoute une source",
-                "body": "Choisis une playlist IPTV autorisée, un serveur Plex/Emby/Jellyfin ou des extensions compatibles. Le bot ne fournit aucun contenu ni abonnement.",
+                "body": "Choisis une playlist IPTV autorisée, un serveur Plex/Emby/Jellyfin ou des extensions compatibles. Ce site ne fournit aucun contenu ni abonnement.",
                 "links": []
               }
             ]
@@ -5532,7 +5532,7 @@
               {
                 "title": "Cherche KDTIVI dans l’App Store",
                 "body": "Dans l’App Store de ton appareil, la fiche KDTIVI et vérifie que l’éditeur est « KDT Apps ». Si aucune fiche exacte n’apparaît, arrête-toi : ne télécharge pas une application homonyme et ne considère pas l’installation comme disponible.",
-                "url": "https://apps.apple.com/no/app/kdtivi-unify-iptv-vod/id6754769190?platform=iphone",
+                "url": "https://kdtapps.com/kdtivi",
                 "links": []
               },
               {
@@ -5557,7 +5557,7 @@
               {
                 "title": "Cherche KDTIVI dans l’App Store",
                 "body": "Dans l’App Store de ton appareil, la fiche KDTIVI et vérifie que l’éditeur est « KDT Apps ». Si aucune fiche exacte n’apparaît, arrête-toi : ne télécharge pas une application homonyme et ne considère pas l’installation comme disponible.",
-                "url": "https://apps.apple.com/no/app/kdtivi-unify-iptv-vod/id6754769190?platform=ipad",
+                "url": "https://kdtapps.com/kdtivi",
                 "links": []
               },
               {
@@ -5757,7 +5757,7 @@
             "steps": [
               {
                 "title": "Retrouve le type de ton accès",
-                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\n• Médiathèque : compte Plex, Emby ou Jellyfin.\nQuand tu l’as trouvé, touche « Autre type de source ». Dans ce bot, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
+                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\n• Médiathèque : compte Plex, Emby ou Jellyfin.\nQuand tu l’as trouvé, touche « Autre type de source ». Sur ce site, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
                 "links": []
               }
             ]
@@ -5944,7 +5944,7 @@
             "steps": [
               {
                 "title": "Retrouve le type de ton accès",
-                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\n• Médiathèque : compte Plex, Emby ou Jellyfin.\nQuand tu l’as trouvé, touche « Autre type de source ». Dans ce bot, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
+                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\n• Médiathèque : compte Plex, Emby ou Jellyfin.\nQuand tu l’as trouvé, touche « Autre type de source ». Sur ce site, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
                 "links": []
               }
             ]
@@ -6163,7 +6163,7 @@
             "steps": [
               {
                 "title": "Retrouve le type de ton accès",
-                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\n• Médiathèque : compte Plex, Emby ou Jellyfin.\nQuand tu l’as trouvé, touche « Autre type de source ». Dans ce bot, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
+                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\n• Médiathèque : compte Plex, Emby ou Jellyfin.\nQuand tu l’as trouvé, touche « Autre type de source ». Sur ce site, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
                 "links": []
               }
             ]
@@ -6379,7 +6379,7 @@
             "steps": [
               {
                 "title": "Retrouve le type de ton accès",
-                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\n• Médiathèque : compte Plex, Emby ou Jellyfin.\nQuand tu l’as trouvé, touche « Autre type de source ». Dans ce bot, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
+                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\n• Médiathèque : compte Plex, Emby ou Jellyfin.\nQuand tu l’as trouvé, touche « Autre type de source ». Sur ce site, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
                 "links": []
               }
             ]
@@ -6571,7 +6571,7 @@
             "steps": [
               {
                 "title": "Retrouve le type de ton accès",
-                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\n• Médiathèque : compte Plex, Emby ou Jellyfin.\nQuand tu l’as trouvé, touche « Autre type de source ». Dans ce bot, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
+                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\n• Médiathèque : compte Plex, Emby ou Jellyfin.\nQuand tu l’as trouvé, touche « Autre type de source ». Sur ce site, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
                 "links": []
               }
             ]
@@ -6790,7 +6790,7 @@
             "steps": [
               {
                 "title": "Retrouve le type de ton accès",
-                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\n• Médiathèque : compte Plex, Emby ou Jellyfin.\nQuand tu l’as trouvé, touche « Autre type de source ». Dans ce bot, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
+                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\n• Médiathèque : compte Plex, Emby ou Jellyfin.\nQuand tu l’as trouvé, touche « Autre type de source ». Sur ce site, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
                 "links": []
               }
             ]
@@ -7031,7 +7031,7 @@
             "steps": [
               {
                 "title": "Retrouve le type de ton accès",
-                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\n• Médiathèque : compte Plex, Emby ou Jellyfin.\nQuand tu l’as trouvé, touche « Autre type de source ». Dans ce bot, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
+                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\n• Médiathèque : compte Plex, Emby ou Jellyfin.\nQuand tu l’as trouvé, touche « Autre type de source ». Sur ce site, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
                 "links": []
               }
             ]
@@ -7081,7 +7081,7 @@
             "links": [
               [
                 "📋 Instructions Android TV",
-                "https://support.google.com/androidtv/answer/12188351?hl=fr"
+                "https://support.google.com/googletv/?hl=fr"
               ]
             ]
           },
@@ -7110,7 +7110,7 @@
           {
             "id": "account",
             "label": "🔑 IPTV, Nuvio ou source non reconnue",
-            "text": "🔑 Source IPTV ou serveur non reconnu ?\n\nRetourne dans ton espace client ou sur ton propre serveur. Vérifie que tu as choisi le bon type d’accès (M3U, Xtream, Stalker si proposé, ou Plex, Emby ou Jellyfin). Saisis l’adresse, le nom d’utilisateur et le mot de passe uniquement dans l’application. Le bot ne fournit aucune chaîne ni aucun accès. N’envoie pas tes identifiants ici.\n\nNuvio : si ta version KDTIVI propose « Nuvio Login » ou « Sync », utilise ton compte Nuvio dans cette fenêtre. Cette connexion est distincte de ton accès IPTV et de tes identifiants Stremio.",
+            "text": "🔑 Source IPTV ou serveur non reconnu ?\n\nRetourne dans ton espace client ou sur ton propre serveur. Vérifie que tu as choisi le bon type d’accès (M3U, Xtream, Stalker si proposé, ou Plex, Emby ou Jellyfin). Saisis l’adresse, le nom d’utilisateur et le mot de passe uniquement dans l’application. Ce site ne fournit aucune chaîne ni aucun accès. N’envoie pas tes identifiants ici.\n\nNuvio : si ta version KDTIVI propose « Nuvio Login » ou « Sync », utilise ton compte Nuvio dans cette fenêtre. Cette connexion est distincte de ton accès IPTV et de tes identifiants Stremio.",
             "links": []
           },
           {
@@ -7168,7 +7168,7 @@
           {
             "id": "account",
             "label": "🔑 IPTV, Nuvio ou source non reconnue",
-            "text": "🔑 Source IPTV ou serveur non reconnu ?\n\nRetourne dans ton espace client ou sur ton propre serveur. Vérifie que tu as choisi le bon type d’accès (M3U, Xtream, Stalker si proposé, ou Plex, Emby ou Jellyfin). Saisis l’adresse, le nom d’utilisateur et le mot de passe uniquement dans l’application. Le bot ne fournit aucune chaîne ni aucun accès. N’envoie pas tes identifiants ici.\n\nNuvio : si ta version KDTIVI propose « Nuvio Login » ou « Sync », utilise ton compte Nuvio dans cette fenêtre. Cette connexion est distincte de ton accès IPTV et de tes identifiants Stremio.",
+            "text": "🔑 Source IPTV ou serveur non reconnu ?\n\nRetourne dans ton espace client ou sur ton propre serveur. Vérifie que tu as choisi le bon type d’accès (M3U, Xtream, Stalker si proposé, ou Plex, Emby ou Jellyfin). Saisis l’adresse, le nom d’utilisateur et le mot de passe uniquement dans l’application. Ce site ne fournit aucune chaîne ni aucun accès. N’envoie pas tes identifiants ici.\n\nNuvio : si ta version KDTIVI propose « Nuvio Login » ou « Sync », utilise ton compte Nuvio dans cette fenêtre. Cette connexion est distincte de ton accès IPTV et de tes identifiants Stremio.",
             "links": []
           },
           {
@@ -7201,7 +7201,7 @@
             "links": [
               [
                 "🔎 Rechercher KDTIVI dans l’App Store",
-                "https://apps.apple.com/fr/search?term=KDTIVI"
+                "https://kdtapps.com/kdtivi"
               ]
             ]
           },
@@ -7212,14 +7212,14 @@
             "links": [
               [
                 "🔎 Rechercher KDTIVI dans l’App Store",
-                "https://apps.apple.com/fr/search?term=KDTIVI"
+                "https://kdtapps.com/kdtivi"
               ]
             ]
           },
           {
             "id": "account",
             "label": "🔑 IPTV, Nuvio ou source non reconnue",
-            "text": "🔑 Source IPTV ou serveur non reconnu ?\n\nRetourne dans ton espace client ou sur ton propre serveur. Vérifie que tu as choisi le bon type d’accès (M3U, Xtream, Stalker si proposé, ou Plex, Emby ou Jellyfin). Saisis l’adresse, le nom d’utilisateur et le mot de passe uniquement dans l’application. Le bot ne fournit aucune chaîne ni aucun accès. N’envoie pas tes identifiants ici.\n\nNuvio : si ta version KDTIVI propose « Nuvio Login » ou « Sync », utilise ton compte Nuvio dans cette fenêtre. Cette connexion est distincte de ton accès IPTV et de tes identifiants Stremio.",
+            "text": "🔑 Source IPTV ou serveur non reconnu ?\n\nRetourne dans ton espace client ou sur ton propre serveur. Vérifie que tu as choisi le bon type d’accès (M3U, Xtream, Stalker si proposé, ou Plex, Emby ou Jellyfin). Saisis l’adresse, le nom d’utilisateur et le mot de passe uniquement dans l’application. Ce site ne fournit aucune chaîne ni aucun accès. N’envoie pas tes identifiants ici.\n\nNuvio : si ta version KDTIVI propose « Nuvio Login » ou « Sync », utilise ton compte Nuvio dans cette fenêtre. Cette connexion est distincte de ton accès IPTV et de tes identifiants Stremio.",
             "links": []
           },
           {
@@ -7244,7 +7244,7 @@
           {
             "id": "install",
             "label": "🚫 Installation refusée",
-            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée par le bot. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
+            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée dans cette fiche. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
             "links": [
               [
                 "✅ Google Play · KDTIVI",
@@ -7255,7 +7255,7 @@
           {
             "id": "account",
             "label": "🔑 IPTV, Nuvio ou source non reconnue",
-            "text": "🔑 Source IPTV ou serveur non reconnu ?\n\nRetourne dans ton espace client ou sur ton propre serveur. Vérifie que tu as choisi le bon type d’accès (M3U, Xtream, Stalker si proposé, ou Plex, Emby ou Jellyfin). Saisis l’adresse, le nom d’utilisateur et le mot de passe uniquement dans l’application. Le bot ne fournit aucune chaîne ni aucun accès. N’envoie pas tes identifiants ici.\n\nNuvio : si ta version KDTIVI propose « Nuvio Login » ou « Sync », utilise ton compte Nuvio dans cette fenêtre. Cette connexion est distincte de ton accès IPTV et de tes identifiants Stremio.",
+            "text": "🔑 Source IPTV ou serveur non reconnu ?\n\nRetourne dans ton espace client ou sur ton propre serveur. Vérifie que tu as choisi le bon type d’accès (M3U, Xtream, Stalker si proposé, ou Plex, Emby ou Jellyfin). Saisis l’adresse, le nom d’utilisateur et le mot de passe uniquement dans l’application. Ce site ne fournit aucune chaîne ni aucun accès. N’envoie pas tes identifiants ici.\n\nNuvio : si ta version KDTIVI propose « Nuvio Login » ou « Sync », utilise ton compte Nuvio dans cette fenêtre. Cette connexion est distincte de ton accès IPTV et de tes identifiants Stremio.",
             "links": []
           },
           {
@@ -7280,7 +7280,7 @@
           {
             "id": "install",
             "label": "🚫 Installation refusée",
-            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée par le bot. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
+            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée dans cette fiche. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
             "links": [
               [
                 "✅ Google Play · KDTIVI",
@@ -7291,7 +7291,7 @@
           {
             "id": "account",
             "label": "🔑 IPTV, Nuvio ou source non reconnue",
-            "text": "🔑 Source IPTV ou serveur non reconnu ?\n\nRetourne dans ton espace client ou sur ton propre serveur. Vérifie que tu as choisi le bon type d’accès (M3U, Xtream, Stalker si proposé, ou Plex, Emby ou Jellyfin). Saisis l’adresse, le nom d’utilisateur et le mot de passe uniquement dans l’application. Le bot ne fournit aucune chaîne ni aucun accès. N’envoie pas tes identifiants ici.\n\nNuvio : si ta version KDTIVI propose « Nuvio Login » ou « Sync », utilise ton compte Nuvio dans cette fenêtre. Cette connexion est distincte de ton accès IPTV et de tes identifiants Stremio.",
+            "text": "🔑 Source IPTV ou serveur non reconnu ?\n\nRetourne dans ton espace client ou sur ton propre serveur. Vérifie que tu as choisi le bon type d’accès (M3U, Xtream, Stalker si proposé, ou Plex, Emby ou Jellyfin). Saisis l’adresse, le nom d’utilisateur et le mot de passe uniquement dans l’application. Ce site ne fournit aucune chaîne ni aucun accès. N’envoie pas tes identifiants ici.\n\nNuvio : si ta version KDTIVI propose « Nuvio Login » ou « Sync », utilise ton compte Nuvio dans cette fenêtre. Cette connexion est distincte de ton accès IPTV et de tes identifiants Stremio.",
             "links": []
           },
           {
@@ -7324,7 +7324,7 @@
             "links": [
               [
                 "🔎 Rechercher KDTIVI dans l’App Store",
-                "https://apps.apple.com/fr/search?term=KDTIVI"
+                "https://kdtapps.com/kdtivi"
               ]
             ]
           },
@@ -7335,14 +7335,14 @@
             "links": [
               [
                 "🔎 Rechercher KDTIVI dans l’App Store",
-                "https://apps.apple.com/fr/search?term=KDTIVI"
+                "https://kdtapps.com/kdtivi"
               ]
             ]
           },
           {
             "id": "account",
             "label": "🔑 IPTV, Nuvio ou source non reconnue",
-            "text": "🔑 Source IPTV ou serveur non reconnu ?\n\nRetourne dans ton espace client ou sur ton propre serveur. Vérifie que tu as choisi le bon type d’accès (M3U, Xtream, Stalker si proposé, ou Plex, Emby ou Jellyfin). Saisis l’adresse, le nom d’utilisateur et le mot de passe uniquement dans l’application. Le bot ne fournit aucune chaîne ni aucun accès. N’envoie pas tes identifiants ici.\n\nNuvio : si ta version KDTIVI propose « Nuvio Login » ou « Sync », utilise ton compte Nuvio dans cette fenêtre. Cette connexion est distincte de ton accès IPTV et de tes identifiants Stremio.",
+            "text": "🔑 Source IPTV ou serveur non reconnu ?\n\nRetourne dans ton espace client ou sur ton propre serveur. Vérifie que tu as choisi le bon type d’accès (M3U, Xtream, Stalker si proposé, ou Plex, Emby ou Jellyfin). Saisis l’adresse, le nom d’utilisateur et le mot de passe uniquement dans l’application. Ce site ne fournit aucune chaîne ni aucun accès. N’envoie pas tes identifiants ici.\n\nNuvio : si ta version KDTIVI propose « Nuvio Login » ou « Sync », utilise ton compte Nuvio dans cette fenêtre. Cette connexion est distincte de ton accès IPTV et de tes identifiants Stremio.",
             "links": []
           },
           {
@@ -7381,7 +7381,7 @@
             "links": [
               [
                 "🔎 Rechercher KDTIVI dans l’App Store",
-                "https://apps.apple.com/fr/search?term=KDTIVI"
+                "https://kdtapps.com/kdtivi"
               ]
             ]
           },
@@ -7392,14 +7392,14 @@
             "links": [
               [
                 "🔎 Rechercher KDTIVI dans l’App Store",
-                "https://apps.apple.com/fr/search?term=KDTIVI"
+                "https://kdtapps.com/kdtivi"
               ]
             ]
           },
           {
             "id": "account",
             "label": "🔑 IPTV, Nuvio ou source non reconnue",
-            "text": "🔑 Source IPTV ou serveur non reconnu ?\n\nRetourne dans ton espace client ou sur ton propre serveur. Vérifie que tu as choisi le bon type d’accès (M3U, Xtream, Stalker si proposé, ou Plex, Emby ou Jellyfin). Saisis l’adresse, le nom d’utilisateur et le mot de passe uniquement dans l’application. Le bot ne fournit aucune chaîne ni aucun accès. N’envoie pas tes identifiants ici.\n\nNuvio : si ta version KDTIVI propose « Nuvio Login » ou « Sync », utilise ton compte Nuvio dans cette fenêtre. Cette connexion est distincte de ton accès IPTV et de tes identifiants Stremio.",
+            "text": "🔑 Source IPTV ou serveur non reconnu ?\n\nRetourne dans ton espace client ou sur ton propre serveur. Vérifie que tu as choisi le bon type d’accès (M3U, Xtream, Stalker si proposé, ou Plex, Emby ou Jellyfin). Saisis l’adresse, le nom d’utilisateur et le mot de passe uniquement dans l’application. Ce site ne fournit aucune chaîne ni aucun accès. N’envoie pas tes identifiants ici.\n\nNuvio : si ta version KDTIVI propose « Nuvio Login » ou « Sync », utilise ton compte Nuvio dans cette fenêtre. Cette connexion est distincte de ton accès IPTV et de tes identifiants Stremio.",
             "links": []
           },
           {
@@ -7452,7 +7452,7 @@
         "apple_tv": [
           [
             "🍎 App Store · KDTIVI",
-            "https://apps.apple.com/no/app/kdtivi-unify-iptv-vod/id6754769190?platform=tv"
+            "https://kdtapps.com/kdtivi"
           ],
           [
             "🌐 Site officiel KDT Apps",
@@ -7482,7 +7482,7 @@
         "iphone": [
           [
             "🍎 App Store · KDTIVI",
-            "https://apps.apple.com/no/app/kdtivi-unify-iptv-vod/id6754769190?platform=iphone"
+            "https://kdtapps.com/kdtivi"
           ],
           [
             "🌐 Site officiel KDT Apps",
@@ -7492,7 +7492,7 @@
         "ipad": [
           [
             "🍎 App Store · KDTIVI",
-            "https://apps.apple.com/no/app/kdtivi-unify-iptv-vod/id6754769190?platform=ipad"
+            "https://kdtapps.com/kdtivi"
           ],
           [
             "🌐 Site officiel KDT Apps",
@@ -7508,7 +7508,7 @@
       "nuvio_integration": {
         "status": "beta",
         "label": "Connexion Nuvio bêta",
-        "source": "https://apps.apple.com/no/app/kdtivi-unify-iptv-vod/id6754769190?platform=tv"
+        "source": "https://kdtapps.com/kdtivi"
       },
       "integration_notes": {
         "iptv": "Fonction principale : Live/TV via M3U, M3U8 ou Xtream selon la version et la source autorisée.",
@@ -7563,8 +7563,8 @@
       "publisher_type": "independent",
       "prerequisites": "Android TV/Google TV/Fire OS compatible ; accès personnel légal M3U, Xtream Codes ou Stalker. Certaines fonctions exigent EPG, stockage et réseau adaptés. Clés TMDB/OMDb facultatives.",
       "downloader_code": "4200542",
-      "code_source_status": "code confirmé par l’administrateur",
-      "code_target_status": "confirmé par l’administrateur",
+      "code_source_status": "code fourni par l’administrateur; à recontrôler avant publication",
+      "code_target_status": "fourni par l’administrateur; à recontrôler avant publication",
       "platform_support": {
         "android_tv": {
           "status": "publisher_claim_unverified",
@@ -7632,7 +7632,7 @@
               {
                 "title": "Autorise l’installation du fichier",
                 "body": "Sur la TV : Paramètres → Applications → Accès spécial (ou Sécurité et restrictions) → Installer des applications inconnues → Downloader → Autoriser. Les noms peuvent varier selon ton modèle Android TV / Google TV.",
-                "url": "https://support.google.com/androidtv/",
+                "url": "https://support.google.com/googletv/?hl=fr",
                 "image": "assets/guides/downloader/android_tv/v57_02.jpg",
                 "links": []
               },
@@ -7705,7 +7705,7 @@
               {
                 "title": "Autorise l’installation du fichier",
                 "body": "Sur la Fire TV : Paramètres → Ma Fire TV → Options pour les développeurs → Installer des applications inconnues → Downloader → Autoriser. Si « Options pour les développeurs » est absent : Ma Fire TV → À propos, puis appuie 7 fois sur le nom du modèle. Cette méthode concerne Fire OS, pas Vega OS.",
-                "url": "https://www.aftvnews.com/how-to-sideload-apps-on-the-fire-tv/",
+                "url": "https://www.aftvnews.com/downloader/",
                 "image": "assets/guides/downloader/fire_tv/v57_02.jpg",
                 "links": []
               },
@@ -7820,7 +7820,7 @@
             "steps": [
               {
                 "title": "Retrouve le type de ton accès",
-                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\n• Portail Stalker : accès explicitement indiqué par le fournisseur.\nQuand tu l’as trouvé, touche « Autre type de source ». Dans ce bot, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
+                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\n• Portail Stalker : accès explicitement indiqué par le fournisseur.\nQuand tu l’as trouvé, touche « Autre type de source ». Sur ce site, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
                 "links": []
               }
             ]
@@ -7913,7 +7913,7 @@
             "steps": [
               {
                 "title": "Retrouve le type de ton accès",
-                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\n• Portail Stalker : accès explicitement indiqué par le fournisseur.\nQuand tu l’as trouvé, touche « Autre type de source ». Dans ce bot, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
+                "body": "Ouvre le courriel ou l’espace client de ton fournisseur.\n• M3U : lien ou fichier .m3u.\n• Xtream : adresse du serveur, identifiant et mot de passe.\n• Portail Stalker : accès explicitement indiqué par le fournisseur.\nQuand tu l’as trouvé, touche « Autre type de source ». Sur ce site, aucune chaîne ni aucun accès n’est fourni ; ne partage pas tes identifiants ici.",
                 "links": []
               }
             ]
@@ -7940,7 +7940,7 @@
             "links": [
               [
                 "📋 Instructions Android TV",
-                "https://support.google.com/androidtv/answer/12188351?hl=fr"
+                "https://support.google.com/googletv/?hl=fr"
               ]
             ]
           },
@@ -8131,7 +8131,7 @@
               },
               {
                 "title": "Ouvre l’application",
-                "body": "Lance Fjord. Pour ajouter ensuite ta source M3U/M3U8 ou Xtream, reviens au bot et choisis « Configurer ». Fjord ne fournit ni chaîne ni abonnement.",
+                "body": "Lance Fjord. Pour ajouter ensuite ta source M3U/M3U8 ou Xtream, reviens à cette fiche et choisis « Configurer ». Fjord ne fournit ni chaîne ni abonnement.",
                 "links": []
               }
             ]
@@ -8155,7 +8155,7 @@
               },
               {
                 "title": "Ouvre l’application",
-                "body": "Lance Fjord. Pour ajouter ensuite ta source M3U/M3U8 ou Xtream, reviens au bot et choisis « Configurer ». Fjord ne fournit ni chaîne ni abonnement.",
+                "body": "Lance Fjord. Pour ajouter ensuite ta source M3U/M3U8 ou Xtream, reviens à cette fiche et choisis « Configurer ». Fjord ne fournit ni chaîne ni abonnement.",
                 "links": []
               }
             ]
@@ -8179,7 +8179,7 @@
               },
               {
                 "title": "Ouvre l’application",
-                "body": "Lance Fjord. Pour ajouter ensuite ta source M3U/M3U8 ou Xtream, reviens au bot et choisis « Configurer ». Fjord ne fournit ni chaîne ni abonnement.",
+                "body": "Lance Fjord. Pour ajouter ensuite ta source M3U/M3U8 ou Xtream, reviens à cette fiche et choisis « Configurer ». Fjord ne fournit ni chaîne ni abonnement.",
                 "links": []
               }
             ]
@@ -8203,7 +8203,7 @@
               },
               {
                 "title": "Ouvre l’application",
-                "body": "Lance Fjord. Pour ajouter ensuite ta source M3U/M3U8 ou Xtream, reviens au bot et choisis « Configurer ». Fjord ne fournit ni chaîne ni abonnement.",
+                "body": "Lance Fjord. Pour ajouter ensuite ta source M3U/M3U8 ou Xtream, reviens à cette fiche et choisis « Configurer ». Fjord ne fournit ni chaîne ni abonnement.",
                 "links": []
               }
             ]
@@ -8726,7 +8726,7 @@
               {
                 "title": "Installe le fichier APK",
                 "body": "Quand Android le demande, autorise temporairement l’installation depuis le navigateur ou le gestionnaire de fichiers utilisé, puis désactive cette autorisation après l’installation.",
-                "url": "https://support.google.com/androidtv/",
+                "url": "https://support.google.com/googletv/?hl=fr",
                 "links": []
               },
               {
@@ -8751,7 +8751,7 @@
               {
                 "title": "Installe le fichier APK",
                 "body": "Quand Android le demande, autorise temporairement l’installation depuis le navigateur ou le gestionnaire de fichiers utilisé, puis désactive cette autorisation après l’installation.",
-                "url": "https://support.google.com/androidtv/",
+                "url": "https://support.google.com/googletv/?hl=fr",
                 "links": []
               },
               {
@@ -8776,7 +8776,7 @@
               {
                 "title": "Installe le fichier APK",
                 "body": "Sur Android TV/Google TV, autorise l’installation pour l’application qui ouvre le fichier : Paramètres → Applications → Accès spécial → Installer des applications inconnues. Les intitulés varient selon la marque.",
-                "url": "https://support.google.com/androidtv/",
+                "url": "https://support.google.com/googletv/?hl=fr",
                 "links": []
               },
               {
@@ -9030,7 +9030,7 @@
           {
             "id": "install",
             "label": "🚫 Installation refusée",
-            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée par le bot. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
+            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée dans cette fiche. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
             "links": [
               [
                 "📂 APK et releases du développeur",
@@ -9066,7 +9066,7 @@
           {
             "id": "install",
             "label": "🚫 Installation refusée",
-            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée par le bot. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
+            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée dans cette fiche. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
             "links": [
               [
                 "📂 APK et releases du développeur",
@@ -9095,7 +9095,7 @@
             "links": [
               [
                 "📋 Instructions Android TV",
-                "https://support.google.com/androidtv/answer/12188351?hl=fr"
+                "https://support.google.com/googletv/?hl=fr"
               ]
             ]
           },
@@ -9149,7 +9149,7 @@
           {
             "id": "install",
             "label": "🚫 Installation refusée",
-            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée par le bot. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
+            "text": "🛠️ Installation bloquée ?\n\nVérifie la compatibilité de ton appareil, la source du fichier et l’espace libre. Reviens à la méthode officielle indiquée dans cette fiche. En cas d’alerte de sécurité, arrête-toi plutôt que de forcer l’installation.",
             "links": [
               [
                 "💻 Nyx Player · releases officielles",

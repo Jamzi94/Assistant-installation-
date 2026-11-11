@@ -1,6 +1,6 @@
 # Données du site
 
-`site-data.json` est un instantané public construit à partir du catalogue, des tutoriels et des médias de l’Assistant Installation V5.7. `generated_at` indique la date de l’export; `refresh_policy` rappelle que les releases, les stores et les pages éditeur ne sont pas surveillés automatiquement.
+`site-data.json` est un instantané public construit à partir du catalogue, des tutoriels et des médias de l’Assistant Installation V5.7. `generated_at` indique la date de l’export; `refresh_policy` rappelle que les releases, les stores et les pages éditeur ne sont pas surveillés automatiquement. Les corrections de liens et l’état de fraîcheur sont suivis dans [`AUDIT_ACTUALISATION_2026-11-11.md`](../AUDIT_ACTUALISATION_2026-11-11.md).
 
 ## Mise à jour reproductible
 
