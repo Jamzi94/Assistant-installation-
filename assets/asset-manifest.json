@@ -1,9 +1,11 @@
 {
-  "generated_at": "2026-11-10",
+  "generated_at": "2026-11-11",
   "policy": "Les illustrations pédagogiques sont affichées avec leur statut. Les icônes applicatives et de stores sont locales, sourcées et ne remplacent pas les libellés textuels.",
   "assets": [
     {"prefix":"assets/guides/","kind":"instructional_illustration","source":"assistant-installation-v5.7-experience-pro/assets/guides/","license_status":"source project asset; verify redistribution terms before public publication","redistribution_allowed":false,"usage":"display with the label: Illustration pédagogique — pas une capture d’écran"},
     {"path":"assets/mark.svg","kind":"brand_mark","source":"Assistant Installation web project","license_status":"original project mark","redistribution_allowed":true},
+    {"prefix":"assets/methods/stremio/","kind":"instructional_illustration","source":"Archive V7; individual origin/license metadata not supplied","license_status":"verify ownership and redistribution rights before public publication","redistribution_allowed":false,"usage":"Inherited assets only (except the separately listed original SVG). Display only when matching the step. PAL step-2 iPhone/iPad images and PAL step-1 iPad image are hidden after the 2026-11-11 audit because they may misstate the action or region support."},
+    {"path":"assets/methods/stremio/pal-download.svg","kind":"original_instructional_illustration","source":"Created for this V7 correction on 2026-11-11","license_status":"original project asset","redistribution_allowed":true,"usage":"Browser page and Download action for the AltStore PAL installation step; not an official screenshot."},
     {"path":"assets/app-icons/nuvio.png","kind":"publisher_app_icon","source":"https://www.nuvio.tv/","license_status":"publisher asset; keep attribution and verify redistribution terms","redistribution_allowed":false},
     {"path":"assets/app-icons/stremio.png","kind":"publisher_app_icon","source":"https://www.stremio.com/downloads","license_status":"publisher asset; keep attribution and verify redistribution terms","redistribution_allowed":false},
     {"path":"assets/app-icons/kdtivi.png","kind":"publisher_app_icon","source":"https://kdtapps.com/kdtivi","license_status":"publisher asset; keep attribution and verify redistribution terms","redistribution_allowed":false},

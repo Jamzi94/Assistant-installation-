@@ -15,6 +15,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlsplit
 
+try:
+    from .stremio_publication import apply_stremio_overrides, validate_stremio_overrides
+except ImportError:
+    from stremio_publication import apply_stremio_overrides, validate_stremio_overrides
+
 
 def json_safe(value):
     if isinstance(value, dict):
@@ -27,7 +32,7 @@ def json_safe(value):
 
 
 def clean_step(step: dict) -> dict:
-    clean = {key: step[key] for key in ('title', 'body', 'url', 'video', 'image', 'links') if step.get(key)}
+    clean = {key: step[key] for key in ('title', 'body', 'url', 'url_label', 'video', 'image', 'image_alt', 'links', 'substeps') if step.get(key)}
     if clean.get('url') and urlsplit(clean['url']).scheme != 'https':
         clean.pop('url', None)
     if clean.get('image') and isinstance(clean['image'], str):
@@ -196,7 +201,7 @@ def main() -> int:
             continue
         videos_out.append({key: json_safe(video[key]) for key in (
             'id', 'title', 'creator', 'lang', 'published', 'url', 'apps', 'devices',
-            'topics', 'disclaimer', 'verification_status'
+            'topics', 'method_ids', 'disclaimer', 'verification_status'
         ) if key in video})
 
     payload = {
@@ -214,6 +219,8 @@ def main() -> int:
         'video_checked_on': json.loads(video_path.read_text(encoding='utf-8')).get('checked_on'),
         'video_verification_method': json.loads(video_path.read_text(encoding='utf-8')).get('verification_method'),
     }
+    apply_stremio_overrides(payload)
+    validate_stremio_overrides(payload)
     output = Path(__file__).resolve().parents[1] / 'data' / 'site-data.json'
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')

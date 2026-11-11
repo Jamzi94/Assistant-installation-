@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
-p=Path('/home/ubuntu/installv57_audit/data/site-data.json')
+from datetime import datetime, timezone
+p=Path(__file__).resolve().parents[1] / 'data' / 'site-data.json'
 d=json.loads(p.read_text())
 k=d['apps']['kdtivi']
 
@@ -44,6 +45,6 @@ for dev, options in k['configure'].items():
     k['configure'][dev]=sorted(by.values(),key=lambda x: priority.index(x['id']) if x['id'] in priority else 99)
 
 k['integration_notes']['qr'] = 'QR/code confirmé pour associer une TV ou Apple TV au compte KDTIVI et gérer playlists/profils depuis le dashboard. Aucun QR Nuvio ou Stremio confirmé.'
-d['generated_at']='2026-11-11T00:22:00+00:00'
+d['generated_at']=datetime.now(timezone.utc).isoformat(timespec='seconds')
 p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n')
 print('KDTIVI QR guides added')

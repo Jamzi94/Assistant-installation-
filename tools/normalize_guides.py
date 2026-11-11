@@ -1,7 +1,8 @@
 import json
 from pathlib import Path
+from datetime import datetime, timezone
 
-p = Path('/home/ubuntu/installv57_audit/data/site-data.json')
+p = Path(__file__).resolve().parents[1] / 'data' / 'site-data.json'
 d = json.loads(p.read_text())
 
 # Textes de sécurité utiles, mais sans répétitions de bot/chat/Telegram.
@@ -144,6 +145,6 @@ for app in d.get('apps', {}).values():
     # avoid re-cleaning metadata keys
     app.update(scrub(app))
 
-d['generated_at'] = '2026-11-11T00:20:00+00:00'
+d['generated_at'] = datetime.now(timezone.utc).isoformat(timespec='seconds')
 p.write_text(json.dumps(d, ensure_ascii=False, indent=2) + '\n')
 print('normalized', len(d['apps']), 'apps')

@@ -47,13 +47,20 @@ function el(tag, className = '', text = '') {
 function readUrlState() {
   const query = new URLSearchParams(window.location.search);
   const tab = query.get('tab') || 'overview';
+  const rawStep = Math.max(0, Number.parseInt(query.get('step') || '0', 10) || 0);
+  const legacyPalLink = query.get('app') === 'stremio'
+    && ['iphone', 'ipad'].includes(query.get('device') || '')
+    && (query.get('method') || 'pal') === 'pal'
+    && (query.get('tab') || 'overview') === 'install'
+    && !query.has('gv') && rawStep >= 4;
+  const step = legacyPalLink ? rawStep + 1 : rawStep;
   return {
     device: query.get('device') || '',
     app: query.get('app') || '',
     tab: VALID_TABS.has(tab) ? tab : 'overview',
     method: query.get('method') || '',
     config: query.get('config') || '',
-    step: Math.max(0, Number.parseInt(query.get('step') || '0', 10) || 0),
+    step,
     completed: query.get('done') === '1',
     service: query.get('service') || '',
     q: query.get('q') || '',
@@ -66,6 +73,7 @@ function syncUrl(push = true) {
   if (state.app) query.set('app', state.app);
   if (state.app && state.tab !== 'overview') query.set('tab', state.tab);
   if (state.method && state.tab === 'install') query.set('method', state.method);
+  if (state.app === 'stremio' && state.method === 'pal' && state.tab === 'install') query.set('gv', '2');
   if (state.config && state.tab === 'configure') query.set('config', state.config);
   if (state.step > 0 && (state.tab === 'install' || state.tab === 'configure')) query.set('step', String(state.step));
   if (state.completed && (state.tab === 'install' || state.tab === 'configure')) query.set('done', '1');
@@ -324,12 +332,23 @@ function appVisual(appId, app, { large = false } = {}) {
 }
 
 function readLastGuide() {
-  try { return JSON.parse(localStorage.getItem('assistant-installation:last-guide') || 'null'); } catch { return null; }
+  try {
+    const last = JSON.parse(localStorage.getItem('assistant-installation:last-guide') || 'null');
+    if (last?.app === 'stremio' && ['iphone', 'ipad'].includes(last.device)
+        && last.tab === 'install' && (!last.method || last.method === 'pal')
+        && !last.guideVersion && Number(last.step) >= 4) {
+      last.step = Number(last.step) + 1;
+      last.method = 'pal';
+      last.guideVersion = 2;
+      localStorage.setItem('assistant-installation:last-guide', JSON.stringify(last));
+    }
+    return last;
+  } catch { return null; }
 }
 
 function saveLastGuide() {
   if (!state.app) return;
-  try { localStorage.setItem('assistant-installation:last-guide', JSON.stringify({ app: state.app, device: state.device, tab: state.tab, step: state.step, completed: state.completed })); } catch { /* storage unavailable */ }
+  try { localStorage.setItem('assistant-installation:last-guide', JSON.stringify({ app: state.app, device: state.device, tab: state.tab, method: state.method, config: state.config, step: state.step, completed: state.completed, guideVersion: state.app === 'stremio' && state.method === 'pal' ? 2 : 1 })); } catch { /* storage unavailable */ }
 }
 
 function renderSmartPanel() {
@@ -728,11 +747,16 @@ function renderGuidedSteps(parent, steps, kind) {
   const content = el('div', 'guide-content');
   content.append(el('h4', '', step.title || `Étape ${index + 1}`));
   content.append(el('p', '', step.body || 'Suivez les instructions affichées par l’application.'));
+  if (Array.isArray(step.substeps) && step.substeps.length) {
+    const list = el('ol', 'guide-substeps');
+    for (const substep of step.substeps) list.append(el('li', '', substep));
+    content.append(list);
+  }
   if (step.image) {
     const figure = el('figure', 'step-visual');
     const image = el('img');
     image.src = step.image.startsWith('assets/') ? `./${step.image}` : step.image;
-    image.alt = 'Illustration pédagogique de cette étape — pas une capture d’écran';
+    image.alt = step.image_alt || 'Illustration pédagogique de cette étape — pas une capture d’écran';
     image.loading = 'lazy';
     image.decoding = 'async';
     image.addEventListener('error', () => figure.replaceChildren(el('figcaption', 'media-fallback', 'Illustration temporairement indisponible')), { once: true });
@@ -757,7 +781,7 @@ function renderGuidedSteps(parent, steps, kind) {
 
   const actionLinks = el('div', 'step-links');
   const sourceApp = data.apps[state.app];
-  if (step.url) addExternalLink(actionLinks, 'Ouvrir la page liée à cette étape', step.url, sourceApp, { compact: true });
+  if (step.url) addExternalLink(actionLinks, step.url_label || 'Ouvrir la page liée à cette étape', step.url, sourceApp, { compact: true });
   for (const [label, url] of step.links || []) addExternalLink(actionLinks, label, url, sourceApp, { compact: true });
   if (actionLinks.childNodes.length) parent.append(actionLinks);
 
@@ -843,7 +867,11 @@ function appendMedia(parent, app) {
     parent.append(section);
   }
 
-  const videos = (data.videos || []).filter((video) => (video.apps || []).includes(state.app) && (video.devices || []).includes(state.device));
+  const videos = (data.videos || []).filter((video) =>
+    (video.apps || []).includes(state.app)
+    && (video.devices || []).includes(state.device)
+    && (!Array.isArray(video.method_ids) || (state.tab === 'install' && video.method_ids.includes(state.method)))
+  );
   if (videos.length) {
     const section = el('section', 'media-section');
     section.append(el('h3', '', 'Vidéos associées'));
@@ -1014,7 +1042,7 @@ function onClick(event) {
   } else if (action === 'resume-last') {
     const last = readLastGuide();
     const app = data.apps[control.dataset.app];
-    if (app) setState({ device: control.dataset.device, app: control.dataset.app, tab: last?.tab || 'install', method: app.install?.[control.dataset.device]?.[0]?.id || '', config: app.configure?.[control.dataset.device]?.[0]?.id || '', step: last?.step || 0, completed: Boolean(last?.completed) }, { scroll: true });
+    if (app) setState({ device: control.dataset.device, app: control.dataset.app, tab: last?.tab || 'install', method: last?.method || app.install?.[control.dataset.device]?.[0]?.id || '', config: last?.config || app.configure?.[control.dataset.device]?.[0]?.id || '', step: last?.step || 0, completed: Boolean(last?.completed) }, { scroll: true });
   } else if (action === 'open-app') {
     const appId = control.dataset.app;
     const app = data.apps[appId];

@@ -599,3 +599,21 @@ main { overflow: clip; }
   .choice-button { width: 100%; min-height: 46px; }
   .choice-button.is-recommended-choice { order: -1; }
 }
+
+
+/* Numbered sub-actions inside a guide step (e.g. PAL source addition). */
+.guide-substeps {
+  display: grid;
+  gap: 10px;
+  max-width: 850px;
+  margin: 16px 0 0;
+  padding-left: 1.55rem;
+  color: #34463c;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.guide-substeps li { padding-left: 4px; }
+.guide-substeps li::marker { color: var(--green-2); font-weight: 800; }
+@media (max-width: 680px) {
+  .guide-substeps { gap: 12px; font-size: 14px; }
+}

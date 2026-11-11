@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-11T00:59:00+00:00",
+  "generated_at": "2026-11-11T02:05:07+00:00",
   "source_version": "Assistant Installation V5.7",
   "refresh_policy": "Données exportées à la date de génération; aucune actualisation automatique n’est promise.",
   "devices": {
@@ -3776,74 +3776,108 @@
             "label": "✅ AltStore PAL (régions éligibles)",
             "steps": [
               {
-                "title": "Vérifie que tu peux utiliser AltStore PAL",
-                "body": "Il faut iOS/iPadOS 18 ou plus, être physiquement dans l’Union européenne, au Japon ou au Brésil ET utiliser un compte App Store de la région correspondante. Sinon choisis Stremio Web.",
-                "url": "https://altstore.io/download",
+                "title": "Vérifie l’éligibilité de ton appareil",
+                "body": "Pour iPhone, il faut iOS 18 ou plus, être physiquement dans l’Union européenne, au Japon ou au Brésil, et utiliser un compte App Store de la région correspondante. Si une condition manque, choisis Stremio Web.",
                 "image": "assets/methods/stremio/iphone/pal/01.jpg",
-                "links": []
+                "links": [
+                  [
+                    "Annonce Stremio · Europe et Japon",
+                    "https://blog.stremio.com/stremio-released-on-apple-altstore-for-europe-and-japan/"
+                  ],
+                  [
+                    "Annonce Stremio · Brésil",
+                    "https://blog.stremio.com/stremio-released-on-apple-altstore-for-brazil/"
+                  ]
+                ]
               },
               {
                 "title": "Télécharge AltStore PAL",
-                "body": "Sur l’iPhone/iPad, ouvre le site officiel AltStore avec Safari, Chrome ou Vivaldi. Appuie sur « Download ».",
+                "body": "Sur ton iPhone ou iPad, saisis altstore.io/download dans Safari, Chrome ou Vivaldi, puis touche « Download ». Cela télécharge la place de marché; confirme son installation à l’étape 4.",
                 "url": "https://altstore.io/download",
-                "image": "assets/methods/stremio/iphone/pal/02.jpg",
-                "links": []
+                "links": [],
+                "url_label": "Télécharger AltStore PAL · site officiel",
+                "image_alt": "Illustration : page altstore.io dans un navigateur, bouton Download, puis téléchargement sur un appareil mobile.",
+                "image": "assets/methods/stremio/pal-download.svg"
               },
               {
                 "title": "Autorise la place de marché",
-                "body": "Si un message apparaît, ouvre Réglages puis « Autoriser la place de marché AltStore LLC ». Reviens au site AltStore et appuie de nouveau sur « Download ».",
-                "url": "https://altstore.io/download",
+                "body": "Si iOS/iPadOS affiche une demande, ouvre Réglages et autorise « Marketplace From AltStore LLC » (le libellé peut varier selon la langue). Reviens ensuite à l’onglet AltStore du navigateur et touche « Download » une seconde fois. Ne quitte pas la page avant la fin de cette autorisation.",
                 "image": "assets/methods/stremio/iphone/pal/03.jpg",
                 "links": []
               },
               {
-                "title": "Installe AltStore PAL",
-                "body": "Après l’autorisation, valide « Installer la place de marché ». Ouvre AltStore PAL sur ton iPhone/iPad.",
-                "url": "https://altstore.io/download",
+                "title": "Confirme l’installation d’AltStore PAL",
+                "body": "Dans l’alerte d’installation qui suit, confirme « Install App Marketplace » ou son équivalent localisé. Attends que l’icône AltStore PAL apparaisse sur l’écran d’accueil.",
                 "image": "assets/methods/stremio/iphone/pal/04.jpg",
                 "links": []
               },
               {
-                "title": "Installe Stremio dans AltStore PAL",
-                "body": "Dans AltStore PAL, recherche « Stremio », vérifie l’éditeur, puis lance l’installation. Si tu ne trouves pas l’application, ouvre l’annonce officielle ci-dessous pour le lien de la source. Ne confonds pas AltStore PAL et AltStore Classic.",
-                "url": "https://blog.stremio.com/stremio-released-on-apple-altstore-for-europe-and-japan/",
+                "title": "Ajoute la source officielle Stremio",
+                "body": "La recherche dans AltStore PAL suffit si Stremio est déjà visible. Si la fiche Stremio manque, ajoute la source officielle à l’aide du lien ci-dessous. Le lien ouvre AltStore Preview; il faut confirmer « Add Source ». Cela ajoute la source, mais n’installe pas encore Stremio.",
                 "image": "assets/methods/stremio/iphone/pal/05.jpg",
+                "links": [
+                  [
+                    "Source officielle Stremio pour AltStore PAL",
+                    "https://altstore.io/source/dl.strem.io/apple/altstore/source.json?app=com.stremio.pal"
+                  ]
+                ],
+                "substeps": [
+                  "Ouvre AltStore PAL et cherche « Stremio » dans Browse; vérifie que l’éditeur affiché est Stremio.",
+                  "Si l’app est absente, touche le lien officiel ci-dessus. Dans AltStore Preview, confirme « Add Source ».",
+                  "Retourne dans AltStore PAL et recherche Stremio de nouveau. Passe à l’étape 6 pour installer l’app."
+                ]
+              },
+              {
+                "title": "Installe Stremio dans AltStore PAL",
+                "body": "Dans AltStore PAL, ouvre la fiche Stremio publiée par Stremio et lance l’installation. Confirme les écrans demandés par PAL, puis attends la fin. Si l’éditeur n’est pas Stremio ou si l’installation ne correspond pas à l’app attendue, annule et ne télécharge pas d’IPA depuis un tiers.",
+                "image": "assets/methods/stremio/iphone/pal/06.jpg",
                 "links": []
               },
               {
                 "title": "Ouvre Stremio",
-                "body": "Connecte-toi à ton compte Stremio et teste une source à laquelle tu as légalement accès. N’envoie jamais ton mot de passe au bot.",
-                "url": "https://www.stremio.com/downloads",
-                "image": "assets/methods/stremio/iphone/pal/06.jpg",
+                "body": "Après l’installation, ouvre Stremio depuis l’écran d’accueil. Connecte-toi à ton compte Stremio et teste un contenu auquel tu as légalement accès. Ne partage jamais ton mot de passe.",
                 "links": []
               }
             ]
           },
           {
             "id": "classic_info",
-            "label": "🧰 IPA et AltStore Classic (avancé)",
+            "label": "⚠️ AltStore Classic — IPA officielle Stremio requise",
             "steps": [
               {
-                "title": "Commence par vérifier le fichier IPA",
-                "body": "Stremio a annoncé une IPA officielle pour iPhone et iPad, mais le lien de téléchargement peut ne pas apparaître sur la page actuelle. Vérifie sur le site de Stremio que le fichier est bien pour iOS/iPadOS avant toute installation : pas d’IPA de source inconnue.",
+                "title": "Vérifie qu’une IPA Stremio officielle est publiée",
+                "body": "Au contrôle du 11 novembre 2026, la page de téléchargements Stremio présente l’option iOS PAL et Stremio Web, mais aucun fichier IPA iOS/iPadOS autonome à télécharger. Ne continue que si une IPA est effectivement publiée par Stremio sur sa page officielle au moment de l’installation. Sinon, arrête le parcours et choisis AltStore PAL si tu es éligible, ou Stremio Web. N’utilise jamais une IPA d’un site tiers.",
                 "url": "https://www.stremio.com/downloads",
                 "image": "assets/methods/stremio/iphone/classic_info/01.jpg",
-                "links": []
+                "links": [],
+                "url_label": "Vérifier les téléchargements Stremio officiels"
               },
               {
-                "title": "Installe AltStore Classic sur ton iPhone",
-                "body": "Avec une IPA pour iOS/iPadOS provenant de Stremio, installe AltServer sur un PC Windows ou un Mac, puis suis les instructions officielles pour installer AltStore Classic sur ton appareil.",
-                "url": "https://faq.altstore.io/altstore-classic/how-to-install-altstore-windows",
+                "title": "Installe AltStore Classic sur ton iPhone/iPad depuis un ordinateur",
+                "body": "Cette étape n’est utile qu’après avoir vérifié l’existence d’une IPA officielle. AltServer doit être installé sur un PC Windows ou un Mac; choisis uniquement le tutoriel correspondant à ton ordinateur. Les instructions Windows et macOS ne sont pas interchangeables.",
                 "video": "https://www.youtube.com/watch?v=878V4TZ1LxA",
                 "image": "assets/methods/stremio/iphone/classic_info/02.jpg",
-                "links": []
+                "links": [
+                  [
+                    "AltStore Classic · guide Windows",
+                    "https://faq.altstore.io/altstore-classic/how-to-install-altstore-windows"
+                  ],
+                  [
+                    "AltStore Classic · guide macOS",
+                    "https://faq.altstore.io/altstore-classic/how-to-install-altstore-macos"
+                  ]
+                ]
               },
               {
-                "title": "Installe l’IPA puis renouvelle si nécessaire",
-                "body": "Dans AltStore Classic, utilise « My Apps » puis + pour choisir l’IPA officielle. Avec un compte Apple gratuit, il faut généralement actualiser l’application tous les 7 jours. Pour une installation simple, choisis plutôt Stremio Web ou AltStore PAL.",
-                "url": "https://faq.altstore.io/altstore-classic/how-to-install-altstore-macos",
+                "title": "Ajoute l’IPA officielle depuis My Apps",
+                "body": "Sur l’appareil, ouvre AltStore Classic, va dans « My Apps », touche « + » et sélectionne uniquement l’IPA Stremio publiée officiellement. Avec un compte Apple gratuit, les apps sideloadées demandent un rafraîchissement périodique (souvent tous les 7 jours); vérifie la limite actuelle dans la FAQ AltStore. Sans IPA officielle disponible, n’effectue pas cette étape.",
                 "image": "assets/methods/stremio/iphone/classic_info/03.jpg",
-                "links": []
+                "links": [
+                  [
+                    "AltStore Classic · fonctionnement de My Apps",
+                    "https://faq.altstore.io/altstore-classic/your-altstore"
+                  ]
+                ]
               }
             ]
           },
@@ -3853,22 +3887,21 @@
             "steps": [
               {
                 "title": "Ouvre Stremio Web",
-                "body": "Sur ton iPhone ou ton iPad, touche le lien Stremio Web. Aucune application à installer : ouvre le site dans Safari.",
+                "body": "Sur ton iPhone ou iPad, touche le bouton ci-dessous pour ouvrir Stremio Web dans le navigateur. Aucune application n’est à installer; cette version Web peut avoir des limites sur iOS/iPadOS.",
                 "url": "https://web.stremio.com/",
                 "image": "assets/methods/stremio/iphone/web/01.jpg",
-                "links": []
+                "links": [],
+                "url_label": "Ouvrir Stremio Web"
               },
               {
-                "title": "Connecte-toi",
-                "body": "Sur le site Stremio, connecte-toi à ton compte. La version Web sur iOS a des limites de lecture et de fonctionnalités : ce n’est pas la même chose que l’application complète.",
-                "url": "https://web.stremio.com/",
+                "title": "Connecte-toi à ton compte Stremio",
+                "body": "Sur Stremio Web, connecte-toi à ton compte. Les menus et la lecture peuvent différer de l’application complète; si une fonction manque, vérifie la documentation officielle avant de changer de méthode.",
                 "image": "assets/methods/stremio/iphone/web/02.jpg",
                 "links": []
               },
               {
-                "title": "Garde un accès rapide",
-                "body": "Facultatif : dans Safari, touche Partager puis « Sur l’écran d’accueil ». Si la lecture ne fonctionne pas, essaie la version complète via AltStore PAL si ton appareil est éligible.",
-                "url": "https://web.stremio.com/",
+                "title": "Crée un accès rapide (facultatif)",
+                "body": "Dans Safari, touche Partager puis « Sur l’écran d’accueil » si tu veux un raccourci. Si une lecture ou une fonction n’est pas disponible, reviens au choix des méthodes et vérifie l’éligibilité PAL; ne télécharge pas d’IPA depuis un site tiers.",
                 "image": "assets/methods/stremio/iphone/web/03.jpg",
                 "links": []
               }
@@ -3881,74 +3914,107 @@
             "label": "✅ AltStore PAL (régions éligibles)",
             "steps": [
               {
-                "title": "Vérifie que tu peux utiliser AltStore PAL",
-                "body": "Il faut iOS/iPadOS 18 ou plus, être physiquement dans l’Union européenne, au Japon ou au Brésil ET utiliser un compte App Store de la région correspondante. Sinon choisis Stremio Web.",
-                "url": "https://altstore.io/download",
-                "image": "assets/methods/stremio/ipad/pal/01.jpg",
-                "links": []
+                "title": "Vérifie l’éligibilité de ton appareil",
+                "body": "Pour installer Stremio sur iPad via PAL, il faut iPadOS 18 ou plus, être physiquement dans l’Union européenne et utiliser un compte App Store de l’UE. Stremio ne propose pas son app PAL pour iPad au Japon ni au Brésil. Sinon, choisis Stremio Web.",
+                "links": [
+                  [
+                    "Annonce Stremio · Europe et Japon",
+                    "https://blog.stremio.com/stremio-released-on-apple-altstore-for-europe-and-japan/"
+                  ],
+                  [
+                    "Annonce Stremio · Brésil",
+                    "https://blog.stremio.com/stremio-released-on-apple-altstore-for-brazil/"
+                  ]
+                ]
               },
               {
                 "title": "Télécharge AltStore PAL",
-                "body": "Sur l’iPhone/iPad, ouvre le site officiel AltStore avec Safari, Chrome ou Vivaldi. Appuie sur « Download ».",
+                "body": "Sur ton iPhone ou iPad, saisis altstore.io/download dans Safari, Chrome ou Vivaldi, puis touche « Download ». Cela télécharge la place de marché; confirme son installation à l’étape 4.",
                 "url": "https://altstore.io/download",
-                "image": "assets/methods/stremio/ipad/pal/02.jpg",
-                "links": []
+                "links": [],
+                "url_label": "Télécharger AltStore PAL · site officiel",
+                "image_alt": "Illustration : page altstore.io dans un navigateur, bouton Download, puis téléchargement sur un appareil mobile.",
+                "image": "assets/methods/stremio/pal-download.svg"
               },
               {
                 "title": "Autorise la place de marché",
-                "body": "Si un message apparaît, ouvre Réglages puis « Autoriser la place de marché AltStore LLC ». Reviens au site AltStore et appuie de nouveau sur « Download ».",
-                "url": "https://altstore.io/download",
+                "body": "Si iOS/iPadOS affiche une demande, ouvre Réglages et autorise « Marketplace From AltStore LLC » (le libellé peut varier selon la langue). Reviens ensuite à l’onglet AltStore du navigateur et touche « Download » une seconde fois. Ne quitte pas la page avant la fin de cette autorisation.",
                 "image": "assets/methods/stremio/ipad/pal/03.jpg",
                 "links": []
               },
               {
-                "title": "Installe AltStore PAL",
-                "body": "Après l’autorisation, valide « Installer la place de marché ». Ouvre AltStore PAL sur ton iPhone/iPad.",
-                "url": "https://altstore.io/download",
+                "title": "Confirme l’installation d’AltStore PAL",
+                "body": "Dans l’alerte d’installation qui suit, confirme « Install App Marketplace » ou son équivalent localisé. Attends que l’icône AltStore PAL apparaisse sur l’écran d’accueil.",
                 "image": "assets/methods/stremio/ipad/pal/04.jpg",
                 "links": []
               },
               {
-                "title": "Installe Stremio dans AltStore PAL",
-                "body": "Dans AltStore PAL, recherche « Stremio », vérifie l’éditeur, puis lance l’installation. Si tu ne trouves pas l’application, ouvre l’annonce officielle ci-dessous pour le lien de la source. Ne confonds pas AltStore PAL et AltStore Classic.",
-                "url": "https://blog.stremio.com/stremio-released-on-apple-altstore-for-europe-and-japan/",
+                "title": "Ajoute la source officielle Stremio",
+                "body": "La recherche dans AltStore PAL suffit si Stremio est déjà visible. Si la fiche Stremio manque, ajoute la source officielle à l’aide du lien ci-dessous. Le lien ouvre AltStore Preview; il faut confirmer « Add Source ». Cela ajoute la source, mais n’installe pas encore Stremio.",
                 "image": "assets/methods/stremio/ipad/pal/05.jpg",
+                "links": [
+                  [
+                    "Source officielle Stremio pour AltStore PAL",
+                    "https://altstore.io/source/dl.strem.io/apple/altstore/source.json?app=com.stremio.pal"
+                  ]
+                ],
+                "substeps": [
+                  "Ouvre AltStore PAL et cherche « Stremio » dans Browse; vérifie que l’éditeur affiché est Stremio.",
+                  "Si l’app est absente, touche le lien officiel ci-dessus. Dans AltStore Preview, confirme « Add Source ».",
+                  "Retourne dans AltStore PAL et recherche Stremio de nouveau. Passe à l’étape 6 pour installer l’app."
+                ]
+              },
+              {
+                "title": "Installe Stremio dans AltStore PAL",
+                "body": "Dans AltStore PAL, ouvre la fiche Stremio publiée par Stremio et lance l’installation. Confirme les écrans demandés par PAL, puis attends la fin. Si l’éditeur n’est pas Stremio ou si l’installation ne correspond pas à l’app attendue, annule et ne télécharge pas d’IPA depuis un tiers.",
+                "image": "assets/methods/stremio/ipad/pal/06.jpg",
                 "links": []
               },
               {
                 "title": "Ouvre Stremio",
-                "body": "Connecte-toi à ton compte Stremio et teste une source à laquelle tu as légalement accès. N’envoie jamais ton mot de passe au bot.",
-                "url": "https://www.stremio.com/downloads",
-                "image": "assets/methods/stremio/ipad/pal/06.jpg",
+                "body": "Après l’installation, ouvre Stremio depuis l’écran d’accueil. Connecte-toi à ton compte Stremio et teste un contenu auquel tu as légalement accès. Ne partage jamais ton mot de passe.",
                 "links": []
               }
             ]
           },
           {
             "id": "classic_info",
-            "label": "🧰 IPA et AltStore Classic (avancé)",
+            "label": "⚠️ AltStore Classic — IPA officielle Stremio requise",
             "steps": [
               {
-                "title": "Commence par vérifier le fichier IPA",
-                "body": "Stremio a annoncé une IPA officielle pour iPhone et iPad, mais le lien de téléchargement peut ne pas apparaître sur la page actuelle. Vérifie sur le site de Stremio que le fichier est bien pour iOS/iPadOS avant toute installation : pas d’IPA de source inconnue.",
+                "title": "Vérifie qu’une IPA Stremio officielle est publiée",
+                "body": "Au contrôle du 11 novembre 2026, la page de téléchargements Stremio présente l’option iOS PAL et Stremio Web, mais aucun fichier IPA iOS/iPadOS autonome à télécharger. Ne continue que si une IPA est effectivement publiée par Stremio sur sa page officielle au moment de l’installation. Sinon, arrête le parcours et choisis AltStore PAL si tu es éligible, ou Stremio Web. N’utilise jamais une IPA d’un site tiers.",
                 "url": "https://www.stremio.com/downloads",
                 "image": "assets/methods/stremio/ipad/classic_info/01.jpg",
-                "links": []
+                "links": [],
+                "url_label": "Vérifier les téléchargements Stremio officiels"
               },
               {
-                "title": "Installe AltStore Classic sur ton iPhone",
-                "body": "Avec une IPA pour iOS/iPadOS provenant de Stremio, installe AltServer sur un PC Windows ou un Mac, puis suis les instructions officielles pour installer AltStore Classic sur ton appareil.",
-                "url": "https://faq.altstore.io/altstore-classic/how-to-install-altstore-windows",
+                "title": "Installe AltStore Classic sur ton iPhone/iPad depuis un ordinateur",
+                "body": "Cette étape n’est utile qu’après avoir vérifié l’existence d’une IPA officielle. AltServer doit être installé sur un PC Windows ou un Mac; choisis uniquement le tutoriel correspondant à ton ordinateur. Les instructions Windows et macOS ne sont pas interchangeables.",
                 "video": "https://www.youtube.com/watch?v=878V4TZ1LxA",
                 "image": "assets/methods/stremio/ipad/classic_info/02.jpg",
-                "links": []
+                "links": [
+                  [
+                    "AltStore Classic · guide Windows",
+                    "https://faq.altstore.io/altstore-classic/how-to-install-altstore-windows"
+                  ],
+                  [
+                    "AltStore Classic · guide macOS",
+                    "https://faq.altstore.io/altstore-classic/how-to-install-altstore-macos"
+                  ]
+                ]
               },
               {
-                "title": "Installe l’IPA puis renouvelle si nécessaire",
-                "body": "Dans AltStore Classic, utilise « My Apps » puis + pour choisir l’IPA officielle. Avec un compte Apple gratuit, il faut généralement actualiser l’application tous les 7 jours. Pour une installation simple, choisis plutôt Stremio Web ou AltStore PAL.",
-                "url": "https://faq.altstore.io/altstore-classic/how-to-install-altstore-macos",
+                "title": "Ajoute l’IPA officielle depuis My Apps",
+                "body": "Sur l’appareil, ouvre AltStore Classic, va dans « My Apps », touche « + » et sélectionne uniquement l’IPA Stremio publiée officiellement. Avec un compte Apple gratuit, les apps sideloadées demandent un rafraîchissement périodique (souvent tous les 7 jours); vérifie la limite actuelle dans la FAQ AltStore. Sans IPA officielle disponible, n’effectue pas cette étape.",
                 "image": "assets/methods/stremio/ipad/classic_info/03.jpg",
-                "links": []
+                "links": [
+                  [
+                    "AltStore Classic · fonctionnement de My Apps",
+                    "https://faq.altstore.io/altstore-classic/your-altstore"
+                  ]
+                ]
               }
             ]
           },
@@ -3958,22 +4024,21 @@
             "steps": [
               {
                 "title": "Ouvre Stremio Web",
-                "body": "Sur ton iPhone ou ton iPad, touche le lien Stremio Web. Aucune application à installer : ouvre le site dans Safari.",
+                "body": "Sur ton iPhone ou iPad, touche le bouton ci-dessous pour ouvrir Stremio Web dans le navigateur. Aucune application n’est à installer; cette version Web peut avoir des limites sur iOS/iPadOS.",
                 "url": "https://web.stremio.com/",
                 "image": "assets/methods/stremio/ipad/web/01.jpg",
-                "links": []
+                "links": [],
+                "url_label": "Ouvrir Stremio Web"
               },
               {
-                "title": "Connecte-toi",
-                "body": "Sur le site Stremio, connecte-toi à ton compte. La version Web sur iOS a des limites de lecture et de fonctionnalités : ce n’est pas la même chose que l’application complète.",
-                "url": "https://web.stremio.com/",
+                "title": "Connecte-toi à ton compte Stremio",
+                "body": "Sur Stremio Web, connecte-toi à ton compte. Les menus et la lecture peuvent différer de l’application complète; si une fonction manque, vérifie la documentation officielle avant de changer de méthode.",
                 "image": "assets/methods/stremio/ipad/web/02.jpg",
                 "links": []
               },
               {
-                "title": "Garde un accès rapide",
-                "body": "Facultatif : dans Safari, touche Partager puis « Sur l’écran d’accueil ». Si la lecture ne fonctionne pas, essaie la version complète via AltStore PAL si ton appareil est éligible.",
-                "url": "https://web.stremio.com/",
+                "title": "Crée un accès rapide (facultatif)",
+                "body": "Dans Safari, touche Partager puis « Sur l’écran d’accueil » si tu veux un raccourci. Si une lecture ou une fonction n’est pas disponible, reviens au choix des méthodes et vérifie l’éligibilité PAL; ne télécharge pas d’IPA depuis un site tiers.",
                 "image": "assets/methods/stremio/ipad/web/03.jpg",
                 "links": []
               }
@@ -4214,19 +4279,19 @@
             "steps": [
               {
                 "title": "Connecte ton compte Stremio",
-                "body": "Sur ton appareil, lance Stremio. Ouvre « Se connecter » ou utilise le code d’association affiché sur la TV, s’il apparaît. Le compte utilisé doit être le même sur tes appareils.",
-                "url": "https://www.stremio.com/downloads",
+                "body": "Ouvre Stremio sur cet appareil et connecte-toi à ton compte Stremio. Utilise le même compte sur tes appareils pour retrouver les éléments associés au compte. Le code d’association affiché sur une télévision ne fait pas partie de ce parcours iPhone/iPad.",
                 "links": []
               },
               {
-                "title": "Ouvre les extensions (Add-ons)",
-                "body": "Sur un ordinateur ou un téléphone connecté au même compte Stremio, ouvre le menu Extensions / Add-ons (l’icône en forme de puzzle sur la version ordinateur). Cherche une extension officielle ou autorisée, puis choisis Installer. Les boutons peuvent varier selon la version.",
+                "title": "Gère les extensions depuis une interface documentée",
+                "body": "La documentation Stremio décrit l’ajout d’extensions sur Web/ordinateur et Android, mais pas un menu équivalent dans l’app iOS. Pour ajouter une extension, connecte-toi au même compte depuis Stremio Web ou un ordinateur, ouvre « Add-ons » (icône puzzle), puis vérifie ce qui est disponible sur iPhone/iPad. Stremio ne contrôle pas toutes les extensions communautaires; choisis uniquement des sources légales et fiables.",
                 "url": "https://stremio.zendesk.com/hc/en-us/articles/360021348391-How-to-install-uninstall-Add-ons",
-                "links": []
+                "links": [],
+                "url_label": "Aide officielle Stremio · extensions"
               },
               {
-                "title": "Vérifie sur ton appareil",
-                "body": "Reviens dans Stremio sur l’appareil que tu configures et vérifie que l’extension apparaît. Ouvre ensuite un contenu auquel tu as accès. Si la lecture est impossible, cela peut dépendre des sources et pas de l’installation.",
+                "title": "Vérifie le compte et la lecture",
+                "body": "Retourne dans Stremio sur iPhone/iPad et vérifie que tu es connecté au bon compte. Teste un contenu auquel tu as légalement accès. Si une extension ou une fonction n’apparaît pas sur iOS/iPadOS, vérifie-la sur Stremio Web ou ordinateur: le menu mobile n’est pas garanti identique.",
                 "links": []
               }
             ]
@@ -4239,19 +4304,19 @@
             "steps": [
               {
                 "title": "Connecte ton compte Stremio",
-                "body": "Sur ton appareil, lance Stremio. Ouvre « Se connecter » ou utilise le code d’association affiché sur la TV, s’il apparaît. Le compte utilisé doit être le même sur tes appareils.",
-                "url": "https://www.stremio.com/downloads",
+                "body": "Ouvre Stremio sur cet appareil et connecte-toi à ton compte Stremio. Utilise le même compte sur tes appareils pour retrouver les éléments associés au compte. Le code d’association affiché sur une télévision ne fait pas partie de ce parcours iPhone/iPad.",
                 "links": []
               },
               {
-                "title": "Ouvre les extensions (Add-ons)",
-                "body": "Sur un ordinateur ou un téléphone connecté au même compte Stremio, ouvre le menu Extensions / Add-ons (l’icône en forme de puzzle sur la version ordinateur). Cherche une extension officielle ou autorisée, puis choisis Installer. Les boutons peuvent varier selon la version.",
+                "title": "Gère les extensions depuis une interface documentée",
+                "body": "La documentation Stremio décrit l’ajout d’extensions sur Web/ordinateur et Android, mais pas un menu équivalent dans l’app iOS. Pour ajouter une extension, connecte-toi au même compte depuis Stremio Web ou un ordinateur, ouvre « Add-ons » (icône puzzle), puis vérifie ce qui est disponible sur iPhone/iPad. Stremio ne contrôle pas toutes les extensions communautaires; choisis uniquement des sources légales et fiables.",
                 "url": "https://stremio.zendesk.com/hc/en-us/articles/360021348391-How-to-install-uninstall-Add-ons",
-                "links": []
+                "links": [],
+                "url_label": "Aide officielle Stremio · extensions"
               },
               {
-                "title": "Vérifie sur ton appareil",
-                "body": "Reviens dans Stremio sur l’appareil que tu configures et vérifie que l’extension apparaît. Ouvre ensuite un contenu auquel tu as accès. Si la lecture est impossible, cela peut dépendre des sources et pas de l’installation.",
+                "title": "Vérifie le compte et la lecture",
+                "body": "Retourne dans Stremio sur iPhone/iPad et vérifie que tu es connecté au bon compte. Teste un contenu auquel tu as légalement accès. Si une extension ou une fonction n’apparaît pas sur iOS/iPadOS, vérifie-la sur Stremio Web ou ordinateur: le menu mobile n’est pas garanti identique.",
                 "links": []
               }
             ]
@@ -4608,23 +4673,48 @@
         "iphone": [
           {
             "id": "download",
-            "label": "⬇️ Le téléchargement échoue",
-            "text": "⬇️ Téléchargement Apple impossible ?\n\nVérifie ton système, la région de l’App Store et l’espace disponible. Pour Stremio sur iPhone/iPad, la méthode AltStore PAL dépend aussi de la région ; tu peux ouvrir Stremio Web comme alternative si le téléchargement n’est pas proposé. Un fichier APK Android ne fonctionne pas sur Apple.",
+            "label": "⬇️ Téléchargement iPhone/iPad impossible",
+            "text": "Vérifie la connexion, l’espace libre, la version du système et la région de ton compte. Pour PAL, utilise uniquement le guide AltStore PAL de cette fiche; si les critères ne sont pas réunis, ouvre Stremio Web. N’installe pas d’IPA provenant d’un site tiers.",
             "links": [
               [
-                "✨ Télécharger AltStore PAL",
-                "https://altstore.io/download"
+                "Téléchargements Stremio officiels",
+                "https://www.stremio.com/downloads"
+              ],
+              [
+                "Stremio Web",
+                "https://web.stremio.com/"
               ]
             ]
           },
           {
             "id": "install",
-            "label": "🚫 Installation refusée",
-            "text": "🍎 Installation refusée\n\nSur iPhone/iPad, vérifie si l’application est disponible dans l’App Store et si la version iOS est suffisante. Pour AltStore PAL, il faut une région éligible. Sur Apple TV, les méthodes iPhone ne fonctionnent pas. Ne tente pas d’installer un APK Android.",
+            "label": "🚫 Installation iPhone/iPad refusée",
+            "text": "Pour AltStore PAL, recontrôle iOS/iPadOS 18+, la présence physique et le compte App Store de la région éligible (sur iPad, Stremio PAL est limité à l’UE). Pour AltStore Classic, continue uniquement si une IPA est publiée par Stremio. Si une condition manque, arrête et utilise Stremio Web.",
             "links": [
               [
-                "✨ Télécharger AltStore PAL",
-                "https://altstore.io/download"
+                "Téléchargements Stremio officiels",
+                "https://www.stremio.com/downloads"
+              ],
+              [
+                "Stremio Web",
+                "https://web.stremio.com/"
+              ]
+            ]
+          },
+          {
+            "id": "altstore_pal",
+            "label": "🍎 AltStore PAL · Stremio absent",
+            "text": "Reviens à Installer → AltStore PAL → étape 5. Le lien « Source officielle Stremio pour AltStore PAL » ajoute la source; il n’installe pas l’application. Après confirmation « Add Source », retourne dans AltStore PAL et recherche Stremio. Si la page ne s’ouvre pas, vérifie AltStore PAL et la région avant de réessayer.",
+            "links": []
+          },
+          {
+            "id": "altstore_classic",
+            "label": "🧰 AltStore Classic · IPA absente",
+            "text": "AltStore Classic ne peut installer Stremio que si Stremio publie une IPA iOS/iPadOS officielle. Au contrôle du 11 novembre 2026, aucun fichier IPA autonome n’était proposé sur la page Stremio. N’importe pas une IPA tierce; choisis PAL si éligible ou Stremio Web.",
+            "links": [
+              [
+                "Vérifier les téléchargements Stremio officiels",
+                "https://www.stremio.com/downloads"
               ]
             ]
           },
@@ -4638,35 +4728,54 @@
             "id": "playback",
             "label": "▶️ Lecture ou écran noir",
             "text": "▶️ Une vidéo ne démarre pas ?\n\nVérifie d’abord ta connexion et essaie une autre source autorisée. Assure-toi d’être connecté au bon compte Stremio et d’avoir installé une extension compatible sur un appareil qui permet de la gérer. Un titre visible dans le catalogue ne garantit pas un flux lisible.",
-            "links": []
-          },
-          {
-            "id": "altstore",
-            "label": "🍎 AltStore",
-            "text": "🍎 On va vérifier AltStore ensemble.\n\n• PAL : ouvre le site officiel dans Safari, vérifie que ton compte Apple et ta présence physique sont dans une région éligible, et qu’iOS/iPadOS est compatible. Dans Réglages, autorise ensuite la place de marché.\n• Classic : vérifie AltServer sur le PC/Mac, le câble ou le même Wi-Fi, la confiance entre appareils et le mode développeur si requis. Avec un compte gratuit, les apps expirent après 7 jours et il existe une limite de 3 apps actives.\n• Si Stremio n’est pas proposé dans PAL, cherche la fiche de l’éditeur dans le catalogue officiel, sans importer d’IPA ou de dépôt inconnu.\n\nTu peux reprendre ton étape sans perdre ta progression.",
             "links": []
           }
         ],
         "ipad": [
           {
             "id": "download",
-            "label": "⬇️ Le téléchargement échoue",
-            "text": "⬇️ Téléchargement Apple impossible ?\n\nVérifie ton système, la région de l’App Store et l’espace disponible. Pour Stremio sur iPhone/iPad, la méthode AltStore PAL dépend aussi de la région ; tu peux ouvrir Stremio Web comme alternative si le téléchargement n’est pas proposé. Un fichier APK Android ne fonctionne pas sur Apple.",
+            "label": "⬇️ Téléchargement iPhone/iPad impossible",
+            "text": "Vérifie la connexion, l’espace libre, la version du système et la région de ton compte. Pour PAL, utilise uniquement le guide AltStore PAL de cette fiche; si les critères ne sont pas réunis, ouvre Stremio Web. N’installe pas d’IPA provenant d’un site tiers.",
             "links": [
               [
-                "✨ Télécharger AltStore PAL",
-                "https://altstore.io/download"
+                "Téléchargements Stremio officiels",
+                "https://www.stremio.com/downloads"
+              ],
+              [
+                "Stremio Web",
+                "https://web.stremio.com/"
               ]
             ]
           },
           {
             "id": "install",
-            "label": "🚫 Installation refusée",
-            "text": "🍎 Installation refusée\n\nSur iPhone/iPad, vérifie si l’application est disponible dans l’App Store et si la version iOS est suffisante. Pour AltStore PAL, il faut une région éligible. Sur Apple TV, les méthodes iPhone ne fonctionnent pas. Ne tente pas d’installer un APK Android.",
+            "label": "🚫 Installation iPhone/iPad refusée",
+            "text": "Pour AltStore PAL, recontrôle iOS/iPadOS 18+, la présence physique et le compte App Store de la région éligible (sur iPad, Stremio PAL est limité à l’UE). Pour AltStore Classic, continue uniquement si une IPA est publiée par Stremio. Si une condition manque, arrête et utilise Stremio Web.",
             "links": [
               [
-                "✨ Télécharger AltStore PAL",
-                "https://altstore.io/download"
+                "Téléchargements Stremio officiels",
+                "https://www.stremio.com/downloads"
+              ],
+              [
+                "Stremio Web",
+                "https://web.stremio.com/"
+              ]
+            ]
+          },
+          {
+            "id": "altstore_pal",
+            "label": "🍎 AltStore PAL · Stremio absent",
+            "text": "Reviens à Installer → AltStore PAL → étape 5. Le lien « Source officielle Stremio pour AltStore PAL » ajoute la source; il n’installe pas l’application. Après confirmation « Add Source », retourne dans AltStore PAL et recherche Stremio. Si la page ne s’ouvre pas, vérifie AltStore PAL et la région avant de réessayer.",
+            "links": []
+          },
+          {
+            "id": "altstore_classic",
+            "label": "🧰 AltStore Classic · IPA absente",
+            "text": "AltStore Classic ne peut installer Stremio que si Stremio publie une IPA iOS/iPadOS officielle. Au contrôle du 11 novembre 2026, aucun fichier IPA autonome n’était proposé sur la page Stremio. N’importe pas une IPA tierce; choisis PAL si éligible ou Stremio Web.",
+            "links": [
+              [
+                "Vérifier les téléchargements Stremio officiels",
+                "https://www.stremio.com/downloads"
               ]
             ]
           },
@@ -4680,12 +4789,6 @@
             "id": "playback",
             "label": "▶️ Lecture ou écran noir",
             "text": "▶️ Une vidéo ne démarre pas ?\n\nVérifie d’abord ta connexion et essaie une autre source autorisée. Assure-toi d’être connecté au bon compte Stremio et d’avoir installé une extension compatible sur un appareil qui permet de la gérer. Un titre visible dans le catalogue ne garantit pas un flux lisible.",
-            "links": []
-          },
-          {
-            "id": "altstore",
-            "label": "🍎 AltStore",
-            "text": "🍎 On va vérifier AltStore ensemble.\n\n• PAL : ouvre le site officiel dans Safari, vérifie que ton compte Apple et ta présence physique sont dans une région éligible, et qu’iOS/iPadOS est compatible. Dans Réglages, autorise ensuite la place de marché.\n• Classic : vérifie AltServer sur le PC/Mac, le câble ou le même Wi-Fi, la confiance entre appareils et le mode développeur si requis. Avec un compte gratuit, les apps expirent après 7 jours et il existe une limite de 3 apps actives.\n• Si Stremio n’est pas proposé dans PAL, cherche la fiche de l’éditeur dans le catalogue officiel, sans importer d’IPA ou de dépôt inconnu.\n\nTu peux reprendre ton étape sans perdre ta progression.",
             "links": []
           }
         ]
@@ -4779,30 +4882,14 @@
         ],
         "iphone": [
           [
-            "✨ Télécharger AltStore PAL",
-            "https://altstore.io/download"
-          ],
-          [
             "🌐 Ouvrir Stremio Web",
             "https://web.stremio.com/"
-          ],
-          [
-            "ℹ️ Installation Stremio via AltStore PAL",
-            "https://blog.stremio.com/stremio-released-on-apple-altstore-for-europe-and-japan/"
           ]
         ],
         "ipad": [
           [
-            "✨ Télécharger AltStore PAL",
-            "https://altstore.io/download"
-          ],
-          [
             "🌐 Ouvrir Stremio Web",
             "https://web.stremio.com/"
-          ],
-          [
-            "ℹ️ Installation Stremio via AltStore PAL",
-            "https://blog.stremio.com/stremio-released-on-apple-altstore-for-europe-and-japan/"
           ]
         ]
       },
@@ -9996,8 +10083,11 @@
         "classic",
         "install"
       ],
-      "disclaimer": "Tutoriel AltStore Classic sur Windows, PAS AltStore PAL ni installation Stremio garantie.",
-      "verification_status": "oembed_disponible_2026-11-09_contenu_non_visionne"
+      "disclaimer": "Vidéo tierce en anglais sur AltStore Classic sous Windows; elle ne montre ni AltStore PAL ni l’installation de Stremio. Contenu non visionné; préfère les guides officiels AltStore.",
+      "verification_status": "oembed_disponible_2026-11-09_contenu_non_visionne",
+      "method_ids": [
+        "classic_info"
+      ]
     }
   ],
   "media_checked_on": "2026-11-09 (captures Fjord Player et Nyx Player ajoutées depuis les sites/dépôts éditeur)",

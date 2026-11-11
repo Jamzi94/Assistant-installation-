@@ -1,6 +1,7 @@
 import json, re
 from pathlib import Path
-p=Path('/home/ubuntu/installv57_audit/data/site-data.json')
+from datetime import datetime, timezone
+p=Path(__file__).resolve().parents[1] / 'data' / 'site-data.json'
 d=json.loads(p.read_text())
 
 # Helpers
@@ -151,6 +152,6 @@ def key(m):
 for app in apps.values():
     for dev,items in app.get('install',{}).items(): items.sort(key=key)
 
-d['generated_at']='2026-11-11T00:28:00+00:00'
+d['generated_at']=datetime.now(timezone.utc).isoformat(timespec='seconds')
 p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n')
 print('exhaustive corrections applied')
