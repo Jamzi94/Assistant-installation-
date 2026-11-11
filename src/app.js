@@ -110,9 +110,9 @@ function normalizeState() {
     return;
   }
   const app = data.apps[state.app];
-  const methods = app.install[state.device] || [];
+  const methods = orderedGuideOptions(app, state.device, 'install');
   if (!methods.some((m) => m.id === state.method)) state.method = methods[0]?.id || '';
-  const configs = app.configure[state.device] || [];
+  const configs = orderedGuideOptions(app, state.device, 'configure');
   if (!configs.some((c) => c.id === state.config)) state.config = configs[0]?.id || '';
   const current = state.tab === 'configure'
     ? configs.find((c) => c.id === state.config)
@@ -189,12 +189,14 @@ function addBadge(parent, label, extraClass = '') {
 
 function renderIntegrationBadges(parent, app) {
   const integrations = app.integrations || [];
-  if (integrations.includes('iptv')) addBadge(parent, 'IPTV', 'badge-iptv');
-  if (integrations.includes('nuvio')) {
+  const supports = (key) => !app.integration_devices?.[key] || app.integration_devices[key].includes(state.device);
+  if (integrations.includes('iptv') && supports('iptv')) addBadge(parent, 'IPTV', 'badge-iptv');
+  if (integrations.includes('nuvio') && supports('nuvio')) {
     const beta = app.accounts?.nuvio === 'confirmed_beta';
-    addBadge(parent, beta ? 'Nuvio compatible · bêta' : 'Nuvio compatible', 'badge-nuvio');
+    const scope = beta && app.integration_devices?.nuvio?.length ? ' · Apple / versions compatibles' : '';
+    addBadge(parent, `${beta ? 'Nuvio compatible · bêta' : 'Nuvio compatible'}${scope}`, 'badge-nuvio');
   }
-  if (integrations.includes('stremio')) addBadge(parent, 'Stremio compatible', 'badge-stremio');
+  if (integrations.includes('stremio') && supports('stremio')) addBadge(parent, 'Stremio compatible', 'badge-stremio');
 }
 
 function groupInfo(groupId) {
@@ -343,7 +345,8 @@ function renderSmartPanel() {
   const last = readLastGuide();
   if (!state.app) {
     const apps = Object.entries(data.apps).filter(([, app]) => app.devices.includes(state.device));
-    const recommended = apps.find(([, app]) => app.publisher_type === 'official') || apps[0];
+    const recommendedId = recommendedAppId(state.device, apps);
+    const recommended = apps.find(([id]) => id === recommendedId) || apps[0];
     inner.append(el('p', 'eyebrow', 'VOTRE ESPACE EST PRÊT'));
     inner.append(el('h2', '', `${apps.length} parcours pour ${data.devices[state.device]?.name || 'votre appareil'}`));
     inner.append(el('p', 'smart-panel-copy', state.device === 'fire_vega'
@@ -383,6 +386,27 @@ function compatibilityBadge(app) {
   return ['Appareil présent au catalogue', ''];
 }
 
+function recommendedAppId(deviceId, apps = Object.entries(data.apps)) {
+  const candidates = apps.filter(([, app]) => app.devices.includes(deviceId) && (app.install?.[deviceId] || []).length);
+  candidates.sort(([aId, a], [bId, b]) => {
+    const score = (id, app) => (app.recommendation_rank || 99) + (app.publisher_type === 'official' ? 0 : 20) + (app.platform_support?.[deviceId]?.status === 'publisher_claim_unverified' ? 10 : 0) + (id === 'kdtivi' ? 5 : 0);
+    return score(aId, a) - score(bId, b);
+  });
+  return candidates[0]?.[0] || '';
+}
+
+function orderedGuideOptions(app, deviceId, kind) {
+  const source = app?.[kind]?.[deviceId] || [];
+  const configPriority = ['profiles', 'nuvio_media', 'iptv_live', 'm3u', 'xtream', 'general', 'library', 'addons', 'unsure'];
+  const installPriority = ['app_store', 'official', 'developer', 'downloader'];
+  const priority = kind === 'configure' ? configPriority : installPriority;
+  return [...source].sort((a, b) => {
+    const ai = priority.indexOf(a.id);
+    const bi = priority.indexOf(b.id);
+    return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+  });
+}
+
 function drawAppCards() {
   catalogRoot.replaceChildren();
   const summary = $('#catalog-summary');
@@ -416,9 +440,11 @@ function drawAppCards() {
     return;
   }
 
+  const recommendedId = recommendedAppId(state.device, matches);
+  matches.sort(([aId], [bId]) => (aId === recommendedId ? -1 : bId === recommendedId ? 1 : 0));
   for (const [appId, app] of matches) {
     const card = el('article', 'app-card');
-    if (app.publisher_type === 'official' && (app.install[state.device] || []).length) {
+    if (appId === recommendedId) {
       card.classList.add('is-recommended');
       card.append(el('span', 'recommendation-ribbon', 'Recommandée'));
     }
@@ -585,7 +611,7 @@ function renderOverviewPane(pane, app) {
   if (app.prerequisites) details.append(el('p', '', `À préparer : ${app.prerequisites}`));
   details.append(el('p', '', 'Cette application ne fournit pas automatiquement de chaînes, d’abonnement ni de sources. N’ajoutez que des contenus et services auxquels vous êtes autorisé à accéder.'));
   pane.append(details);
-  const methods = app.install[state.device] || [];
+  const methods = orderedGuideOptions(app, state.device, 'install');
   if (methods.length) {
     const recommendation = el('aside', 'recommendation-card');
     recommendation.append(el('p', 'eyebrow', 'PARCOURS RECOMMANDÉ'));
@@ -605,7 +631,7 @@ function renderOverviewPane(pane, app) {
 }
 
 function renderInstallPane(pane, app) {
-  const options = app.install[state.device] || [];
+  const options = orderedGuideOptions(app, state.device, 'install');
   const heading = el('div', 'pane-heading');
   heading.append(el('h3', '', 'Installation, pas à pas'));
   heading.append(el('p', '', 'Choisissez une méthode disponible dans le catalogue pour cet appareil. Les menus peuvent varier selon le modèle et la version de l’application.'));
@@ -616,16 +642,17 @@ function renderInstallPane(pane, app) {
   }
   if (options.length > 1) {
     const list = el('div', 'choice-list');
-    for (const option of options) {
+    for (const [index, option] of options.entries()) {
       const button = el('button', 'choice-button');
       button.type = 'button'; button.dataset.action = 'set-method'; button.dataset.method = option.id;
       button.setAttribute('aria-pressed', String(state.method === option.id));
+      if (index === 0) button.classList.add('is-recommended-choice');
       const firstUrl = option.steps?.find((step) => step.url)?.url;
       const type = firstUrl ? classifyLink(firstUrl, app) : (/apple|altstore|ios/i.test(option.label) ? { icon: 'apple', label: 'App Store / Apple' } : /google|android|play/i.test(option.label) ? { icon: 'google', label: 'Google Play' } : null);
       if (type?.icon && STORE_ICONS[type.icon]) {
         const icon = el('img', 'store-icon method-icon'); icon.src = STORE_ICONS[type.icon]; icon.alt = ''; icon.setAttribute('aria-hidden', 'true'); button.append(icon);
       }
-      button.append(el('span', '', option.label));
+      button.append(el('span', '', `${index === 0 ? '★ Recommandé · ' : ''}${option.label}`));
       list.append(button);
     }
     pane.append(list);
@@ -636,7 +663,7 @@ function renderInstallPane(pane, app) {
 }
 
 function renderConfigurePane(pane, app) {
-  const options = app.configure[state.device] || [];
+  const options = orderedGuideOptions(app, state.device, 'configure');
   const heading = el('div', 'pane-heading');
   heading.append(el('h3', '', 'Configuration pas à pas'));
   heading.append(el('p', '', 'Ajoutez uniquement vos propres accès. Les mots de passe, URL privées, adresses MAC et codes d’association ne doivent pas être partagés dans un chatbot.'));
@@ -648,8 +675,8 @@ function renderConfigurePane(pane, app) {
   const label = el('label', 'config-select-label', 'Que souhaitez-vous configurer ?');
   const select = el('select', 'config-select');
   select.id = 'config-choice';
-  for (const option of options) {
-    const item = el('option', '', option.label);
+  for (const [index, option] of options.entries()) {
+    const item = el('option', '', `${index === 0 ? '★ Recommandé · ' : ''}${option.label}`);
     item.value = option.id;
     item.selected = state.config === option.id;
     select.append(item);
